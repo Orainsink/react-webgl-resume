@@ -1,9 +1,9 @@
-@import "/styles/reset.css";
+@import "./styles/reset.css";
+@import "./assets/fonts/font.css";
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family:"Microsoft YaHei", raleway, Arial, Helvetica, sans-serif, "宋体", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

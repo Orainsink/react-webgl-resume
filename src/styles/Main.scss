@@ -36,3 +36,53 @@
     width: auto;;
   }
 }
+
+
+/*topNavBar*/
+.topNav {
+  background: rgba(0,0,0,0.2);
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  .setting{
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+  }
+  .setting_svg {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    position:absolute;
+/*    display: flex;
+    justify-content: center;
+    align-items: center;*/
+    //animation:
+    //transform: rotate(1turn) ;
+  }
+}
+
+@for $i from 1 through 8 {
+  .topNav .topNavItem:nth-child(#{$i}) {
+    $time: $i * 3 + unquote('');
+    $delay: unquote('0.' + $time + 's');
+    animation-name: showTopNavItem;
+    animation-duration: 0.6s;
+    animation-delay: $delay;
+    animation-timing-function: ease-in;
+  }
+}
+@keyframes showTopNavItem {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
