@@ -24,7 +24,7 @@ blockquote:before, blockquote:after,
 q:before, q:after {content: none;}
 table {border-collapse: collapse;border-spacing: 0;}
 /* custom */
-a {color: #7e8c8d;text-decoration: none;-webkit-backface-visibility: hidden;}
+a {color: unset;text-decoration: none;-webkit-backface-visibility: hidden;}
 li {list-style: none;}
 ::-webkit-scrollbar {width: 5px;height: 5px;}
 ::-webkit-scrollbar-track-piece {background-color: rgba(0, 0, 0, 0.2);-webkit-border-radius: 6px;}

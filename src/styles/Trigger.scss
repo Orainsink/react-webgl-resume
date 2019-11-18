@@ -1,0 +1,72 @@
+// general
+.trigger {
+  position: fixed;
+  z-index: 4;
+  bottom: 0;
+
+  width: 100%;
+  height: 80px;
+
+  cursor: pointer;
+  text-align: center;
+}
+.trigger_bottom {
+  top: auto;
+  position: fixed;
+}
+.trigger_top {
+  top: 0;
+  bottom: auto;
+}
+.trigger_info {
+  position: absolute;
+  z-index: 10;
+
+  width: 100%;
+  padding: 10px 0;
+
+  text-align: center;
+}
+
+.trigger_info-arrow {
+  bottom: 0;
+  left: 50%;
+
+  width: 26px;
+  height: 20px;
+  margin-left: -13px;
+
+  opacity: .5;
+  color: #fff;
+}
+
+.trigger_info-heads {
+  bottom: 0;
+
+  color: #fff;
+}
+
+.trigger_info-tails {
+  bottom: -77px;
+
+  color: #0a0a0a;
+}
+
+.trigger_info_text {
+  position: relative;
+  z-index: 2;
+}
+
+.trigger_info_bg {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.trigger_info_bg-tails {
+  background: linear-gradient(to bottom, #FFF 0%,#FFF 36%,rgba(255,255,255,0) 100%);
+}

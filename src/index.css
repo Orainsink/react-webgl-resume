@@ -1,14 +1,2 @@
-@import "./styles/reset.css";
-@import "./assets/fonts/font.css";
-
-body {
-  margin: 0;
-  font-family:"Microsoft YaHei", raleway, Arial, Helvetica, sans-serif, "宋体", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+@import "styles/reset.css";
+@import "styles/font.css";

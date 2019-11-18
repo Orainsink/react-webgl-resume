@@ -358,7 +358,9 @@ module.exports = function(webpackEnv) {
 								babelrc: false,
 								configFile: false,
 								compact: false,
-								presets: [[require.resolve("babel-preset-react-app/dependencies"), { helpers: true }]],
+								presets: [
+									[require.resolve("babel-preset-react-app/dependencies"), { helpers: true }]
+								],
 								cacheDirectory: true,
 								cacheCompression: isEnvProduction,
 
@@ -570,7 +572,9 @@ module.exports = function(webpackEnv) {
 					useTypescriptIncrementalApi: true,
 					checkSyntacticErrors: true,
 					resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-					resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
+					resolveTypeReferenceDirectiveModule: process.versions.pnp
+						? `${__dirname}/pnpTs.js`
+						: undefined,
 					tsconfig: paths.appTsConfig,
 					reportFiles: [
 						"**",
