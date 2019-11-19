@@ -9,7 +9,7 @@ export default function About() {
 
 	useEffect(() => {
 		if (waypoint) {
-			if (hasStarted) return false;
+			if (hasStarted) return;
 			gsap.fromTo(
 				".tails__section--about .tails__section__el",
 				{ opacity: 0, y: "10%" },

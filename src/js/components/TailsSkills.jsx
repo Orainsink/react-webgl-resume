@@ -5,7 +5,7 @@ import gsap from "gsap";
 let hasStarted = false;
 export default function Skills() {
 	function start() {
-		if (hasStarted) return false;
+		if (hasStarted) return;
 		gsap.fromTo(
 			".tails__section--skills .tails__section__el",
 			{ opacity: 0, y: "10%" },

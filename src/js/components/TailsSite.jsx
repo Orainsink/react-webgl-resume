@@ -42,7 +42,7 @@ export default function Site() {
 		!hasStarted && animate();
 
 		// left column interval
-		if (interval) return false;
+		if (interval) return;
 		const positions = [-20, -90, -135, -200, -20, 40];
 		const totalPositions = positions.length;
 		interval = setInterval(() => {
@@ -55,7 +55,7 @@ export default function Site() {
 	}
 
 	function stop() {
-		if (!interval) return false;
+		if (!interval) return true;
 
 		clearInterval(interval);
 		interval = null;

@@ -91,6 +91,7 @@ function App() {
 		}
 
 		function slide(callback) {
+			// console.log(isOpen, trigger);
 			setIsSliding(true);
 
 			let to, y, durations;
