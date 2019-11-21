@@ -532,6 +532,8 @@ export default function Viewport() {
 		console.log("setupBackground");
 		const rangeY = [sectionHeight, -sections.length * sectionHeight - sectionHeight];
 
+		setSounds({ ...sounds, background: true });
+
 		const backgroundParticles = new BackgroundParticles({
 			rangeY: rangeY,
 			count: 1000

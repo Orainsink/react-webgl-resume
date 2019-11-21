@@ -13,7 +13,7 @@ export function makeStore() {
     waypoint: false, // 触发事件 [true,false]
     scene: false, // three 场景激活 [true,false]
     sounds: {
-			background: true,
+			background: false,
 			wind: false,
       whitenoise: false,
       neon: false,
