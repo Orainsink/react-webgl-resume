@@ -1,4 +1,4 @@
-// 预加载图片, 加载完成过后结束loading, 因为考虑到用户体验, 所以直接控制真实DOM.
+// 预加载图片, 加载完成过后结束loading, 因为考虑到bundle文件较大加载慢,影响用户体验, 所以直接控制真实DOM.
 import ImagesLoader from "../libs/imagesLoader";
 
 (function() {

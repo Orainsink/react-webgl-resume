@@ -8,13 +8,13 @@ import wind from "../../assets/sounds/wind.ogg";
 import whitenoise from "../../assets/sounds/whitenoise.ogg";
 import neon from "../../assets/sounds/neon.ogg";
 
-export default function Sound(props) {
+export default function Sound() {
 	const mapState = React.useCallback(state => state, []);
-	const { mute } = useMappedState(mapState);
+	const { mute, sound } = useMappedState(mapState);
 	const [visibility, setVisibility] = useState(true);
 
-	let { sound, playing } = props.params;
-	sound = sound || "background";
+	let { curSound, playing } = sound;
+	curSound = curSound || "background";
 
 	function soundError(e) {
 		console.log(e);
@@ -43,12 +43,11 @@ export default function Sound(props) {
 		<>
 			<PageVisibility onChange={setVisibility} />
 			<ReactHowler
-				{...sounds[sound]}
+				{...sounds[curSound]}
 				playing={playing}
 				mute={!visibility || mute}
 				onLoadError={soundError}
 			/>
-			;
 		</>
 	);
 }

@@ -21,6 +21,11 @@ export default function reducer(state, action) {
 			return { ...state, mute };
 		}
 
+    case "setSound": {
+    	let sound = action.payload
+      return { ...state, sound };
+    }
+
 		case "setIsSliding": {
 			let isSliding = action.payload;
 			return { ...state, isSliding };
@@ -42,6 +47,14 @@ export default function reducer(state, action) {
 		case "setWaypoint": {
 			return {...state,waypoint: action.payload}
 		}
+
+    case "setSectionChangeBegin": {
+      return {...state,sectionChangeBegin: action.payload}
+    }
+
+    case "setSectionChangeComplete": {
+      return {...state,sectionChangeComplete: action.payload}
+    }
 
 		default:
 			return state;

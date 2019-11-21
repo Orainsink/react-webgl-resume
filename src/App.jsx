@@ -12,12 +12,12 @@ import { useDispatch, useMappedState } from "redux-react-hook";
 
 function App() {
 	const mapState = React.useCallback(state => state, []);
-	const { trigger, isOpen, isSliding, waypoint } = useMappedState(mapState);
+	const { trigger, isOpen, isSliding, sound } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
 	const [headsParam, setHeadsParam] = useState({});
 	const [tailsParam, setTailsParam] = useState({});
-	const [sound, setSound] = useState({});
+	const setSound = React.useCallback(payload => dispatch({ type: "setSound", payload }), []);
 
 	const setHeadsVisib = React.useCallback(
 		blur => dispatch({ type: "setHeadsVisib", payload: blur }),
@@ -33,8 +33,10 @@ function App() {
 	);
 	const setIsOpen = React.useCallback(blur => dispatch({ type: "setIsOpen", payload: blur }), []);
 	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
-
-	const navigation = useEffect(() => {
+	/**
+	 * navigation
+	 */
+	useEffect(() => {
 		switch (trigger) {
 			case "mouseEnter":
 				open();
@@ -91,7 +93,6 @@ function App() {
 		}
 
 		function slide(callback) {
-			// console.log(isOpen, trigger);
 			setIsSliding(true);
 
 			let to, y, durations;
@@ -100,7 +101,7 @@ function App() {
 				to = "heads";
 				y = "0%";
 				durations = [1.05, 1];
-				setHeadsVisib(false);
+				setHeadsVisib(true);
 			} else {
 				to = "tails";
 				y = "-100%";
@@ -166,7 +167,7 @@ function App() {
 			</Heads>
 			<Tails params={tailsParam} />
 			<Trigger />
-			<Sound params={sound} />
+			<Sound />
 		</div>
 	);
 }
