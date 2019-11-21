@@ -12,12 +12,12 @@ import { useDispatch, useMappedState } from "redux-react-hook";
 
 function App() {
 	const mapState = React.useCallback(state => state, []);
-	const { trigger, isOpen, isSliding, sound } = useMappedState(mapState);
+	const { trigger, isOpen, isSliding, sounds } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
 	const [headsParam, setHeadsParam] = useState({});
 	const [tailsParam, setTailsParam] = useState({});
-	const setSound = React.useCallback(payload => dispatch({ type: "setSound", payload }), []);
+	const setSounds = React.useCallback(payload => dispatch({ type: "setSounds", payload }), []);
 
 	const setHeadsVisib = React.useCallback(
 		blur => dispatch({ type: "setHeadsVisib", payload: blur }),
@@ -127,12 +127,12 @@ function App() {
 					setWaypoint(false);
 
 					try {
-						setSound({ curSound: "background", playing: true });
+						setSounds({ ...sounds, background: true });
 					} catch (e) {
 						console.warn(e);
 					}
 				} else {
-					setSound({ curSound: "background", playing: false });
+					setSounds({ ...sounds, background: false });
 				}
 			}
 			function slideComplete(to) {

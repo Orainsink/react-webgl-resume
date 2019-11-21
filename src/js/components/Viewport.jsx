@@ -24,17 +24,11 @@ import neonsSection from "../sections/neonsSection";
 // import citySection from "../sections/citySection";
 // import endSection from "../sections/endSection";
 
-let parameters = {
-	fogColor: "#0a0a0a",
-	quality: 1,
-	sectionHeight: 50
-};
-
 // THREE Scene
 let renderer, scene, camera, frameId;
 let cameraShakeY = 0;
 // mouse
-let mouseX = 0;
+/*let mouseX = 0;*/
 // general
 let isActive;
 let isStarted = false;
@@ -47,29 +41,30 @@ let isScrolling = false;
 let backgroundLines;
 // sections
 let sections = [];
-let sectionsMap = {}; // map name with index
+let sectionsMap = {}; // map name with index TODO
 let totalSections;
 let currentIndex = 0;
 let previousIndex = 0;
 //scroll
 let newDate, oldDate;
+// parameters
+let fogColor = "#0a0a0a";
+let sectionHeight = 50;
+// lock
+let isLocked = false;
 
 export default function Viewport() {
 	const mapState = React.useCallback(state => state, []);
-	const { quality, headsVisib } = useMappedState(mapState);
+	const { quality, headsVisib, sounds } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
-	const setSound = React.useCallback(payload => dispatch({ type: "setSound", payload }), []);
+	const setSounds = React.useCallback(payload => dispatch({ type: "setSounds", payload }), []);
 
-	const [state, setState] = useState({
-		fogColor: null,
-		canvas: null,
-		mouseX: null,
-		end: false,
-		sectionChangeBegin: {},
-		sectionChangeComplete: {},
-		isLocked: false // used to prevent additional event when slide() called from outside
-	});
+	// 鼠标坐标
+	const [mouseX, setMouseX] = useState(0);
+	const [sectionChangeBegin, setSectionChangeBegin] = useState({});
+	const [sectionChangeComplete, setSectionChangeComplete] = useState({});
+	const [end, setEnd] = useState(false);
 	const [resizeListener, sizes] = useResizeAware();
 
 	const viewport = useRef(null);
@@ -97,7 +92,8 @@ export default function Viewport() {
 			// citySection,
 			// endSection
 		]);
-		doIn();
+		setupBackground();
+		sceneIn();
 		start();
 		document.addEventListener("keydown", e => {
 			onKeyDown(e);
@@ -106,10 +102,11 @@ export default function Viewport() {
 
 	// changeBegin 副作用函数
 	useEffect(() => {
-		if (!state.sectionChangeBegin || !state.sectionChangeBegin.to) return;
-		const way = state.sectionChangeBegin.way;
-		const to = state.sectionChangeBegin.to.name;
-		const from = state.sectionChangeBegin.from.name;
+		console.log("changeBegin", sectionChangeBegin);
+		if (!sectionChangeBegin || !sectionChangeBegin.to) return;
+		const way = sectionChangeBegin.way;
+		const to = sectionChangeBegin.to.name;
+		const from = sectionChangeBegin.from.name;
 		console.log("changeBegin", way, to, from);
 		// in begin
 		if (to === "hello") {
@@ -220,13 +217,13 @@ export default function Viewport() {
 		} else if (from === "end") {
 			endSection.out(way);
 		}*/
-	}, [state.sectionChangeBegin]);
+	}, [sectionChangeBegin]);
 
 	// changeComplete 副作用函数
 	useEffect(() => {
-		if (!state.sectionChangeComplete || !state.sectionChangeComplete.to) return;
-		const to = state.sectionChangeComplete.to.name;
-		const from = state.sectionChangeComplete.from.name;
+		if (!sectionChangeComplete || !sectionChangeComplete.to) return;
+		const to = sectionChangeComplete.to.name;
+		const from = sectionChangeComplete.from.name;
 		console.log(to, from);
 		// out complete
 		if (from === "hello") {
@@ -337,13 +334,13 @@ export default function Viewport() {
 				gravitySection.hide();
 			}
 		}*/
-	}, [state.sectionChangeComplete]);
+	}, [sectionChangeComplete]);
 
 	// end 副作用函数 TODO figure out how it works
 	useEffect(() => {
-		setState({ isLocked: true });
+		isLocked = true;
 		// APP.slide(SCENE.unlock); TODO
-	}, [state.end]);
+	}, [end]);
 
 	useEffect(() => {
 		console.log("headsVisibChange", headsVisib);
@@ -393,7 +390,7 @@ export default function Viewport() {
 				},
 				way: "down"
 			};
-			setState({ sectionChangeBegin: data });
+			setSectionChangeBegin(data);
 			console.log("start-data", data);
 			isStarted = true;
 		}
@@ -414,8 +411,11 @@ export default function Viewport() {
 		}
 	}
 
-	function doIn() {
-		console.log("doIn");
+	/**
+	 * 初次渲染, 相机视角2s内从200到60
+	 */
+	function sceneIn() {
+		console.log("sceneIn");
 		gsap.to(
 			{ fov: 200, speed: 0 },
 			{
@@ -469,7 +469,7 @@ export default function Viewport() {
 			console.log("initScene");
 			// 场景初始化
 			scene = new THREE.Scene();
-			scene.fog = new THREE.FogExp2(state.fogColor, 0.01);
+			scene.fog = new THREE.FogExp2(fogColor, 0.01);
 			let light = new THREE.DirectionalLight("#ffffff", 0.5);
 			light.position.set(0.2, 1, 0.5);
 			scene.add(light);
@@ -488,8 +488,8 @@ export default function Viewport() {
 	function next() {
 		console.log("next");
 		if (currentIndex === totalSections) {
-			if (!state.isLocked) {
-				setState({ end: true });
+			if (isLocked) {
+				setEnd(true);
 			}
 			oldDate = new Date();
 		}
@@ -530,10 +530,7 @@ export default function Viewport() {
 		// add background particles and lines
 		// rangeY based on the size and the number of sections
 		console.log("setupBackground");
-		const rangeY = [
-			parameters.sectionHeight,
-			-sections.length * parameters.sectionHeight - parameters.sectionHeight
-		];
+		const rangeY = [sectionHeight, -sections.length * sectionHeight - sectionHeight];
 
 		const backgroundParticles = new BackgroundParticles({
 			rangeY: rangeY,
@@ -573,7 +570,8 @@ export default function Viewport() {
 	 * @param e
 	 */
 	function onMouseMove(e) {
-		setState({ mouseX: (e.clientX / window.innerWidth) * 2 - 1 });
+		// TODO
+		setMouseX((e.clientX / window.innerWidth) * 2 - 1);
 	}
 
 	/**
@@ -604,7 +602,7 @@ export default function Viewport() {
 		console.log("animateCamera");
 		currentIndex = index;
 
-		let nextPosition = index * -parameters.sectionHeight;
+		let nextPosition = index * -sectionHeight;
 
 		// which way are we animating?
 		let way = index < previousIndex ? -1 : 1;
@@ -626,11 +624,12 @@ export default function Viewport() {
 			duration: 1.5,
 			ease: "CustomEase.create('ease-in-out-quart', '.77,0,.18,1')",
 			onStart: function() {
+				console.log("sliding_start");
 				isScrolling = true;
 				// TODO wonder if background sound will pause
-				setSound({ curSound: "wind", playing: true });
+				setSounds({ ...sounds, wind: true });
 				// TODO section change
-				setState({ sectionChangeBegin: data });
+				setSectionChangeBegin(data);
 			},
 			onComplete: function() {
 				if (previousIndex === index) {
@@ -638,7 +637,7 @@ export default function Viewport() {
 				}
 
 				isScrolling = false;
-				setState({ sectionChangeComplete: data });
+				setSectionChangeComplete(data);
 				previousIndex = index;
 			}
 		});
@@ -664,20 +663,13 @@ export default function Viewport() {
 		for (let i = 0, j = sections.length; i < j; i++) {
 			const section = sections[i];
 			sectionsMap[i] = section.name;
-			section.el.position.y = i * -parameters.sectionHeight;
+			section.el.position.y = i * -sectionHeight;
 			scene.add(section.el);
 		}
-		setupBackground();
 	}
 
 	return (
-		<div
-			className="heads__viewport"
-			ref={viewport}
-			onMouseMove={onMouseMove}
-			onScroll={onScroll}
-			onKeyDown={onKeyDown}
-		>
+		<div className="heads__viewport" ref={viewport} onMouseMove={onMouseMove} onScroll={onScroll}>
 			{resizeListener}
 			<ViewportTrigger />
 		</div>

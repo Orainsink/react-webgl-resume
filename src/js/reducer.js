@@ -21,9 +21,10 @@ export default function reducer(state, action) {
 			return { ...state, mute };
 		}
 
-    case "setSound": {
-    	let sound = action.payload
-      return { ...state, sound };
+    case "setSounds": {
+    	let sounds = action.payload;
+    	console.log("asdasdas",sounds,state)
+      return { ...state, sounds };
     }
 
 		case "setIsSliding": {

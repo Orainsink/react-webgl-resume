@@ -12,8 +12,11 @@ export function makeStore() {
 		isOpen: false, // true为Tails, false为Heads
     waypoint: false, // 触发事件 [true,false]
     scene: false, // three 场景激活 [true,false]
-    sound: {}, // 音效{curSound:string,playing:bulr}
-    sectionChangeBegin: {},
-    sectionChangeComplete: {},
+    sounds: {
+			background: true,
+			wind: false,
+      whitenoise: false,
+      neon: false,
+		}, // 音效
 	});
 }

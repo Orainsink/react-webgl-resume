@@ -10,44 +10,35 @@ import neon from "../../assets/sounds/neon.ogg";
 
 export default function Sound() {
 	const mapState = React.useCallback(state => state, []);
-	const { mute, sound } = useMappedState(mapState);
+	const { mute, sounds } = useMappedState(mapState);
 	const [visibility, setVisibility] = useState(true);
 
-	let { curSound, playing } = sound;
-	curSound = curSound || "background";
-
-	function soundError(e) {
-		console.log(e);
-	}
-
-	const sounds = {
-		background: {
-			src: background,
-			volume: 0.5,
-			loop: true
-		},
-		wind: {
-			src: wind
-		},
-		whitenoise: {
+	const soundsList = [
+		{ name: "background", src: background, volume: 0.5, loop: true },
+		{ name: "wind", src: wind },
+		{
+			name: "whitenoise",
 			src: whitenoise,
 			volume: 0.5
 		},
-		neon: {
+		{
+			name: "neon",
 			src: neon,
 			volume: 0.5
 		}
-	};
+	];
 
 	return (
 		<>
 			<PageVisibility onChange={setVisibility} />
-			<ReactHowler
-				{...sounds[curSound]}
-				playing={playing}
-				mute={!visibility || mute}
-				onLoadError={soundError}
-			/>
+			{soundsList.map((item, i) => (
+				<ReactHowler
+					key={i}
+					{...item}
+					playing={sounds[item.name] || false}
+					mute={!visibility || mute}
+				/>
+			))}
 		</>
 	);
 }
