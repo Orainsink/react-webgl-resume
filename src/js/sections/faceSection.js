@@ -1,7 +1,4 @@
-
-
 import Section from "../classes/SectionClass";
-
 import TextPanel from "../objects/TextPanelObject3D";
 import Face from "../objects/FaceHpObject3D";
 import Strips from "../objects/StripsObject3D";

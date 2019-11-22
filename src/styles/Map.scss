@@ -6,7 +6,8 @@ $nodeSize: 10px;
   top: 50%;
   right: 20px;
   opacity: .5;
-  transition: opacity .3s ease-in-out
+  transition: opacity .3s ease-in-out;
+  transform: translateY(-50%);
 }
 
 .map:hover {

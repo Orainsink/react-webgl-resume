@@ -1,9 +1,8 @@
-const THREE = require("three");
-require("../utils/legacyJSONLoaderUtil");
 import dilate from "../utils/dilateUtil";
 import outlineMaterial from "../materials/outlineMaterial";
+const THREE = require("three");
+require("../utils/legacyJSONLoaderUtil");
 
-// TODO something went wrong in this page
 /**
  * City
  *

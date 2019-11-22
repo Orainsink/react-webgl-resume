@@ -1,5 +1,3 @@
-
-
 import Section from "../classes/SectionClass";
 import Title from "../objects/HelloTitleObject3D";
 import Smoke from "../objects/SmokeObject3D";

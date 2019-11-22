@@ -16,20 +16,18 @@ import dropSection from "../sections/dropSection";
 import ballSection from "../sections/ballSection";
 import flowSection from "../sections/flowSection";
 import neonsSection from "../sections/neonsSection";
-// import heightSection from "../sections/heightSection";
-// import waveSection from "../sections/waveSection";
-// import faceSection from "../sections/faceSection";
-// import rocksSection from "../sections/rocksSection";
-// import galaxySection from "../sections/galaxySection";
-// import gravitySection from "../sections/gravitySection";
-// import citySection from "../sections/citySection";
-// import endSection from "../sections/endSection";
+import heightSection from "../sections/heightSection";
+import waveSection from "../sections/waveSection";
+import faceSection from "../sections/faceSection";
+import rocksSection from "../sections/rocksSection";
+import galaxySection from "../sections/galaxySection";
+import gravitySection from "../sections/gravitySection";
+import citySection from "../sections/citySection";
+import endSection from "../sections/endSection";
 
 // THREE Scene
 let renderer, scene, camera, frameId;
 let cameraShakeY = 0;
-// mouse
-/*let mouseX = 0;*/
 // general
 let isActive;
 let isStarted = false;
@@ -42,7 +40,7 @@ let isScrolling = false;
 let backgroundLines;
 // sections
 let sections = [];
-let sectionsMap = {}; // map name with index TODO
+let sectionsMap = {};
 let totalSections;
 let currentIndex = 0;
 let previousIndex = 0;
@@ -75,9 +73,6 @@ export default function Viewport() {
 	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
 
 	const [mouseX, setMouseX] = useState(0);
-	// const [sectionChangeBegin, setSectionChangeBegin] = useState({});
-	// const [sectionChangeComplete, setSectionChangeComplete] = useState({});
-	// const [end, setEnd] = useState(false);
 	const [resizeListener, sizes] = useResizeAware();
 
 	const viewport = useRef(null);
@@ -87,15 +82,15 @@ export default function Viewport() {
 		dropSection,
 		ballSection,
 		flowSection,
-		neonsSection
-		// heightSection,
-		// waveSection,
-		// faceSection
-		// rocksSection,
-		// galaxySection,
-		// gravitySection,
-		// citySection,
-		// endSection
+		neonsSection,
+		heightSection,
+		waveSection,
+		faceSection,
+		rocksSection,
+		galaxySection,
+		gravitySection,
+		citySection,
+		endSection
 	];
 
 	/**
@@ -172,27 +167,26 @@ export default function Viewport() {
 			neonsSection.start();
 			neonsSection.smokeStart();
 
-			// heightSection.show();
+			heightSection.show();
 		} else if (to === "height") {
 			flowSection.fieldIn();
 			flowSection.start();
 
 			neonsSection.smokeStart();
 
-			// heightSection.show();
-			// heightSection.in();
-			// heightSection.start();
+			heightSection.show();
+			heightSection.in();
+			heightSection.start();
 		} else if (to === "wave") {
-			// heightSection.show();
-			//
-			// waveSection.in(way);
-			// waveSection.start();
+			heightSection.show();
+
+			waveSection.in(way);
+			waveSection.start();
 		} else if (to === "face") {
-			// faceSection.in();
-			// faceSection.start();
-			// rocksSection.show();
-		}
-		/*else if (to === "rocks") {
+			faceSection.in();
+			faceSection.start();
+			rocksSection.show();
+		} else if (to === "rocks") {
 			rocksSection.show();
 			rocksSection.in();
 			rocksSection.start();
@@ -209,7 +203,7 @@ export default function Viewport() {
 			gravitySection.start();
 		} else if (to === "end") {
 			endSection.in();
-		}*/
+		}
 
 		// out begin
 		if (from === "hello") {
@@ -225,13 +219,12 @@ export default function Viewport() {
 		} else if (from === "neons") {
 			neonsSection.out(way);
 		} else if (from === "height") {
-			// heightSection.out(way);
+			heightSection.out(way);
 		} else if (from === "wave") {
-			// waveSection.out(way);
+			waveSection.out(way);
 		} else if (from === "face") {
-			// faceSection.out(way);
-		}
-		/*else if (from === "rocks") {
+			faceSection.out(way);
+		} else if (from === "rocks") {
 			rocksSection.out(way);
 		} else if (from === "galaxy") {
 			galaxySection.out(way);
@@ -239,7 +232,7 @@ export default function Viewport() {
 			gravitySection.out(way);
 		} else if (from === "end") {
 			endSection.out(way);
-		}*/
+		}
 	}, [sectionChangeBegin]);
 
 	// changeComplete 副作用函数
@@ -305,13 +298,13 @@ export default function Viewport() {
 			}
 
 			if (to !== "height" && to !== "wave") {
-				// heightSection.hide();
+				heightSection.hide();
 			}
 		} else if (from === "height") {
-			// heightSection.stop();
+			heightSection.stop();
 
 			if (to !== "neons" && to !== "wave") {
-				// heightSection.hide();
+				heightSection.hide();
 			}
 
 			if (to !== "flow" && to !== "neons") {
@@ -322,19 +315,18 @@ export default function Viewport() {
 				flowSection.stop();
 			}
 		} else if (from === "wave") {
-			// waveSection.stop();
+			waveSection.stop();
 
 			if (to !== "neons" && to !== "height") {
-				// heightSection.hide();
+				heightSection.hide();
 			}
 		} else if (from === "face") {
-			// faceSection.stop();
+			faceSection.stop();
 
 			if (to !== "rocks" && to !== "galaxy") {
-				// rocksSection.hide();
+				rocksSection.hide();
 			}
-		}
-		/*else if (from === "rocks") {
+		} else if (from === "rocks") {
 			rocksSection.stop();
 
 			if (to !== "face" && to !== "galaxy") {
@@ -356,7 +348,7 @@ export default function Viewport() {
 			if (to !== "galaxy") {
 				gravitySection.hide();
 			}
-		}*/
+		}
 	}, [sectionChangeComplete]);
 
 	useEffect(() => {

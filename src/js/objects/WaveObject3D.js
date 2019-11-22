@@ -1,9 +1,7 @@
-
-
 import * as THREE from "three";
 import gsap from "gsap";
-
 import loop from "../utils/loopUtil";
+import textureWaveImg from "../../assets/images/texture-wave.png"
 
 /**
  * Animated wave
@@ -50,7 +48,7 @@ class Wave {
     let idleTween = gsap.to({},  {
       duration: 5,
       paused: true,
-      ease: window.Linear.easeNone,
+      ease: "none",
       onUpdate: updateWave,
       onComplete: loop
     });
@@ -83,7 +81,7 @@ class Wave {
    */
   getPlane() {
     let texture = new THREE.TextureLoader().load(
-      require("../../assets/images/texture-wave.png")
+      textureWaveImg
     );
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(20, 20);

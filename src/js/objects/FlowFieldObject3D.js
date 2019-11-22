@@ -218,7 +218,7 @@ class FlowField {
         duration: random(4, 8),
         i: 1,
         paused: true,
-        // ease: window.Linear.easeNone,
+        // ease: "none",
         onUpdate: function() {
           let position = sub.getPoint(this._targets[0].i);
           let rotation = sub.getTangent(this._targets[0].i);

@@ -1,10 +1,10 @@
-
-
 import gsap from "gsap";
-
 import Section from "../classes/SectionClass";
-
 import City from "../objects/CityObject3D";
+
+import grounds from "../../assets/3D/shanghai-grounds.json"
+import buildings from "../../assets/3D/shanghai-buildings.json"
+import towers from "../../assets/3D/shanghai-towers.json"
 
 let citySection = new Section("city");
 
@@ -12,9 +12,9 @@ let city = new City();
 city.addGroup({
   name: "shanghai",
   objs: {
-    ground: "public/3D/shanghai-grounds.json",
-    buildings: "public/3D/shanghai-buildings.json",
-    towers: "public/3D/shanghai-towers.json"
+    grounds: "src/assets/3D/shanghai-grounds.json",
+    buildings:"src/assets/3D/shanghai-buildings.json",
+    towers:"src/assets/3D/shanghai-towers.json",
   },
   outline: {
     ground: {
@@ -34,7 +34,7 @@ city.showGroup("shanghai");
 gsap.to(city.el.rotation, {
   duration:30,
   y: 2 * Math.PI,
-  ease: window.Linear.easeNone,
+  ease: "none",
   onComplete: function() {
     this.restart();
   }

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import gsap from "gsap";
 
-import Events from "../classes/EventsClass";
+// import Events from "../classes/EventsClass";
 
 import random from "../utils/randomUtil";
 import map from "../utils/mapUtil";
@@ -27,7 +27,7 @@ class HeightMap {
   constructor(options) {
     this.parameters = Object.assign(HeightMap.defaultOptions, options);
 
-    this.events = new Events();
+    // this.events = new Events();
 
     this.fromColor = new THREE.Color(this.parameters.fromColor);
     this.toColor = new THREE.Color(this.parameters.toColor);
@@ -384,7 +384,7 @@ class HeightMap {
    * @method on
    */
   on() {
-    this.events.on.apply(this.events, arguments);
+    // this.events.on.apply(this.events, arguments);
   }
 
   /**
@@ -393,7 +393,7 @@ class HeightMap {
    * @method trigger
    */
   trigger() {
-    this.events.trigger.apply(this.events, arguments);
+    // this.events.trigger.apply(this.events, arguments);
   }
 }
 

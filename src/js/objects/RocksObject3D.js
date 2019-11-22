@@ -1,9 +1,9 @@
 
 
-import * as THREE from"three";
 import gsap from "gsap";
 
 import yoyo from "../utils/yoyoUtil";
+const THREE = require("three");
 require("../utils/legacyJSONLoaderUtil");
 
 /**

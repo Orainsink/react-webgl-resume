@@ -1,7 +1,4 @@
-
-
 import Section from "../classes/SectionClass";
-
 import TextPanel from "../objects/TextPanelObject3D";
 import Rocks from "../objects/RocksObject3D";
 

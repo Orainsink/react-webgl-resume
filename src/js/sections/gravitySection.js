@@ -1,7 +1,4 @@
-
-
 import Section from "../classes/SectionClass";
-
 import GravityGrid from "../objects/GravityGridObject3D";
 
 let gravitySection = new Section("gravity");
