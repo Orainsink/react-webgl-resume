@@ -8,6 +8,7 @@ import BackgroundLines from "../objects/BackgroundLinesObject3D";
 import BackgroundParticles from "../objects/BackgroundParticlesObject3D";
 import SPRITE3D from "../libs/sprite3DLib";
 import useResizeAware from "react-resize-aware";
+import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 
 import helloSection from "../sections/helloSection";
 import beamsSection from "../sections/beamsSection";
@@ -45,29 +46,57 @@ let sectionsMap = {}; // map name with index TODO
 let totalSections;
 let currentIndex = 0;
 let previousIndex = 0;
-//scroll
-let newDate, oldDate;
 // parameters
 let fogColor = "#0a0a0a";
 let sectionHeight = 50;
-// lock
-let isLocked = false;
 
 export default function Viewport() {
 	const mapState = React.useCallback(state => state, []);
-	const { quality, headsVisib, sounds } = useMappedState(mapState);
+	const {
+		quality,
+		headsVisib,
+		sounds,
+		sectionChangeBegin,
+		sectionChangeComplete,
+		mapScrollTo
+	} = useMappedState(mapState);
 	const dispatch = useDispatch();
 
 	const setSounds = React.useCallback(payload => dispatch({ type: "setSounds", payload }), []);
+	const setMap = React.useCallback(payload => dispatch({ type: "setMap", payload }), []);
+	const setSectionChangeBegin = React.useCallback(
+		payload => dispatch({ type: "setSectionChangeBegin", payload }),
+		[]
+	);
+	const setSectionChangeComplete = React.useCallback(
+		payload => dispatch({ type: "setSectionChangeComplete", payload }),
+		[]
+	);
+	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
 
-	// 鼠标坐标
 	const [mouseX, setMouseX] = useState(0);
-	const [sectionChangeBegin, setSectionChangeBegin] = useState({});
-	const [sectionChangeComplete, setSectionChangeComplete] = useState({});
-	const [end, setEnd] = useState(false);
+	// const [sectionChangeBegin, setSectionChangeBegin] = useState({});
+	// const [sectionChangeComplete, setSectionChangeComplete] = useState({});
+	// const [end, setEnd] = useState(false);
 	const [resizeListener, sizes] = useResizeAware();
 
 	const viewport = useRef(null);
+	const sectionsList = [
+		helloSection,
+		beamsSection,
+		dropSection,
+		ballSection,
+		flowSection,
+		neonsSection
+		// heightSection,
+		// waveSection,
+		// faceSection
+		// rocksSection,
+		// galaxySection,
+		// gravitySection,
+		// citySection,
+		// endSection
+	];
 
 	/**
 	 * 初始化
@@ -76,38 +105,32 @@ export default function Viewport() {
 		console.log("init");
 		setup();
 		// 添加 sections
-		addSections([
-			helloSection,
-			beamsSection,
-			dropSection,
-			ballSection,
-			flowSection,
-			neonsSection
-			// heightSection,
-			// waveSection,
-			// faceSection
-			// rocksSection,
-			// galaxySection,
-			// gravitySection,
-			// citySection,
-			// endSection
-		]);
+		addSections(sectionsList);
 		setupBackground();
 		sceneIn();
 		start();
-		document.addEventListener("keydown", e => {
-			onKeyDown(e);
-		});
 	}, []);
 
+	// 点击 map 切换
+	useEffect(() => {
+		if (mapScrollTo || mapScrollTo === 0) {
+			currentIndex = mapScrollTo;
+			animateCamera(currentIndex);
+		}
+	}, [mapScrollTo]);
 	// changeBegin 副作用函数
 	useEffect(() => {
 		console.log("changeBegin", sectionChangeBegin);
 		if (!sectionChangeBegin || !sectionChangeBegin.to) return;
+
 		const way = sectionChangeBegin.way;
 		const to = sectionChangeBegin.to.name;
+		const index = sectionChangeBegin.to.index;
 		const from = sectionChangeBegin.from.name;
 		console.log("changeBegin", way, to, from);
+
+		setMap({ count: sectionsList.length, now: index });
+
 		// in begin
 		if (to === "hello") {
 			helloSection.in();
@@ -336,12 +359,6 @@ export default function Viewport() {
 		}*/
 	}, [sectionChangeComplete]);
 
-	// end 副作用函数 TODO figure out how it works
-	useEffect(() => {
-		isLocked = true;
-		// APP.slide(SCENE.unlock); TODO
-	}, [end]);
-
 	useEffect(() => {
 		console.log("headsVisibChange", headsVisib);
 		if (headsVisib) {
@@ -391,7 +408,6 @@ export default function Viewport() {
 				way: "down"
 			};
 			setSectionChangeBegin(data);
-			console.log("start-data", data);
 			isStarted = true;
 		}
 
@@ -488,10 +504,8 @@ export default function Viewport() {
 	function next() {
 		console.log("next");
 		if (currentIndex === totalSections) {
-			if (isLocked) {
-				setEnd(true);
-			}
-			oldDate = new Date();
+			setTrigger("click");
+			return;
 		}
 		currentIndex++;
 		animateCamera(currentIndex);
@@ -505,7 +519,7 @@ export default function Viewport() {
 			return false;
 		}
 		currentIndex--;
-		oldDate = new Date();
+
 		animateCamera(currentIndex);
 	}
 
@@ -549,21 +563,15 @@ export default function Viewport() {
 	 * 根据鼠标滚动方向, 执行navigation的next()或prev方法
 	 * @param event
 	 */
-	function onScroll(event) {
+	function handleWheel(way) {
 		console.log("scroll");
-		newDate = new Date();
-
-		let elapsed = newDate.getTime() - oldDate.getTime();
-
-		if (elapsed > 50 && !isScrolling) {
-			if (event.originalEvent.detail > 0 || event.originalEvent.wheelDelta < 0) {
+		if (!isScrolling && isActive) {
+			if (way === "down") {
 				next();
 			} else {
 				prev();
 			}
 		}
-
-		oldDate = new Date();
 	}
 
 	/**
@@ -574,24 +582,6 @@ export default function Viewport() {
 	function onMouseMove(e) {
 		// TODO
 		setMouseX((e.clientX / window.innerWidth) * 2 - 1);
-	}
-
-	/**
-	 * 键盘事件
-	 * 监听键盘上下键, 执行navigation 的 next()或 prev()方法
-	 * @param e
-	 */
-	function onKeyDown(e) {
-		console.log("onkeyDown", e.keyCode);
-		if (!isScrolling && isActive) {
-			let keyCode = e.keyCode;
-
-			if (keyCode === 40) {
-				next();
-			} else if (keyCode === 38) {
-				prev();
-			}
-		}
 	}
 
 	/**
@@ -628,7 +618,6 @@ export default function Viewport() {
 			onStart: function() {
 				console.log("sliding_start");
 				isScrolling = true;
-				// TODO wonder if background sound will pause
 				setSounds({ ...sounds, wind: true });
 				// TODO section change
 				setSectionChangeBegin(data);
@@ -671,10 +660,15 @@ export default function Viewport() {
 	}
 
 	return (
-		<div className="heads__viewport" ref={viewport} onMouseMove={onMouseMove} onScroll={onScroll}>
-			{resizeListener}
-			<ViewportTrigger />
-		</div>
+		<ReactScrollWheelHandler
+			upHandler={handleWheel.bind(this, "up")}
+			downHandler={handleWheel.bind(this, "down")}
+		>
+			<div className="heads__viewport" ref={viewport} onMouseMove={onMouseMove}>
+				{resizeListener}
+				<ViewportTrigger />
+			</div>
+		</ReactScrollWheelHandler>
 	);
 }
 // TODO a huge wave of things to do in this page o(╥﹏╥)o

@@ -8417,6 +8417,11 @@ react-resize-aware@3.0.0-beta.4:
   resolved "https://registry.npm.taobao.org/react-resize-aware/download/react-resize-aware-3.0.0-beta.4.tgz#dc7684d8246067aae36eb3edb65ad879d6719084"
   integrity sha1-3HaE2CRgZ6rjbrPttlrYedZxkIQ=
 
+react-scroll-wheel-handler@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npm.taobao.org/react-scroll-wheel-handler/download/react-scroll-wheel-handler-1.1.3.tgz#f158f68f0f5420baed0fa230de9b2cb9833c1a88"
+  integrity sha1-8Vj2jw9UILrtD6Iw3pssuYM8Gog=
+
 react-waypoint@^9.0.2:
   version "9.0.2"
   resolved "https://registry.npm.taobao.org/react-waypoint/download/react-waypoint-9.0.2.tgz#d65fb0fe6ff5c1b832a1d01b1462a661fb921e45"

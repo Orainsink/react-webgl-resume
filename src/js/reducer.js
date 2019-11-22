@@ -21,11 +21,10 @@ export default function reducer(state, action) {
 			return { ...state, mute };
 		}
 
-    case "setSounds": {
-    	let sounds = action.payload;
-    	console.log("asdasdas",sounds,state)
-      return { ...state, sounds };
-    }
+		case "setSounds": {
+			let sounds = action.payload;
+			return { ...state, sounds };
+		}
 
 		case "setIsSliding": {
 			let isSliding = action.payload;
@@ -46,15 +45,24 @@ export default function reducer(state, action) {
 		}
 
 		case "setWaypoint": {
-			return {...state,waypoint: action.payload}
+			return { ...state, waypoint: action.payload };
 		}
 
+		case "setMap": {
+		  console.log("setMap",action.payload)
+			return { ...state, map: action.payload };
+		}
+
+    case "setMapScrollTo": {
+      return {...state, mapScrollTo: action.payload}
+    }
+
     case "setSectionChangeBegin": {
-      return {...state,sectionChangeBegin: action.payload}
+      return { ...state, sectionChangeBegin: action.payload };
     }
 
     case "setSectionChangeComplete": {
-      return {...state,sectionChangeComplete: action.payload}
+      return { ...state, sectionChangeComplete: action.payload };
     }
 
 		default:

@@ -18,5 +18,9 @@ export function makeStore() {
       whitenoise: false,
       neon: false,
 		}, // 音效
+		map: {count: null,now: null},
+    mapScrollTo: null, // 通过右边的导航点进行切换{Number}
+    setSectionChangeBegin: {},
+    setSectionChangeComplete: {},
 	});
 }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
 import Trigger from "./js/components/Trigger.jsx";
+import Map from "./js/components/Map.jsx";
 import Menu from "./js/components/Menu.jsx";
 import Heads from "./js/components/Heads.jsx";
 import Tails from "./js/components/Tails.jsx";
-import Sections from "./js/components/Sections.jsx";
+// import Sections from "./js/components/Sections.jsx";
 import Viewport from "./js/components/Viewport.jsx";
 import Sound from "./js/components/Sound.jsx";
 
@@ -161,9 +162,9 @@ function App() {
 	return (
 		<div className="App">
 			<Heads params={headsParam}>
+				<Map />
 				<Menu />
 				<Viewport />
-				<Sections />
 			</Heads>
 			<Tails params={tailsParam} />
 			<Trigger />
