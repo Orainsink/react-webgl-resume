@@ -22,46 +22,41 @@ export default function Skills() {
 				<h2 className="tails__section__el"> Javascript </h2>
 				<div className="tails__section__el">
 					<p>
-						ES5 / ES6 <br />
-						Node.js <br />
-						Coffeescript <br />
-						Typescript
+						<span className={"bold"}>ES6</span>
+						<br />
+						<span className={"bold"}>Node.js</span> <br />
+						<span className={"bold"}>Typescript</span>
 					</p>
 					<p>
-						<span> Make life easier: </span> jQuery, Zepto, underscore.js <br />
-						<span> WebGL: </span> Three.js <br />
-						<span> Canvas: </span> paper.js, D3.js <br />
-						<span> Animation: </span> TweenLite / TweenMax, Velocity.js <br />
-						<span> MV* Frameworks: </span> Backbone.js, AngularJS, React <br />
-						<span> Package manager: </span> Npm, Bower <br />
-						<span> Dependencies injection: </span> AMD (requirejs), CommonJS (browserify) <br />
-						<span> build tools: </span> Grunt, Gulp, Make <br />
-						<span> features detection: </span> Modernizr <br />
-						<span> Tests: </span> Jasmine, PhantomJS <br />
+						<span className={"bold"}> 框架: </span> 掌握Vue，React，微信原生小程序，了解uni/taro{" "}
+						<br />
+						<span className={"bold"}> 响应式UI框架: </span> Element UI <br />
+						<span className={"bold"}> 一把梭: </span> jQury，bootstrap <br />
+						<span className={"bold"}> WebGL: </span> Three.js <br />
+						<span className={"bold"}> Canvas: </span> D3.js <br />
+						<span className={"bold"}> 动画库: </span> GSAP <br />
+						<span className={"bold"}> 预处理: </span> babel，Sass，postcss <br />
+						<span className={"bold"}> 打包工具: </span> Webpack <br />
+						<span className={"bold"}> 测试工具: </span> jest，Karma，Mocha，Travis CI <br />
 					</p>
 				</div>
 
 				<h2 className="tails__section__el"> HTML / CSS </h2>
 				<div className="tails__section__el">
 					<p>
-						HTML5 / CSS3 <br />
-						SVG
+						<span className={"bold"}>HTML5 / CSS3</span> <br />
 					</p>
 					<p>
-						Preprocessors: LESS, SASS <br />
-						Modular: SMACSS, BEM
+						<span className={"bold"}>移动端兼容: </span>flexible-rem方案，vh/vw方案，媒体查询
 					</p>
 				</div>
 				<h2 className="tails__section__el"> Misc </h2>
 				<div className="tails__section__el">
 					<p>
-						PHP: Cake PHP, Wordpress <br />
-						Python &amp; Ruby <br />
-						Version control: Git, SVN <br />
-						I care about the elders: Polyfills and fallbacks for older browsers <br />
-						Design patterns: MV*, Pubsub, Modules, Singleton, Decorator, ... <br />
-						Adobe creative suite: Photoshop, Illustrator, InDesign, ... <br />
-						3D: Maya
+						<span className={"bold"}>Python </span>
+						<br />
+						<span className={"bold"}>代码托管工具: </span>Git，SVN <br />
+						<span className={"bold"}>设计软件: </span>PS，AI，LR，XD，Maya，CAD <br />
 					</p>
 				</div>
 			</div>

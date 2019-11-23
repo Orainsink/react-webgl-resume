@@ -155,8 +155,21 @@ export default function Site() {
 				</div>
 
 				<p className={"tails__section--site__p"} ref={$elp}>
-					This is not really a portfolio, but my attempt at learning WebGL. <br />I wanted to learn
-					WebGL for quite some time, especially after Internet Explorer started supporting it.
+					这个网站是我学习 React Hooks，Three.js，GSAP3.0 时的练手产物，感谢原作者 @Valentin 发布的{" "}
+					<br />
+					Extraordinary Experiment:{" "}
+					<a href="https://github.com/vaalentin/2015" target={"_blank"}>
+						https://github.com/vaalentin/2015
+					</a>
+					<br />
+					重写一个5年前的老项目总是会遇到非常多的困难，当我把源码下载下来但是根本跑不通的时候，
+					我就感觉可能不好啃了，jQuery和React是两种完全不同的思维方式，
+					在初步重写的过程中我用了大量的ref，以此获取dom元素，再用gsap来达到原项目的动画效果，
+					但是这样直接操纵dom的方式有悖react的设计理念，也会产生性能的问题，
+					我在想办法移除不必要的dom操作。 另一方面我是一个React初学者，虽然mvvm框架大同小异，
+					但是新手写出的代码在美观和结构清晰这方面差了很多火候。
+					<br />
+					webGL 很难，但是真的很有趣。
 				</p>
 			</div>
 		</Waypoint>
