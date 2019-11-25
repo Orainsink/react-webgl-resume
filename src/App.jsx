@@ -63,8 +63,8 @@ function App() {
 			to = "tails";
 		}
 
-		setHeadsParam({ y, duration: 0.4, ease: "power2" });
-		setTailsParam({ y, duration: 0.4, ease: "power2" });
+		setHeadsParam({ y, ease: "power2" });
+		setTailsParam({ y, ease: "power2" });
 	}
 	// 鼠标离开trigger
 	function close() {

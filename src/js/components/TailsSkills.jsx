@@ -1,16 +1,17 @@
 import React from "react";
 import { Waypoint } from "react-waypoint";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenMax } from "gsap/TweenMax";
 
 let hasStarted = false;
 export default function Skills() {
 	function start() {
 		if (hasStarted) return;
-		TweenLite.fromTo(
+		TweenMax.staggerFromTo(
 			".tails__section--skills .tails__section__el",
 			0.5,
-			{ opacity: 0, y: "10%" },
-			{ opacity: 1, y: 0, delay: 1, stagger: 0.2 }
+			{ opacity: 0, y: 100 },
+			{ opacity: 1, y: 0, delay: 0.5 },
+			0.1
 		);
 
 		hasStarted = true;

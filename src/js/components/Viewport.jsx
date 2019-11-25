@@ -47,6 +47,8 @@ let previousIndex = 0;
 // parameters
 let fogColor = "#0a0a0a";
 let sectionHeight = 50;
+// mouse
+let mouseX = 0;
 
 export default function Viewport() {
 	const mapState = React.useCallback(state => state, []);
@@ -72,7 +74,6 @@ export default function Viewport() {
 	);
 	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
 
-	const [mouseX, setMouseX] = useState(0);
 	const [resizeListener, sizes] = useResizeAware();
 
 	const viewport = useRef(null);
@@ -416,7 +417,7 @@ export default function Viewport() {
 	}
 
 	/**
-	 * 初次渲染, 相机视角2s内从200到60
+	 * 初次渲染, 相机视距2s内从200到60
 	 */
 	function sceneIn() {
 		console.log("sceneIn");
@@ -560,12 +561,11 @@ export default function Viewport() {
 
 	/**
 	 * 鼠标移动事件
-	 * 根据鼠标位置更新 mouseX 状态
+	 * 根据鼠标位置更新 mouseX
 	 * @param e
 	 */
 	function onMouseMove(e) {
-		// TODO
-		setMouseX((e.clientX / window.innerWidth) * 2 - 1);
+		mouseX = (e.clientX / window.innerWidth) * 2 - 1;
 	}
 
 	/**

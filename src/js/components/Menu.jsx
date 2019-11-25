@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import "../../styles/Menu.scss";
 import { useDispatch, useMappedState } from "redux-react-hook";
 import { TweenLite } from "gsap/TweenMax";
+import { TimelineMax } from "gsap";
 
 export default function Menu() {
 	const mapState = React.useCallback(state => state, []);
@@ -27,9 +28,9 @@ export default function Menu() {
 
 		TweenLite.to(menu.current, 0.4, { left: 0, ease: window.Linear.easeNone });
 		TweenLite.to(menuButton.current, 0.4, { opacity: 0 });
-		const tl = TweenLite.timeline();
+		const tl = new TimelineMax();
 		menuItem.forEach(item => {
-			tl.fromTo(item, { opacity: 0 }, { opacity: 1, duration: 0.2 });
+			tl.fromTo(item, 0.2, { opacity: 0 }, { opacity: 1 });
 		});
 	}
 	function mouseout() {

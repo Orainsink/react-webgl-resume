@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useMappedState } from "redux-react-hook";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenMax } from "gsap/TweenMax";
 
 let hasStarted = false;
 export default function About() {
@@ -10,11 +10,12 @@ export default function About() {
 	useEffect(() => {
 		if (waypoint) {
 			if (hasStarted) return;
-			TweenLite.fromTo(
+			TweenMax.staggerFromTo(
 				".tails__section--about .tails__section__el",
 				0.5,
-				{ opacity: 0, y: "10%" },
-				{ opacity: 1, y: 0, stagger: 0.2 }
+				{ opacity: 0, y: 100 },
+				{ opacity: 1, y: 0 },
+				0.1
 			);
 
 			hasStarted = true;

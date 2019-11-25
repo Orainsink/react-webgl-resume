@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import "../../styles/TailsSite.scss";
 import { Waypoint } from "react-waypoint";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenMax } from "gsap/TweenMax";
+import { TimelineMax } from "gsap";
 
 let interval = null;
 let hasStarted = false;
@@ -18,24 +19,27 @@ export default function Site() {
 
 	function animate() {
 		// wireframe timeline
-		const tl1 = TweenLite.timeline();
-		const tl2 = TweenLite.timeline();
-		tl1.to(".wireframe__frame--top", 0.2, { width: "100%", stagger: 0.1 });
-		tl1.to(".wireframe__frame--bottom", 0.2, { width: "100%", stagger: 0.1 });
-		TweenLite.to(".wireframe__frame--left", 0.2, { height: "100%", stagger: 0.2 });
-		TweenLite.to(".wireframe__frame--right", 0.6, { height: "100%", stagger: 0.2 });
-		TweenLite.to(".wireframe__controls__node", 0.8, { top: 0, stagger: 0.2 });
-
+		const tl1 = new TimelineMax();
+		const tl2 = new TimelineMax();
+		tl1.staggerTo(".wireframe__frame--top", 0.2, { width: "100%" }, 0.1);
+		tl1.staggerTo(".wireframe__frame--bottom", 0.2, { width: "100%" }, 0.1);
+		TweenMax.staggerTo(".wireframe__frame--left", 0.2, { height: "100%" }, 0.2);
+		TweenMax.staggerTo(".wireframe__frame--right", 0.6, { height: "100%" }, 0.2);
+		TweenMax.staggerTo(".wireframe__controls__node", 0.8, { top: 0 }, 0.2);
+		console.log("textLines", textLines);
 		textLines.forEach(item => {
 			const width = item.className.includes("wireframe__text__line--incomplete") ? "60%" : "100%";
-			tl2.to(item, { width: width, duration: 0.1 });
+			tl2.to(item, 0.1, { width: width });
 		});
-		TweenLite.fromTo(
+
+		TweenMax.staggerFromTo(
 			".tails__section--site .tails__section__el",
 			0.5,
-			{ opacity: 0, y: "10%" },
-			{ opacity: 1, y: 0, delay: 1, stagger: 1 }
+			{ opacity: 0, y: 100 },
+			{ opacity: 1, y: 0, delay: 1 },
+			0.8
 		);
+
 		hasStarted = true;
 	}
 
@@ -64,7 +68,7 @@ export default function Site() {
 
 	return (
 		<Waypoint onEnter={start} onLeave={stop}>
-			<div className="tails__section tails__section--site">
+			<div className={`tails__section tails__section--site`}>
 				<h1 className="tails__section__el" ref={$elh}>
 					ABOUT THIS WEBSITE
 				</h1>
@@ -73,7 +77,7 @@ export default function Site() {
 					<div className="wireframe__page">
 						<div className={`wireframe__frame--left `} />
 						<div className={`wireframe__frame--right`} />
-						<div className={`wireframe__frame--top `} />
+						<div className={`wireframe__frame--top`} />
 						<div className={`wireframe__frame--bottom`} />
 						<div className={`wireframe__column wireframe__column--left`} style={leftColumn}>
 							<div className="wireframe__picture wireframe__picture--tall">
