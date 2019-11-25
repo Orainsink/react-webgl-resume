@@ -1,10 +1,9 @@
-
-
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import map from "../utils/mapUtil";
 import random from "../utils/randomUtil";
+
 
 /**
  * Simple 3D grid that can receive forces
@@ -142,7 +141,6 @@ class Grid {
     // update points
     for (let i = 0, j = this.points.geometry.vertices.length; i < j; i++) {
       let dist = this.points.geometry.vertices[i].distanceTo(center);
-
       this.points.geometry.vertices[i].z -=
         (strength * 10) / Math.sqrt(dist * 2) - strength * 2;
     }
@@ -260,7 +258,6 @@ class GravityGrid {
 
     function setIdleTween(paused) {
       let properties = {
-        duration: 2,
         bezier: {
           type: "soft",
           values: [
@@ -279,11 +276,11 @@ class GravityGrid {
           ]
         },
         onUpdate: function() {
-          satelliteA.position.x = this._targets[0].xA;
-          satelliteA.position.y = this._targets[0].yA;
+          satelliteA.position.x = this.target.xA;
+          satelliteA.position.y = this.target.yA;
 
-          satelliteB.position.x = this._targets[0].xB;
-          satelliteB.position.y = this._targets[0].yB;
+          satelliteB.position.x = this.target.xB;
+          satelliteB.position.y = this.target.yB;
 
           grid.resetForce();
           grid.applyForce(sphereMesh.position, mass);
@@ -295,26 +292,26 @@ class GravityGrid {
         }
       };
 
+
       if (paused) {
         properties.paused = true;
       }
 
-      return gsap.to(cache, properties);
+      return TweenLite.to(cache, 2,properties);
     }
 
     let idleTween = setIdleTween(true);
 
     // animate for 50 ms to put the sphere in the right position
     idleTween.resume();
-    gsap.delayedCall(0.1, function() {
+    TweenLite.delayedCall(0.1, function() {
       idleTween.pause();
     });
 
     this.el = group;
 
     this.in = function() {
-      gsap.to(sphereMesh.position, {
-        duration: 1,
+      TweenLite.to(sphereMesh.position,1, {
         x: (rangeX.max + rangeX.min) / 2,
         y: (rangeY.max + rangeY.min) / 2,
         z: 5,
@@ -323,7 +320,7 @@ class GravityGrid {
     };
 
     this.out = function() {
-      gsap.to(sphereMesh.position,{duration:1, x: 0, y: 30, z: 40, delay: 0.2 });
+      TweenLite.to(sphereMesh.position,1,{ x: 0, y: 30, z: 40, delay: 0.2 });
     };
 
     this.start = function() {

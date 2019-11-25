@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
 import "../../styles/Viewport.scss";
 import ViewportTrigger from "./ViewportTrigger.jsx";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 import * as THREE from "three";
 import BackgroundLines from "../objects/BackgroundLinesObject3D";
 import BackgroundParticles from "../objects/BackgroundParticlesObject3D";
@@ -105,7 +105,6 @@ export default function Viewport() {
 		sceneIn();
 		start();
 	}, []);
-
 	// 点击 map 切换
 	useEffect(() => {
 		if (mapScrollTo || mapScrollTo === 0) {
@@ -113,9 +112,8 @@ export default function Viewport() {
 			animateCamera(currentIndex);
 		}
 	}, [mapScrollTo]);
-	// changeBegin 副作用函数
+	// changeBegin
 	useEffect(() => {
-		console.log("changeBegin", sectionChangeBegin);
 		if (!sectionChangeBegin || !sectionChangeBegin.to) return;
 
 		const way = sectionChangeBegin.way;
@@ -206,7 +204,7 @@ export default function Viewport() {
 		}
 
 		// out begin
-		if (from === "hello") {
+		if (from === "hello" && to !== "hello") {
 			helloSection.out(way);
 		} else if (from === "beams") {
 			beamsSection.out(way);
@@ -234,8 +232,7 @@ export default function Viewport() {
 			endSection.out(way);
 		}
 	}, [sectionChangeBegin]);
-
-	// changeComplete 副作用函数
+	// changeComplete
 	useEffect(() => {
 		if (!sectionChangeComplete || !sectionChangeComplete.to) return;
 		const to = sectionChangeComplete.to.name;
@@ -350,7 +347,7 @@ export default function Viewport() {
 			}
 		}
 	}, [sectionChangeComplete]);
-
+	// 切换head <->tails时触发
 	useEffect(() => {
 		console.log("headsVisibChange", headsVisib);
 		if (headsVisib) {
@@ -359,13 +356,12 @@ export default function Viewport() {
 			stop();
 		}
 	}, [headsVisib]);
-
+	// 修改模型质量时触发
 	useEffect(() => {
 		console.log("quality");
 		if (!renderer) return;
 		renderer.setSize(width * quality, height * quality);
 	}, [quality]);
-
 	/**
 	 * resize事件
 	 * 组件刚建立的时候,初始化width和height, 其后每次resize, 更新渲染器和相机
@@ -424,20 +420,16 @@ export default function Viewport() {
 	 */
 	function sceneIn() {
 		console.log("sceneIn");
-		gsap.to(
-			{ fov: 200, speed: 0 },
-			{
-				duration: 2,
-				bezier: { type: "soft", values: [{ speed: 20 }, { speed: 0 }] },
-				fov: 60,
-				ease: "easeOutCubic",
-				onUpdate: function() {
-					backgroundLines.updateZ(this._targets[0].speed);
-					camera.fov = this._targets[0].fov;
-					camera.updateProjectionMatrix();
-				}
+		TweenLite.to({ fov: 200, speed: 0 }, 2, {
+			bezier: { type: "soft", values: [{ speed: 20 }, { speed: 0 }] },
+			fov: 60,
+			ease: "easeOutCubic",
+			onUpdate: function() {
+				backgroundLines.updateZ(this.target.speed);
+				camera.fov = this.target.fov;
+				camera.updateProjectionMatrix();
 			}
-		);
+		});
 	}
 
 	/**
@@ -552,7 +544,7 @@ export default function Viewport() {
 
 	/**
 	 * 滚动事件
-	 * 根据鼠标滚动方向, 执行navigation的next()或prev方法
+	 * 根据鼠标滚动方向, 执行next()或prev()方法
 	 * @param event
 	 */
 	function handleWheel(way) {
@@ -603,15 +595,13 @@ export default function Viewport() {
 			},
 			way: way === -1 ? "up" : "down"
 		};
-		gsap.to(camera.position, {
+		TweenLite.to(camera.position, 1.5, {
 			y: nextPosition,
-			duration: 1.5,
-			ease: "CustomEase.create('ease-in-out-quart', '.77,0,.18,1')",
+			ease: window.Quad.easeInOut,
 			onStart: function() {
 				console.log("sliding_start");
 				isScrolling = true;
 				setSounds({ ...sounds, wind: true });
-				// TODO section change
 				setSectionChangeBegin(data);
 			},
 			onComplete: function() {
@@ -625,11 +615,10 @@ export default function Viewport() {
 			}
 		});
 
-		gsap.to(cameraCache, {
+		TweenLite.to(cameraCache, 1.5, {
 			bezier: { type: "soft", values: [{ speed: 10 }, { speed: 0 }] },
-			duration: 1.5,
 			onUpdate: function() {
-				backgroundLines.updateY(this._targets[0].speed);
+				backgroundLines.updateY(this.target.speed);
 			}
 		});
 	}

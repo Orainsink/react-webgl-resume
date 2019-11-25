@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import loop from "../utils/loopUtil";
 
@@ -43,7 +43,7 @@ class Drop {
       for (let i = 0, j = group.children.length; i < j; i++) {
         const el = group.children[i];
         const cache = caches[i];
-        gsap.to(el.position, { duration: cache.duration, z: 0 });
+        TweenLite.to(el.position, cache.duration,{ z: 0 });
       }
     };
 
@@ -53,7 +53,7 @@ class Drop {
       for (let i = 0, j = group.children.length; i < j; i++) {
         let el = group.children[i];
         let cache = caches[i];
-        gsap.to(el.position, {duration: cache.duration,  z: factor * cache.z });
+        TweenLite.to(el.position, cache.duration,{ z: factor * cache.z });
       }
     };
 
@@ -109,8 +109,7 @@ class Drop {
     const scale =
       ((index + 1) * this.parameters.amplitude) / this.parameters.count;
 
-    let tween =  gsap.to(cache, {
-      duration:1.5,
+    let tween =  TweenLite.to(cache,1.5, {
       scale: scale,
       opacity: 0,
       paused: true,

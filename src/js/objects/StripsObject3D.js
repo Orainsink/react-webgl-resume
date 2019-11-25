@@ -1,7 +1,7 @@
 
 
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 
@@ -70,16 +70,14 @@ class Strip {
   }
 
   in() {
-    gsap.to(this.cache, {
-      duration:this.parameters.speed,
+    TweenLite.to(this.cache, this.parameters.speed,{
       x: this.to,
       onUpdate: this.update.bind(this)
     });
   }
 
   out() {
-    gsap.to(this.cache,{
-      duration: this.parameters.speed,
+    TweenLite.to(this.cache,this.parameters.speed,{
       x: this.from,
       onUpdate: this.update.bind(this)
     });

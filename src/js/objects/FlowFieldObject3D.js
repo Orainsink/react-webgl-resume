@@ -1,7 +1,5 @@
-
-
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 import noise from "../utils/noiseUtil";
@@ -181,17 +179,16 @@ class FlowField {
    * @return {TweenLite}
    */
   getInTween(line) {
-    return gsap.to({}, {
-      duration:  random(1, 3),
+    return TweenLite.to({}, random(1, 3),{
       paused: true,
       onComplete: function() {
         line.visible = true;
 
-        gsap.delayedCall(0.2, function() {
+        TweenLite.delayedCall(0.2, function() {
           line.visible = false;
         });
 
-        gsap.delayedCall(0.3, function() {
+        TweenLite.delayedCall(0.3, function() {
           line.visible = true;
         });
       },
@@ -214,14 +211,13 @@ class FlowField {
     let tweens = [];
 
     function getTween(mesh, sub) {
-      return gsap.to({ i: 0 }, {
-        duration: random(4, 8),
+      return TweenLite.to({ i: 0 }, random(4, 8),{
         i: 1,
         paused: true,
-        // ease: "none",
+        ease: window.Linear.easeNone,
         onUpdate: function() {
-          let position = sub.getPoint(this._targets[0].i);
-          let rotation = sub.getTangent(this._targets[0].i);
+          let position = sub.getPoint(this.target.i);
+          let rotation = sub.getTangent(this.target.i);
 
           mesh.position.set(position.x, position.y, position.z);
           mesh.rotation.set(rotation.x, rotation.y, rotation.z);

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/TailsSite.scss";
 import { Waypoint } from "react-waypoint";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 let interval = null;
 let hasStarted = false;
@@ -18,22 +18,23 @@ export default function Site() {
 
 	function animate() {
 		// wireframe timeline
-		const tl1 = gsap.timeline();
-		const tl2 = gsap.timeline();
-		tl1.to(".wireframe__frame--top", { width: "100%", duration: 0.2, stagger: 0.1 });
-		tl1.to(".wireframe__frame--bottom", { width: "100%", duration: 0.2, stagger: 0.1 });
-		gsap.to(".wireframe__frame--left", { height: "100%", duration: 0.6, stagger: 0.2 });
-		gsap.to(".wireframe__frame--right", { height: "100%", duration: 0.6, stagger: 0.2 });
-		gsap.to(".wireframe__controls__node", { top: 0, duration: 0.8, stagger: 0.2 });
+		const tl1 = TweenLite.timeline();
+		const tl2 = TweenLite.timeline();
+		tl1.to(".wireframe__frame--top", 0.2, { width: "100%", stagger: 0.1 });
+		tl1.to(".wireframe__frame--bottom", 0.2, { width: "100%", stagger: 0.1 });
+		TweenLite.to(".wireframe__frame--left", 0.2, { height: "100%", stagger: 0.2 });
+		TweenLite.to(".wireframe__frame--right", 0.6, { height: "100%", stagger: 0.2 });
+		TweenLite.to(".wireframe__controls__node", 0.8, { top: 0, stagger: 0.2 });
 
 		textLines.forEach(item => {
 			const width = item.className.includes("wireframe__text__line--incomplete") ? "60%" : "100%";
 			tl2.to(item, { width: width, duration: 0.1 });
 		});
-		gsap.fromTo(
+		TweenLite.fromTo(
 			".tails__section--site .tails__section__el",
+			0.5,
 			{ opacity: 0, y: "10%" },
-			{ opacity: 1, y: 0, duration: 0.5, delay: 1, stagger: 1 }
+			{ opacity: 1, y: 0, delay: 1, stagger: 1 }
 		);
 		hasStarted = true;
 	}

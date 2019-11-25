@@ -1,10 +1,6 @@
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 import Section from "../classes/SectionClass";
 import City from "../objects/CityObject3D";
-
-import grounds from "../../assets/3D/shanghai-grounds.json"
-import buildings from "../../assets/3D/shanghai-buildings.json"
-import towers from "../../assets/3D/shanghai-towers.json"
 
 let citySection = new Section("city");
 
@@ -12,9 +8,9 @@ let city = new City();
 city.addGroup({
   name: "shanghai",
   objs: {
-    grounds: "src/assets/3D/shanghai-grounds.json",
-    buildings:"src/assets/3D/shanghai-buildings.json",
-    towers:"src/assets/3D/shanghai-towers.json",
+    grounds: "/3D/shanghai-grounds.json",
+    buildings:"/3D/shanghai-buildings.json",
+    towers:"/3D/shanghai-towers.json",
   },
   outline: {
     ground: {
@@ -31,10 +27,9 @@ city.el.position.set(5, -10, 0);
 citySection.add(city.el);
 city.showGroup("shanghai");
 
-gsap.to(city.el.rotation, {
-  duration:30,
+TweenLite.to(city.el.rotation, 30,{
   y: 2 * Math.PI,
-  ease: "none",
+  ease: window.Linear.easeNone,
   onComplete: function() {
     this.restart();
   }

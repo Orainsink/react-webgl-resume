@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 import { useMappedState } from "redux-react-hook";
 
 export default function ViewportTrigger() {
@@ -12,29 +12,29 @@ export default function ViewportTrigger() {
 
 	useEffect(() => {
 		if (trigger === "mouseEnter" && !isOpen) {
-			gsap.to(arrow.current, { opacity: 0, bottom: 20, duration: 0.5 });
-			gsap.to(tails.current, { opacity: 1, duration: 0.8 });
+			TweenLite.to(arrow.current, 0.5, { opacity: 0, bottom: 20 });
+			TweenLite.to(tails.current, 0.8, { opacity: 1 });
 		}
 		if (trigger === "mouseLeave" && !isOpen) {
-			gsap.to(arrow.current, { opacity: 0.5, bottom: 0, duration: 0.5 });
-			gsap.to(tails.current, { opacity: 0, duration: 0.8 });
+			TweenLite.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
+			TweenLite.to(tails.current, 0.8, { opacity: 0 });
 		}
 		if (trigger === "mouseEnter" && isOpen) {
-			gsap.to(arrow.current, { opacity: 0, bottom: 20, duration: 0.5 });
-			gsap.to(heads.current, { opacity: 1, duration: 0.8 });
+			TweenLite.to(arrow.current, 0.5, { opacity: 0, bottom: 20 });
+			TweenLite.to(heads.current, 0.8, { opacity: 1 });
 		}
 		if (trigger === "mouseLeave" && isOpen) {
-			gsap.to(arrow.current, { opacity: 0.5, bottom: 0, duration: 0.5 });
-			gsap.to(heads.current, { opacity: 0, duration: 0.8 });
+			TweenLite.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
+			TweenLite.to(heads.current, 0.8, { opacity: 0 });
 		}
 		if (trigger === "click" && isOpen) {
-			gsap.to(heads.current, { opacity: 0, duration: 0.8 });
-			gsap.to(arrow.current, { opacity: 0.5, bottom: 0, duration: 0.5 });
+			TweenLite.to(heads.current, 0.8, { opacity: 0 });
+			TweenLite.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
 		}
 		if (trigger === "click" && !isOpen) {
-			gsap.to(tails.current, { opacity: 0, duration: 0.8 });
+			TweenLite.to(tails.current, 0.8, { opacity: 0 });
 		}
-	}, [trigger]);
+	}, [isOpen, trigger]);
 	return (
 		<>
 			<div className="trigger__info trigger__info--arrow" ref={arrow}>

@@ -1,7 +1,7 @@
 
 
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 import yoyo from "../utils/yoyoUtil";
@@ -118,12 +118,12 @@ class Grid {
     };
 
     this.in = function() {
-      gsap.to(group.position,{duration: 1,  y: 0 });
+      TweenLite.to(group.position,1,{ y: 0 });
     };
 
     this.out = function(way) {
       let y = way === "up" ? -50 : 50;
-      gsap.to(group.position, {duration: 1,  y: y });
+      TweenLite.to(group.position, 1,{y: y });
     };
   }
 
@@ -173,7 +173,6 @@ class Grid {
    */
   getTween(line, from, to) {
     let parameters = {
-      duration: random(1, 2),
       paused: true,
       delay: random(0, 2),
       onUpdate: function() {
@@ -187,7 +186,7 @@ class Grid {
       z: to.z
     };
 
-    return gsap.to(from,  parameters);
+    return TweenLite.to(from, random(1, 2), parameters);
   }
 }
 

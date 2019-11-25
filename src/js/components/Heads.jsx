@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/Heads.scss";
 import { useMappedState } from "redux-react-hook";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 export default function Heads(props) {
-  const heads = useRef(null)
+	const heads = useRef(null);
 
-  useEffect(()=>{
-    gsap.to(heads.current, {...props.params} );
-  },[props.params])
+	useEffect(() => {
+		TweenLite.to(heads.current, 0.4, { ...props.params });
+	}, [props.params]);
 
 	return (
 		<div className={"heads"} ref={heads}>

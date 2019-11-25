@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 import loop from "../utils/loopUtil";
 import textureWaveImg from "../../assets/images/texture-wave.png"
 
@@ -45,10 +45,9 @@ class Wave {
 
     updateWave();
 
-    let idleTween = gsap.to({},  {
-      duration: 5,
+    let idleTween = TweenLite.to({}, 5, {
       paused: true,
-      ease: "none",
+      ease: window.Linear.easeNone,
       onUpdate: updateWave,
       onComplete: loop
     });
@@ -57,12 +56,12 @@ class Wave {
 
     this.in = function(way) {
       plane.position.y = way === "up" ? 20 : -20;
-      gsap.to(plane.position,  {duration:1.5, y: -10 });
+      TweenLite.to(plane.position, 1.5, { y: -10 });
     };
 
     this.out = function(way) {
       let y = way === "up" ? -20 : 20;
-      gsap.to(plane.position, {duration:1,  y: y });
+      TweenLite.to(plane.position,1, {  y: y });
     };
 
     this.start = function() {

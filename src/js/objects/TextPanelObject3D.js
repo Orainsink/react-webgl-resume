@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 /**
  * Display a 2D text in 3D space
@@ -117,8 +117,7 @@ class TextPanel {
     }
 
     this.in = function() {
-      gsap.to(cache, {
-        duration: 1.5,
+      TweenLite.to(cache,1.5, {
         y: 0,
         opacity: 1,
         onStart: function() {
@@ -130,8 +129,7 @@ class TextPanel {
 
     this.out = function(way) {
       let y = way === "up" ? -20 : 20;
-      gsap.to(cache,{
-        duration:  1,
+      TweenLite.to(cache,1,{
         y: y,
         opacity: 0,
         onUpdate: update,

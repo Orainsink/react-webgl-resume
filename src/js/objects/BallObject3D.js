@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 // import SOUNDS from "../modules/soundsModule";
 import random from "../utils/randomUtil";
@@ -50,7 +50,7 @@ class Ball {
       materialStripe.emissive = colorB;
       materialStripe.color = colorA;
 
-      gsap.delayedCall(random(0.1, 1), function() {
+      TweenLite.delayedCall(random(0.1, 1), function() {
         materialStripe.emissive = colorA;
         materialStripe.color = colorB;
       });
@@ -62,20 +62,19 @@ class Ball {
 
       // SOUNDS.whitenoise.play();
 
-      gsap.delayedCall(random(0.2, 1), function() {
+      TweenLite.delayedCall(random(0.2, 1), function() {
         mesh.material = materialStripe;
         // SOUNDS.whitenoise.stop();
       });
     }
 
-    let inTween = gsap.to({ y: 40, opacity: 0 },  {
-      duration: 1.5,
+    let inTween = TweenLite.to({ y: 40, opacity: 0 }, 1.5, {
       y: 0,
       opacity: 1,
       paused: true,
       onUpdate: function() {
-        mesh.position.y = this._targets[0].y;
-        materialStripe.opacity = this._targets[0].opacity;
+        mesh.position.y = this.target.y;
+        materialStripe.opacity = this.target.opacity;
       }
     });
 
@@ -83,8 +82,7 @@ class Ball {
     let appearTweenCurrent = 0;
     let repeatValues = [1, 10, 30, 0, 1, 5];
 
-    let appearTween = gsap.to({}, {
-      duration: 0.1,
+    let appearTween = TweenLite.to({}, 0.1,{
       paused: true,
       onComplete: function() {
         appearTweenCurrent++;
@@ -106,12 +104,11 @@ class Ball {
     let rotateX = 0;
 
     let idleTweens = {
-      rotate: gsap.to({ textureRepeat: 3 },  {
-        duration: 5,
+      rotate: TweenLite.to({ textureRepeat: 3 }, 5, {
         textureRepeat: 8,
         paused: true,
         onUpdate: function() {
-          texture.repeat.set(1, this._targets[0].textureRepeat);
+          texture.repeat.set(1, this.target.textureRepeat);
 
           mesh.rotation.y = rotateY;
           mesh.rotation.x = rotateX;
@@ -123,8 +120,7 @@ class Ball {
         onReverseComplete: yoyo
       }),
 
-      glitch: gsap.to({}, {
-        duration: random(0.1, 5),
+      glitch: TweenLite.to({}, random(0.1, 5),{
         paused: true,
         onComplete: function() {
           glitch();
@@ -133,8 +129,7 @@ class Ball {
         }
       }),
 
-      blink: gsap.to({}, {
-        duration: random(0.1, 5),
+      blink: TweenLite.to({}, random(0.1, 5),{
         paused: true,
         onComplete: function() {
           blink();

@@ -1,9 +1,5 @@
-
-
 import * as THREE from "three";
-
 import Section from "../classes/SectionClass";
-
 import FlowField from "../objects/FlowFieldObject3D";
 import TextPanel from "../objects/TextPanelObject3D";
 

@@ -1,7 +1,4 @@
-
-
 import Section from "../classes/SectionClass";
-
 import TextPanel from "../objects/TextPanelObject3D";
 import Ball from "../objects/BallObject3D";
 import Grid from "../objects/GridObject3D";

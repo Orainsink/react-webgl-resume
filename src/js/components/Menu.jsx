@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/Menu.scss";
 import { useDispatch, useMappedState } from "redux-react-hook";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 export default function Menu() {
 	const mapState = React.useCallback(state => state, []);
@@ -25,9 +25,9 @@ export default function Menu() {
 	function mouseover() {
 		setActive(true);
 
-		gsap.to(menu.current, { left: 0, duration: 0.4, ease: "power2" });
-		gsap.to(menuButton.current, { opacity: 0, duration: 0.4 });
-		const tl = gsap.timeline();
+		TweenLite.to(menu.current, 0.4, { left: 0, ease: window.Linear.easeNone });
+		TweenLite.to(menuButton.current, 0.4, { opacity: 0 });
+		const tl = TweenLite.timeline();
 		menuItem.forEach(item => {
 			tl.fromTo(item, { opacity: 0 }, { opacity: 1, duration: 0.2 });
 		});
@@ -35,8 +35,8 @@ export default function Menu() {
 	function mouseout() {
 		setActive(false);
 
-		gsap.to(menu.current, { left: 30, duration: 0.4, ease: "power2" });
-		gsap.to(menuButton.current, { opacity: 1, duration: 0.4 });
+		TweenLite.to(menu.current, 0.4, { left: 30, ease: window.Linear.easeNone });
+		TweenLite.to(menuButton.current, 0.4, { opacity: 1 });
 	}
 
 	return (

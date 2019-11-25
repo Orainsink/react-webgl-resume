@@ -1,7 +1,7 @@
 
 
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 import map from "../utils/mapUtil";
@@ -86,8 +86,7 @@ class Galaxy {
 
       update();
 
-      gsap.to(cache, {
-        duration:2,
+      TweenLite.to(cache, 2,{
         rotationX: -1,
         rotationY: 0.2,
         onUpdate: update
@@ -97,14 +96,13 @@ class Galaxy {
     this.out = function(way) {
       const to =
         way === "up"
-          ? {duration:1,  rotationY: 0.6, rotationX: -1.5, onUpdate: update }
-          : {duration:1, rotationY: -0.6, rotationX: -0.5, onUpdate: update };
+          ? {rotationY: 0.6, rotationX: -1.5, onUpdate: update }
+          : {rotationY: -0.6, rotationX: -0.5, onUpdate: update };
 
-      gsap.to(cache, to);
+      TweenLite.to(cache, 1,to);
     };
 
-    const idleTween = gsap.to({}, {
-      duration:10,
+    const idleTween = TweenLite.to({},10, {
       paused: true,
       onUpdate: function() {
         for (let radius in planets) {

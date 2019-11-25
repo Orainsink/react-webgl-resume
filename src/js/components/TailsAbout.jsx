@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useMappedState } from "redux-react-hook";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 let hasStarted = false;
 export default function About() {
@@ -10,10 +10,11 @@ export default function About() {
 	useEffect(() => {
 		if (waypoint) {
 			if (hasStarted) return;
-			gsap.fromTo(
+			TweenLite.fromTo(
 				".tails__section--about .tails__section__el",
+				0.5,
 				{ opacity: 0, y: "10%" },
-				{ opacity: 1, y: 0, duration: 0.5, stagger: 0.2 }
+				{ opacity: 1, y: 0, stagger: 0.2 }
 			);
 
 			hasStarted = true;

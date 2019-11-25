@@ -1,7 +1,6 @@
 import * as THREE from "three";
-import gsap from "gsap";
-
-// import Events from "../classes/EventsClass";
+import { TweenLite } from "gsap/TweenMax";
+import Events from "../classes/EventsClass";
 
 import random from "../utils/randomUtil";
 import map from "../utils/mapUtil";
@@ -21,13 +20,13 @@ import map from "../utils/mapUtil";
  * @param {String} [options.fromColor='#4c4c4c'] Height min color
  * @param {String} [options.toColor='#ffffff'] Height max color
  * @param {Array} [options.maps=[]] Maps sources
- * @requires jQuery, THREE, TweenLite, Events, random, map
+ * @requires THREE, gsap, Events, random, map
  */
 class HeightMap {
   constructor(options) {
     this.parameters = Object.assign(HeightMap.defaultOptions, options);
 
-    // this.events = new Events();
+    this.events = new Events();
 
     this.fromColor = new THREE.Color(this.parameters.fromColor);
     this.toColor = new THREE.Color(this.parameters.toColor);
@@ -184,8 +183,7 @@ class HeightMap {
   getIdleTween() {
     let _this = this;
 
-    return gsap.to({}, {
-      duration:2,
+    return TweenLite.to({}, 2,{
       paused: true,
       onComplete: function() {
         _this.current++;
@@ -291,8 +289,7 @@ class HeightMap {
 
     let _this = this;
 
-    gsap.to({ factor: 1 }, {
-      duration: 1,
+    TweenLite.to({ factor: 1 }, 0.8,{
       factor: 0,
       ease: window.Elastic.easeOut,
       onUpdate: function() {
@@ -300,7 +297,7 @@ class HeightMap {
           let vertex = _this.geometry.vertices[i];
           let offset =
             currentData[i] +
-            (previousData[i] - currentData[i]) * this._targets[0].factor;
+            (previousData[i] - currentData[i]) * this.target.factor;
           vertex.z = offset;
         }
 
@@ -384,7 +381,7 @@ class HeightMap {
    * @method on
    */
   on() {
-    // this.events.on.apply(this.events, arguments);
+    this.events.on.apply(this.events, arguments);
   }
 
   /**
@@ -393,7 +390,7 @@ class HeightMap {
    * @method trigger
    */
   trigger() {
-    // this.events.trigger.apply(this.events, arguments);
+    this.events.trigger.apply(this.events, arguments);
   }
 }
 

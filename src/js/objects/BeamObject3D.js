@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 import yoyo from "../utils/yoyoUtil";
@@ -131,13 +131,13 @@ class Beam {
     let cache = { y: height / 2 + width / 2 };
 
     function positionUpdate() {
-      let extremity = this._targets[0].y - width / 2;
+      let extremity = this.target.y - width / 2;
 
       lineGeometry.vertices[1].y = extremity;
       lineGeometry.verticesNeedUpdate = true;
       lineGeometry.computeBoundingSphere();
 
-      bodyGeometry.vertices[2].y = bodyGeometry.vertices[3].y = this._targets[0].y;
+      bodyGeometry.vertices[2].y = bodyGeometry.vertices[3].y = this.target.y;
       bodyGeometry.verticesNeedUpdate = true;
       bodyGeometry.computeBoundingSphere();
 
@@ -148,39 +148,36 @@ class Beam {
     }
 
     let idleTweens = {
-      flare: gsap.to({ scale: 1, opacity: 1 }, {
-        duration:random(1, 2),
+      flare: TweenLite.to({ scale: 1, opacity: 1 },random(1, 2), {
         scale: 2,
         opacity: 0.6,
         paused: true,
         onUpdate: function() {
-          flareMesh.scale.set(this._targets[0].scale, this._targets[0].scale, 1);
-          flareMaterial.opacity = this._targets[0].opacity;
+          flareMesh.scale.set(this.target.scale, this.target.scale, 1);
+          flareMaterial.opacity = this.target.opacity;
         },
         onComplete: yoyo,
         onReverseComplete: yoyo
       }),
 
-      movingflare: gsap.to({ y: 0, scale: 3, opacity: 1 }, {
-        duration:random(2, 6),
+      movingflare: TweenLite.to({ y: 0, scale: 3, opacity: 1 }, random(2, 6),{
         y: 30,
         scale: 1,
         opacity: 0,
         paused: true,
         onUpdate: function() {
-          movingFlareMesh.position.y = this._targets[0].y;
-          movingFlareMesh.scale.x = this._targets[0].scale;
-          movingFlareMaterial.opacity = this._targets[0].opacity;
+          movingFlareMesh.position.y = this.target.y;
+          movingFlareMesh.scale.x = this.target.scale;
+          movingFlareMaterial.opacity = this.target.opacity;
         },
         onComplete: yoyo,
         onReverseComplete: yoyo
       }),
 
-      body: gsap.to({ opacity: 1 }, {
-        duration: random(1, 2),
+      body: TweenLite.to({ opacity: 1 }, random(1, 2),{
         opacity: 0.5,
         onUpdate: function(){
-          bodyMaterial.opacity = capMaterial.opacity = this._targets[0].opacity;
+          bodyMaterial.opacity = capMaterial.opacity = this.target.opacity;
         },
         onComplete: yoyo,
         onReverseComplete: yoyo
@@ -192,12 +189,12 @@ class Beam {
     let delay = parameters.delay;
 
     this.in = function() {
-      gsap.to(cache,  { duration: 1,y: -5, delay: delay, onUpdate: positionUpdate });
+      TweenLite.to(cache, 1, {y: -5, delay: delay, onUpdate: positionUpdate });
     };
 
     this.out = function(way) {
       let y = way === "up" ? height / 2 + width / 2 - 1 : -70;
-      gsap.to(cache, {duration: 1,  y: y, delay: delay, onUpdate: positionUpdate });
+      TweenLite.to(cache, 1,{ y: y, delay: delay, onUpdate: positionUpdate });
     };
 
     this.start = function() {

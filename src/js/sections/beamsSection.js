@@ -1,7 +1,4 @@
-
-
 import Section from "../classes/SectionClass";
-
 import Beam from "../objects/BeamObject3D";
 
 let beamsSection = new Section("beams");

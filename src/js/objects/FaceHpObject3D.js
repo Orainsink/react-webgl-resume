@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 import yoyo from "../utils/yoyoUtil";
 import matCap from "../materials/matCapMaterial";
 import matCapShinyImg from "../../assets/images/matCap-shiny.jpg"
@@ -20,31 +20,30 @@ class Face {
     let group = new THREE.Object3D();
 
     let loader = new THREE.LegacyJSONLoader();
-    loader.load("public/3D/face-hp.json", (geometry) => {
+    loader.load("/3D/face-hp.json", (geometry) => {
       let mesh = new THREE.Mesh(geometry, matCap);
       mesh.scale.x = 1.5;
       mesh.scale.y = 1.5;
 
       group.add(mesh);
 
-      let idleTween = gsap.to({ y: -0.2 },  {
-        duration: 2,
+      let idleTween = TweenLite.to({ y: -0.2 }, 2, {
         y: 0.2,
         paused: true,
         onUpdate: function() {
-          mesh.rotation.y = this._targets[0].y;
+          mesh.rotation.y = this.target.y;
         },
         onComplete: yoyo,
         onReverseComplete: yoyo
       });
 
       this.in = function() {
-        gsap.to(mesh.rotation, {duration:1.5,  x: 0 });
+        TweenLite.to(mesh.rotation,1.5,{  x: 0 });
       };
 
       this.out = function(way) {
         let x = way === "up" ? -1 : 1;
-        gsap.to(mesh.rotation, {duration: 1.5,  x: x });
+        TweenLite.to(mesh.rotation, 1.5,{x: x });
       };
 
       this.start = function() {

@@ -3,13 +3,13 @@ import "../../styles/Tails.scss";
 import About from "./TailsAbout.jsx";
 import Site from "./TailsSite.jsx";
 import Skills from "./TailsSkills.jsx";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 export default function Tails(props) {
 	const tails = useRef(null);
 
 	useEffect(() => {
-		gsap.to(tails.current, { ...props.params });
+		TweenLite.to(tails.current, 0.4, { ...props.params });
 	}, [props.params]);
 
 	return (

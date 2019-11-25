@@ -1,7 +1,5 @@
-
-
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 
@@ -67,20 +65,19 @@ class LookAtField {
 
     this.in = function() {
       group.visible = true;
-      gsap.to(center, {duration:2,  y: 0, onUpdate: update });
-      gsap.to(group.position, {duration:1,  y: 0 });
+      TweenLite.to(center, 2,{ y: 0, onUpdate: update });
+      TweenLite.to(group.position, 1,{ y: 0 });
     };
 
     this.out = function() {
-      gsap.to(center, {
-        duration:1,
+      TweenLite.to(center, 1,{
         y: 50,
         onUpdate: update,
         onComplete: function() {
           group.visible = false;
         }
       });
-      gsap.to(group.position, {duration: 1, y: -50 });
+      TweenLite.to(group.position, 1,{ y: -50 });
     };
   }
 }

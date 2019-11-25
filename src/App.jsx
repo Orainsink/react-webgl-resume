@@ -5,7 +5,6 @@ import Map from "./js/components/Map.jsx";
 import Menu from "./js/components/Menu.jsx";
 import Heads from "./js/components/Heads.jsx";
 import Tails from "./js/components/Tails.jsx";
-// import Sections from "./js/components/Sections.jsx";
 import Viewport from "./js/components/Viewport.jsx";
 import Sound from "./js/components/Sound.jsx";
 
@@ -51,113 +50,113 @@ function App() {
 			default:
 				break;
 		}
-
-		function open() {
-			let y, to;
-			if (isOpen) {
-				y = "-90%";
-				to = "heads";
-				setHeadsVisib(true);
-			} else {
-				y = "-10%";
-				to = "tails";
-			}
-
-			setHeadsParam({ y, duration: 0.4, ease: "power2" });
-			setTailsParam({ y, duration: 0.4, ease: "power2" });
-		}
-
-		function close() {
-			if (isSliding) return false;
-			let y, to;
-
-			if (isOpen) {
-				to = "heads";
-				y = "-100%";
-			} else {
-				to = "tails";
-				y = "0%";
-			}
-
-			function onComplete() {
-				if (to === "heads") {
-					setHeadsVisib(false);
-				}
-			}
-
-			setTimeout(() => {
-				onComplete();
-			}, 400);
-
-			setHeadsParam({ y, duration: 0.4, ease: "power2" });
-			setTailsParam({ y, duration: 0.4, ease: "power2" });
-		}
-
-		function slide(callback) {
-			setIsSliding(true);
-
-			let to, y, durations;
-
-			if (isOpen) {
-				to = "heads";
-				y = "0%";
-				durations = [1.05, 1];
-				setHeadsVisib(true);
-			} else {
-				to = "tails";
-				y = "-100%";
-				durations = [1, 1.05];
-			}
-
-			slideBegin(to);
-
-			function onComplete() {
-				setIsSliding(false);
-
-				slideComplete(to);
-
-				if (to === "tails") {
-					setHeadsVisib(false);
-				}
-				if (callback) {
-					callback();
-				}
-			}
-			function slideBegin(to) {
-				if (to === "heads") {
-					setWaypoint(false);
-
-					try {
-						setSounds({ ...sounds, background: true });
-					} catch (e) {
-						console.warn(e);
-					}
-				} else {
-					setSounds({ ...sounds, background: false });
-				}
-			}
-			function slideComplete(to) {
-				if (to === "tails") {
-					setWaypoint(true);
-				}
-			}
-
-			setTimeout(() => {
-				onComplete();
-			}, 400);
-
-			setHeadsParam({ y, duration: durations[0], ease: "power2" });
-			setTailsParam({ y, duration: durations[1], ease: "power2" });
-
-			setIsOpen(!isOpen);
-
-			if (isOpen) {
-				setTrigger("tails");
-			} else {
-				setTrigger("heads");
-			}
-		}
 	}, [trigger]);
+	// 鼠标进入trigger
+	function open() {
+		let y, to;
+		if (isOpen) {
+			y = "-90%";
+			to = "heads";
+			setHeadsVisib(true);
+		} else {
+			y = "-10%";
+			to = "tails";
+		}
+
+		setHeadsParam({ y, duration: 0.4, ease: "power2" });
+		setTailsParam({ y, duration: 0.4, ease: "power2" });
+	}
+	// 鼠标离开trigger
+	function close() {
+		if (isSliding) return false;
+		let y, to;
+
+		if (isOpen) {
+			to = "heads";
+			y = "-100%";
+		} else {
+			to = "tails";
+			y = "0%";
+		}
+
+		function onComplete() {
+			if (to === "heads") {
+				setHeadsVisib(false);
+			}
+		}
+
+		setTimeout(() => {
+			onComplete();
+		}, 400);
+
+		setHeadsParam({ y, ease: "power2" });
+		setTailsParam({ y, ease: "power2" });
+	}
+	// 切换tail <-> heads
+	function slide(callback) {
+		setIsSliding(true);
+
+		let to, y, durations;
+
+		if (isOpen) {
+			to = "heads";
+			y = "0%";
+			durations = [1.05, 1];
+			setHeadsVisib(true);
+		} else {
+			to = "tails";
+			y = "-100%";
+			durations = [1, 1.05];
+		}
+
+		slideBegin(to);
+
+		function onComplete() {
+			setIsSliding(false);
+
+			slideComplete(to);
+
+			if (to === "tails") {
+				setHeadsVisib(false);
+			}
+			if (callback) {
+				callback();
+			}
+		}
+		function slideBegin(to) {
+			if (to === "heads") {
+				setWaypoint(false);
+
+				try {
+					setSounds({ ...sounds, background: true });
+				} catch (e) {
+					console.warn(e);
+				}
+			} else {
+				setSounds({ ...sounds, background: false });
+			}
+		}
+		function slideComplete(to) {
+			if (to === "tails") {
+				setWaypoint(true);
+			}
+		}
+
+		setTimeout(() => {
+			onComplete();
+		}, 400);
+
+		setHeadsParam({ y, duration: durations[0], ease: "power2" });
+		setTailsParam({ y, duration: durations[1], ease: "power2" });
+
+		setIsOpen(!isOpen);
+
+		if (isOpen) {
+			setTrigger("tails");
+		} else {
+			setTrigger("heads");
+		}
+	}
 
 	return (
 		<div className="App">

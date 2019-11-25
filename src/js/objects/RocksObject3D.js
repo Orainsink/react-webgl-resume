@@ -1,6 +1,6 @@
 
 
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import yoyo from "../utils/yoyoUtil";
 const THREE = require("three");
@@ -33,7 +33,7 @@ class Rocks {
 
     let loader = new THREE.LegacyJSONLoader();
     loader.load(
-      "public/3D/rocks.json",
+      "/3D/rocks.json",
       function(geometry) {
         let rocks = new THREE.Mesh(geometry, rocksMaterial);
         rocks.position.set(-70, 0, -30);
@@ -52,8 +52,7 @@ class Rocks {
         }
 
         this.in = function() {
-          gsap.to(cache,  {
-            duration: 1,
+          TweenLite.to(cache, 1, {
             angle: 0.3,
             y: 20,
             intensity: 15,
@@ -64,8 +63,7 @@ class Rocks {
 
         this.out = function(way) {
           let y = way === "up" ? 11 : 20;
-          gsap.to(cache, {
-            duration:1,
+          TweenLite.to(cache,1, {
             angle: 0,
             y: y,
             intensity: 0,
@@ -74,14 +72,13 @@ class Rocks {
           });
         };
 
-        let idleTween = gsap.to({ x: -2, z: -45 }, {
-          duration:2,
+        let idleTween = TweenLite.to({ x: -2, z: -45 }, 2,{
           x: 2,
           z: -35,
           paused: true,
           onUpdate: function() {
-            light.position.z = this._targets[0].z;
-            sphere.position.z = this._targets[0].z;
+            light.position.z = this.target.z;
+            sphere.position.z = this.target.z;
           },
           onComplete: yoyo,
           onReverseComplete: yoyo

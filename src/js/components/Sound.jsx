@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactHowler from "react-howler";
-import { useMappedState } from "redux-react-hook";
+import { useDispatch, useMappedState } from "redux-react-hook";
 import PageVisibility from "react-page-visibility";
 
 import background from "../../assets/sounds/background.ogg";
@@ -11,6 +11,7 @@ import neon from "../../assets/sounds/neon.ogg";
 export default function Sound() {
 	const mapState = React.useCallback(state => state, []);
 	const { mute, sounds } = useMappedState(mapState);
+
 	const [visibility, setVisibility] = useState(true);
 
 	const soundsList = [

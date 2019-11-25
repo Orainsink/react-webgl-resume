@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import gsap from "gsap";
+import { TweenLite } from "gsap/TweenMax";
 
 import SPRITE3D from "../libs/sprite3DLib";
 import spriteImg from "../../assets/images/sprite-none.png"
@@ -44,8 +44,7 @@ class Title {
     }
 
     let cache = { y: 20, opacity: 0 };
-    let inTween = gsap.to(cache,  {
-      duration:1,
+    let inTween = TweenLite.to(cache, 1, {
       y: 0,
       opacity: 1,
       paused: true,
