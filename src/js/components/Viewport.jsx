@@ -529,7 +529,7 @@ export default function Viewport() {
 		// add background particles and lines
 		// rangeY based on the size and the number of sections
 		console.log("setupBackground");
-		const rangeY = [sectionHeight, -sections.length * sectionHeight - sectionHeight];
+		const rangeY = [sectionHeight, -sectionsList.length * sectionHeight - sectionHeight];
 
 		setSounds({ ...sounds, background: true });
 
