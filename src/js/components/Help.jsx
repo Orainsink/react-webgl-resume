@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../../styles/Help.scss";
 import { useDispatch, useMappedState } from "redux-react-hook";
 import { TweenLite } from "gsap/TweenMax";
+import "../../styles/Help.scss";
 import "../../styles/Slider.scss";
 import Keys from "./Keys.jsx";
 import Mouse from "./Mouse.jsx";
@@ -47,14 +47,9 @@ function Slide1(props) {
 
 	useEffect(() => {
 		if (start) {
-			TweenLite.fromTo(
-				slideRef.current,
-				0.5,
-				{ opacity: 0, display: "none", x: -100 },
-				{ opacity: 1, display: "block", x: 0 }
-			);
+			TweenLite.fromTo(slideRef.current, 0.5, { opacity: 0 }, { opacity: 1 });
 		} else {
-			TweenLite.to(slideRef.current, 0.5, { opacity: 0, display: "none", x: -100 });
+			TweenLite.to(slideRef.current, 0.2, { opacity: 0 });
 		}
 	}, [start]);
 
@@ -77,9 +72,9 @@ function Slide2(props) {
 
 	useEffect(() => {
 		if (start) {
-			TweenLite.to(slideRef.current, 0.5, { opacity: 1, display: "block", x: 0 });
+			TweenLite.fromTo(slideRef.current, 0.5, { opacity: 0 }, { opacity: 1 });
 		} else {
-			TweenLite.to(slideRef.current, 0.5, { opacity: 0, display: "none", x: 100 });
+			TweenLite.to(slideRef.current, 0.2, { opacity: 0 });
 		}
 	}, [start]);
 	return (
@@ -104,6 +99,7 @@ export default function Help() {
 
 	const helpRef = useRef(null);
 	const sliderRef = useRef(null);
+	const slidesRef = useRef(null);
 
 	useEffect(() => {
 		if (help) {
@@ -111,8 +107,24 @@ export default function Help() {
 		}
 	}, [help]);
 
+	useEffect(() => {
+		if (help) {
+			TweenLite.to(slidesRef.current, 0.5, { x: 2 - curSlide ? "0%" : "-50%", ease: "easeIn" });
+			const timer = setInterval(() => {
+				changeSlide();
+			}, 12000);
+			return () => {
+				clearInterval(timer);
+			};
+		}
+	}, [curSlide]);
+
 	function changeSlide() {
 		setCurSlide(3 - curSlide);
+	}
+
+	function handleClickNode(slide) {
+		setCurSlide(slide);
 	}
 
 	return (
@@ -121,12 +133,21 @@ export default function Help() {
 				<div className="help" ref={helpRef}>
 					<Quit />
 					<div className="slider" ref={sliderRef}>
-						<div className="slider__slides">
+						<div className="slider__slides" ref={slidesRef}>
 							<Slide1 start={curSlide === 1} />
 							<Slide2 start={curSlide === 2} />
 						</div>
 
-						<div className="slider__map" />
+						<div className="slider__map">
+							<div
+								className={`slider__map__node ${curSlide === 1 ? "is-active" : ""}`}
+								onClick={handleClickNode.bind(this, 1)}
+							/>
+							<div
+								className={`slider__map__node ${curSlide === 2 ? "is-active" : ""}`}
+								onClick={handleClickNode.bind(this, 2)}
+							/>
+						</div>
 					</div>
 				</div>
 			)}

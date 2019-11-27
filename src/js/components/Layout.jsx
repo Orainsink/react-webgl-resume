@@ -36,7 +36,7 @@ export default function Layout() {
 			let flag = false;
 
 			TweenLite.to(mouseRef.current, 0.5, {
-				top: mouseY,
+				top: mouseY + "%",
 				onUpdate: function() {
 					if (this.time() > 0.25) {
 						flag = !flag;
@@ -48,7 +48,7 @@ export default function Layout() {
 
 		function open() {
 			TweenLite.to(containerRef.current, 0.8, {
-				top: openY,
+				top: openY + "%",
 				onComplete: () => {
 					click();
 				}

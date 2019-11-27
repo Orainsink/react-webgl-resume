@@ -6,7 +6,7 @@ export function makeStore() {
 		event: "", // 全局传递参数
 		trigger: null, // Trigger触发事件[null,"mouseEnter","mouseLeave","click"]
 		mute: false, // 静音
-		help: true, // 帮助页面
+		help: false, // 帮助页面
 		quality: 1, // 模型质量 [0.5,1]
 		headsVisib: true, // Heads可见 [true,false]
 		isSliding: false, // 滑动中

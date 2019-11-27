@@ -4,30 +4,29 @@
   top: 50%;
 
   max-width: 460px;
-  height: 600px;
   margin: 0 auto;
+  transform: translateY(-50%);
 }
 
 // slides
 .slider__slides {
-  position: absolute;
-
-  height: 100%;
+  width: 200%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-flow: nowrap;
 }
 
 // slide
 .slider__slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-
   opacity: 0;
   transition: opacity .3s ease-in-out;
+  width: 50%;
 }
 
-.slider__slide.is-active {
+/*.slider__slide.is-active {
   opacity: 1;
-}
+}*/
 
 // slider content
 .slider__slide__content {

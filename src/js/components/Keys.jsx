@@ -9,7 +9,7 @@ export default function Keys() {
 			setCurrent(current === "top" ? "bottom" : "top");
 		}, 1000);
 		return () => clearInterval(timer);
-	}, []);
+	}, [current]);
 
 	return (
 		<div className="keys">

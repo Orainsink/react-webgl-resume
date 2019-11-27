@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import TweenLite from "gsap/TweenLite";
 import TimelineMax from "gsap/TimelineMax";
 import React from "react";
@@ -6,22 +6,21 @@ import "../../styles/Mouse.scss";
 
 export default function Mouse() {
 	const mouseWheelRef = useRef(null);
-	let y = 0;
+	const [y, setY] = useState(0);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
 			scroll();
 		}, 2000);
 		return () => clearInterval(timer);
-	}, []);
+	}, [y]);
 
 	function scroll() {
-		TweenLite.to(mouseWheelRef.current, 400, { opacity: 1 });
-
-		y = -80 - y;
+		setY(-80 - y);
 		const tl = new TimelineMax();
-		tl.to(".mouse__wheel__line", 500, { top: y });
-		tl.to(".mouse__wheel__line", 300, { opacity: 0.2 });
+		TweenLite.to(mouseWheelRef.current, 0.4, { opacity: 1 });
+		tl.to(".mouse__wheel__line", 0.5, { top: y + "%" });
+		tl.to(".mouse__wheel", 0.3, { opacity: 0.2 });
 	}
 
 	return (
