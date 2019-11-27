@@ -110,12 +110,4 @@ neonsSection.smokeStop = function() {
   smoke.el.visible = false;
 };
 
-neonsSection.usingCallback = function(cb){
-  neonA.usingCallback = cb
-  neonB.usingCallback = cb
-  neonC.usingCallback = cb
-  neonD.usingCallback = cb
-}
-
-
 export default neonsSection;

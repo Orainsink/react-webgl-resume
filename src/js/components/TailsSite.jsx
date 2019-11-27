@@ -26,7 +26,6 @@ export default function Site() {
 		TweenMax.staggerTo(".wireframe__frame--left", 0.2, { height: "100%" }, 0.2);
 		TweenMax.staggerTo(".wireframe__frame--right", 0.6, { height: "100%" }, 0.2);
 		TweenMax.staggerTo(".wireframe__controls__node", 0.8, { top: 0 }, 0.2);
-		console.log("textLines", textLines);
 		textLines.forEach(item => {
 			const width = item.className.includes("wireframe__text__line--incomplete") ? "60%" : "100%";
 			tl2.to(item, 0.1, { width: width });

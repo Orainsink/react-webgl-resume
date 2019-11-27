@@ -652,4 +652,3 @@ export default function Viewport() {
 		</ReactScrollWheelHandler>
 	);
 }
-// TODO a huge wave of things to do in this page o(╥﹏╥)o

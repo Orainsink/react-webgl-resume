@@ -7,6 +7,7 @@ import Heads from "./js/components/Heads.jsx";
 import Tails from "./js/components/Tails.jsx";
 import Viewport from "./js/components/Viewport.jsx";
 import Sound from "./js/components/Sound.jsx";
+import Help from "./js/components/Help.jsx";
 
 import { useDispatch, useMappedState } from "redux-react-hook";
 
@@ -160,6 +161,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Help />
 			<Heads params={headsParam}>
 				<Map />
 				<Menu />

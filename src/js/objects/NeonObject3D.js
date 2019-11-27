@@ -139,8 +139,6 @@ class Neon {
 		}
 
 		// SOUNDS.neon.play();
-		console.log("应该触发");
-    this.usingCallback()
 
     TweenLite.delayedCall(random(0.05, 0.07), () => {
 			this.tube.material.emissive.set("#000000");
@@ -171,8 +169,6 @@ class Neon {
 			this.flickering = !this.flickering;
 
 			// SOUNDS.neon.play();
-			console.log("应该触发");
-      this.usingCallback()
 		});
 	}
 
@@ -262,7 +258,6 @@ class Neon {
 
 		return mesh;
 	}
-	usingCallback(){}
 }
 
 Neon.defaultOptions = {

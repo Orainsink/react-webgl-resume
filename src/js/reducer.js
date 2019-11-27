@@ -21,6 +21,11 @@ export default function reducer(state, action) {
 			return { ...state, mute };
 		}
 
+    case "setHelp": {
+      let help = !state.help;
+      return { ...state, help };
+    }
+
 		case "setSounds": {
 			let sounds = action.payload;
 			return { ...state, sounds };

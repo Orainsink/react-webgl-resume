@@ -17,6 +17,9 @@ export default function Menu() {
 	const setMute = React.useCallback(() => {
 		dispatch({ type: "setMute" });
 	}, []);
+	const setHelp = React.useCallback(() => {
+		dispatch({ type: "setHelp" });
+	}, []);
 
 	const menu = useRef(null);
 	const menuButton = useRef(null);
@@ -52,7 +55,7 @@ export default function Menu() {
 					<a className="menu__item menu__items--3D" ref={a => (menuItem[0] = a)} onClick={setMute}>
 						{mute ? " UNMUTE " : " MUTE "}
 					</a>
-					<a className="menu__item menu__items--3D" ref={a => (menuItem[1] = a)}>
+					<a className="menu__item menu__items--3D" ref={a => (menuItem[1] = a)} onClick={setHelp}>
 						{" HELP "}
 					</a>
 					<a className="menu__item menu__items--3D" ref={a => (menuItem[2] = a)}>
