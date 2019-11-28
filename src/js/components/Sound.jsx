@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactHowler from "react-howler";
-import { useDispatch, useMappedState } from "redux-react-hook";
+import { useMappedState } from "redux-react-hook";
 import PageVisibility from "react-page-visibility";
 
 import background from "../../assets/sounds/background.ogg";

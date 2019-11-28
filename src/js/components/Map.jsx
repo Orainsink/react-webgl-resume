@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../../styles/Map.scss";
 import { useDispatch, useMappedState } from "redux-react-hook";
-import { TweenLite } from "gsap/TweenMax";
 
 let renderd = false;
 export default function Map() {

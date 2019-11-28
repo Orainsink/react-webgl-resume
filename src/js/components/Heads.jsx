@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/Heads.scss";
-import { useMappedState } from "redux-react-hook";
 import { TweenLite } from "gsap/TweenMax";
 
 export default function Heads(props) {
