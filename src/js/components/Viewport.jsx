@@ -39,7 +39,6 @@ let isScrolling = false;
 // background lines
 let backgroundLines;
 // sections
-let sections = [];
 let sectionsMap = {};
 let totalSections;
 let currentIndex = 0;
@@ -372,10 +371,13 @@ export default function Viewport() {
 		width = sizes.width || viewport.current.offsetWidth || 0;
 		height = sizes.height || viewport.current.offsetHeight || 0;
 		if (!camera) return;
+		if (!device) {
+			camera.position.set(0, 0, 50);
+		}
 		camera.aspect = width / height;
 		camera.updateProjectionMatrix();
 		renderer.setSize(width * quality, height * quality);
-	}, [sizes]);
+	}, [device, sizes]);
 
 	/**
 	 * 启动渲染

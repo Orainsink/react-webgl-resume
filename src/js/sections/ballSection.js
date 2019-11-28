@@ -2,6 +2,7 @@ import Section from "../classes/SectionClass";
 import TextPanel from "../objects/TextPanelObject3D";
 import Ball from "../objects/BallObject3D";
 import Grid from "../objects/GridObject3D";
+import device from "../utils/deviceUtil"
 
 let ballSection = new Section("ball");
 
@@ -25,7 +26,11 @@ let text = new TextPanel("G  I  V  E \n S  H  A  P  E", {
   size: 50,
   lineSpacing: 40
 });
-text.el.position.set(15, 0, 15);
+if (device){
+  text.el.position.set(15, 0, 15);
+}else {
+  text.el.position.set(-5, -15, 15);
+}
 text.el.rotation.y = -0.4;
 ballSection.add(text.el);
 

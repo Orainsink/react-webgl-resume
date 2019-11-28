@@ -2,6 +2,7 @@ import Section from "../classes/SectionClass";
 import TextPanel from "../objects/TextPanelObject3D";
 import Face from "../objects/FaceHpObject3D";
 import Strips from "../objects/StripsObject3D";
+import device from "../utils/deviceUtil"
 
 let faceSection = new Section("face");
 
@@ -11,8 +12,13 @@ let text = new TextPanel("K  E  E  P \n T  R  Y  I  N  G", {
   size: 50,
   lineSpacing: 40
 });
-text.el.position.set(23, 0, 0);
-text.el.rotation.y = -0.4;
+
+if (device){
+  text.el.position.set(23, 0, 0);
+  text.el.rotation.y = -0.4;
+}else {
+  text.el.position.set(0, -23, 0);
+}
 faceSection.add(text.el);
 
 let face = new Face();

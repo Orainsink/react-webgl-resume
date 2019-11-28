@@ -16,7 +16,7 @@
 
 // general
 
-.trigger__info {
+.tails__info {
   position: absolute;
   z-index: 10;
 
@@ -26,8 +26,8 @@
   text-align: center;
 }
 
-.trigger__info--arrow {
-  bottom: 0;
+.tails__info--arrow {
+  top: 0;
   left: 50%;
 
   width: 26px;
@@ -35,14 +35,14 @@
   margin-left: -13px;
 
   opacity: .5;
-  color: #fff;
+  color: #0a0a0a;
 }
 
 .trigger__info--heads {
-  bottom: 0;
+  top: 0;
   opacity: 0;
 
-  color: #fff;
+  color: #0a0a0a;
 }
 
 .trigger__info--tails {

@@ -36,6 +36,7 @@ function App() {
 	const setIsOpen = React.useCallback(blur => dispatch({ type: "setIsOpen", payload: blur }), []);
 	const setTrigger = React.useCallback(blur => dispatch({ type: "setTrigger", payload: blur }), []);
 
+	// 检测设备类型 device [true: web, false: phone]
 	useEffect(() => {
 		const tmp =
 			navigator.userAgent.match(/Android/i) ||
