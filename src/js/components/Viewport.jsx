@@ -58,7 +58,8 @@ export default function Viewport() {
 		sounds,
 		sectionChangeBegin,
 		sectionChangeComplete,
-		mapScrollTo
+		mapScrollTo,
+		device
 	} = useMappedState(mapState);
 	const dispatch = useDispatch();
 
@@ -565,6 +566,7 @@ export default function Viewport() {
 	 * @param e
 	 */
 	function onMouseMove(e) {
+		if (!device) return;
 		mouseX = (e.clientX / window.innerWidth) * 2 - 1;
 	}
 

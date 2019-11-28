@@ -65,6 +65,7 @@ export default function Menu() {
 						className="menu__item menu__items--3D"
 						ref={a => (menuItem[3] = a)}
 						onClick={setQuality}
+						style={{ whiteSpace: "nowrap" }}
 					>
 						{` QUALITY : ${quality} `}
 					</a>

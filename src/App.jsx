@@ -13,7 +13,7 @@ import { useDispatch, useMappedState } from "redux-react-hook";
 
 function App() {
 	const mapState = React.useCallback(state => state, []);
-	const { trigger, isOpen, isSliding, sounds } = useMappedState(mapState);
+	const { trigger, isOpen, isSliding, sounds, device } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
 	const [headsParam, setHeadsParam] = useState({});
@@ -32,8 +32,22 @@ function App() {
 		blur => dispatch({ type: "setWaypoint", payload: blur }),
 		[]
 	);
+	const setDevice = React.useCallback(payload => dispatch({ type: "setDevice", payload }), []);
 	const setIsOpen = React.useCallback(blur => dispatch({ type: "setIsOpen", payload: blur }), []);
-	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
+	const setTrigger = React.useCallback(blur => dispatch({ type: "setTrigger", payload: blur }), []);
+
+	useEffect(() => {
+		const tmp =
+			navigator.userAgent.match(/Android/i) ||
+			navigator.userAgent.match(/webOS/i) ||
+			navigator.userAgent.match(/iPhone/i) ||
+			navigator.userAgent.match(/iPad/i) ||
+			navigator.userAgent.match(/iPod/i) ||
+			navigator.userAgent.match(/BlackBerry/i) ||
+			navigator.userAgent.match(/Windows Phone/i);
+		setDevice(!tmp);
+	}, [device]);
+
 	/**
 	 * navigation
 	 */

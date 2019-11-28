@@ -4,11 +4,9 @@ export default function reducer(state, action) {
 	}
 
 	switch (action.type) {
-		case "setEvent": {
-			return {
-				...state,
-				event: action.payload
-			};
+		case "setDevice": {
+			let device = action.payload;
+			return {...state, device};
 		}
 
 		case "setTrigger": {
@@ -21,10 +19,10 @@ export default function reducer(state, action) {
 			return { ...state, mute };
 		}
 
-    case "setHelp": {
-      let help = !state.help;
-      return { ...state, help };
-    }
+		case "setHelp": {
+			let help = !state.help;
+			return { ...state, help };
+		}
 
 		case "setSounds": {
 			let sounds = action.payload;
@@ -54,21 +52,21 @@ export default function reducer(state, action) {
 		}
 
 		case "setMap": {
-		  console.log("setMap",action.payload)
+			console.log("setMap", action.payload);
 			return { ...state, map: action.payload };
 		}
 
-    case "setMapScrollTo": {
-      return {...state, mapScrollTo: action.payload}
-    }
+		case "setMapScrollTo": {
+			return { ...state, mapScrollTo: action.payload };
+		}
 
-    case "setSectionChangeBegin": {
-      return { ...state, sectionChangeBegin: action.payload };
-    }
+		case "setSectionChangeBegin": {
+			return { ...state, sectionChangeBegin: action.payload };
+		}
 
-    case "setSectionChangeComplete": {
-      return { ...state, sectionChangeComplete: action.payload };
-    }
+		case "setSectionChangeComplete": {
+			return { ...state, sectionChangeComplete: action.payload };
+		}
 
 		default:
 			return state;
