@@ -8,6 +8,8 @@ require("../utils/legacyJSONLoaderUtil");
 matCap.uniforms.map.value = new THREE.TextureLoader().load(
   matCapShinyImg
 );
+
+const publicPath = process.env.PUBLIC_URL
 /**
  * 3D face
  *
@@ -20,7 +22,7 @@ class Face {
     let group = new THREE.Object3D();
 
     let loader = new THREE.LegacyJSONLoader();
-    loader.load("/3D/face-hp.json", (geometry) => {
+    loader.load(publicPath + "/3D/face-hp.json", (geometry) => {
       let mesh = new THREE.Mesh(geometry, matCap);
       mesh.scale.x = 1.5;
       mesh.scale.y = 1.5;

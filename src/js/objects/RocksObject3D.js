@@ -1,10 +1,10 @@
-
-
 import { TweenLite } from "gsap/TweenMax";
 
 import yoyo from "../utils/yoyoUtil";
 const THREE = require("three");
 require("../utils/legacyJSONLoaderUtil");
+
+const publicPath = process.env.PUBLIC_URL
 
 /**
  * 3D Rocks
@@ -33,7 +33,7 @@ class Rocks {
 
     let loader = new THREE.LegacyJSONLoader();
     loader.load(
-      "/3D/rocks.json",
+      publicPath + "/3D/rocks.json",
       function(geometry) {
         let rocks = new THREE.Mesh(geometry, rocksMaterial);
         rocks.position.set(-70, 0, -30);

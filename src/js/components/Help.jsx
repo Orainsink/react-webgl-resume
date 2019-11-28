@@ -112,15 +112,14 @@ export default function Help() {
 	}, [help]);
 
 	useEffect(() => {
+		let timer = null;
 		if (help) {
 			TweenLite.to(slidesRef.current, 0.5, { x: 2 - curSlide ? "0%" : "-50%", ease: "easeIn" });
-			const timer = setInterval(() => {
+			timer = setInterval(() => {
 				changeSlide();
 			}, 12000);
-			return () => {
-				clearInterval(timer);
-			};
 		}
+		return () => clearInterval(timer);
 	}, [curSlide]);
 
 	function changeSlide() {

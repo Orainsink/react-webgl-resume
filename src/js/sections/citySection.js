@@ -3,14 +3,14 @@ import Section from "../classes/SectionClass";
 import City from "../objects/CityObject3D";
 
 let citySection = new Section("city");
-
+const publicPath = process.env.PUBLIC_URL
 let city = new City();
 city.addGroup({
   name: "shanghai",
   objs: {
-    grounds: "/3D/shanghai-grounds.json",
-    buildings:"/3D/shanghai-buildings.json",
-    towers:"/3D/shanghai-towers.json",
+    grounds: publicPath + "/3D/shanghai-grounds.json",
+    buildings:publicPath + "/3D/shanghai-buildings.json",
+    towers: publicPath + "/3D/shanghai-towers.json",
   },
   outline: {
     ground: {

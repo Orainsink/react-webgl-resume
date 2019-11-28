@@ -8,7 +8,7 @@ import { makeStore } from "./js/store";
 
 import * as serviceWorker from "./serviceWorker";
 
-import {imgList}from "./js/libs/preloadImages";
+import { imgList }from "./js/libs/preloadImages";
 import ImagesLoader from "./js/libs/imagesLoader";
 
 let loader = document.getElementById("loader");
