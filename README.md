@@ -1,68 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-webgl-resume
 
-## Available Scripts
+一个基于 React Hooks + three.js +GSAP 的项目
 
-In the project directory, you can run:
+源码 fork 自  https://github.com/vaalentin/2015
 
-### `npm start`
+# 技术栈
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**models**: maya
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+**framwork**: React Hooks
 
-### `npm test`
+**Cli**: creat-react-app
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**webGL**: three.js r101
 
-### `npm run build`
+**sound**: react-howler
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**animation**: gsap 2.0
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+**state management**: redux-react-hook
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 进度
 
-### `npm run eject`
+- [x] ~~run, read, think~~
+- [x] 移除 jQuery
+- [x] 用 React Hooks 重写
+- [x] 有postcss和babel, 改用ES6, css3语法重写, 移除为了兼容ie而写的妥协性css
+- [x] 升级依赖 
+- [x] Loading 预加载动画优化 
+- [x] 移除移动端专页, 添加移动端适配 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Todos
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [ ] 尝试用 GLTFExporter 重新导出模型数据, 废弃老版本的 JSONloader
+- [ ] 修复模型的一些已知问题
+- [ ] 添加自定义内容
+- [ ] 组件过渡动画优化
+- [ ] 性能优化, 移除不必要的 ref 引用
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Quick start
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```shell
+# install dependencies
+yarn
+# dev: server will run at localhost:3000
+yarn start
+# build dist
+yarn build
+```
 
-## Learn More
+# Others
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Thanks for [vaalentin](https://github.com/vaalentin)'s extraordinary experiment, I learned a lot from him.
