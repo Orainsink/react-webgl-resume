@@ -28,18 +28,20 @@ export default function Tails(props) {
 
 	return (
 		<div className="tails" ref={tails}>
-			<div className="tails__info tails__info--arrow" ref={arrow}>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 20">
-					<path
-						fill="none"
-						stroke="#0a0a0a"
-						strokeWidth="1"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						d="M2.5,5L12.5 15 22.5 5"
-					/>
-				</svg>
-			</div>
+			{!device && (
+				<div className="tails__info tails__info--arrow" ref={arrow}>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 20">
+						<path
+							fill="none"
+							stroke="#0a0a0a"
+							strokeWidth="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M2.5,5L12.5 15 22.5 5"
+						/>
+					</svg>
+				</div>
+			)}
 			<About />
 			<Site />
 			<Skills />
