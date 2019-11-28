@@ -6,6 +6,7 @@ import "../../styles/Slider.scss";
 import Keys from "./Keys.jsx";
 import Mouse from "./Mouse.jsx";
 import Layout from "./Layout.jsx";
+import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 
 function Quit() {
 	const dispatch = useDispatch();
@@ -42,6 +43,8 @@ function Quit() {
 }
 
 function Slide1(props) {
+	const mapState = React.useCallback(state => state, []);
+	const { device } = useMappedState(mapState);
 	const { start } = props;
 	const slideRef = useRef(null);
 
@@ -58,8 +61,8 @@ function Slide1(props) {
 			<div className="slider__slide__content">
 				<Layout />
 				<p className="text--center text--white">
-					There&apos;re 2 parts on the website. Presentation and About me, you can switch between
-					them anytime by clicking on the bottom and top part of the screen.
+					{`There are 2 parts on the website. Presentation and About me, you can switch between
+					them anytime by ${device ? "clicking" : "tapping"} on the bottom and top part of the screen.`}
 				</p>
 			</div>
 		</div>
@@ -104,6 +107,7 @@ export default function Help() {
 	useEffect(() => {
 		if (help) {
 			TweenLite.to(helpRef.current, 0.5, { display: "block", opacity: 0.9, delay: 0.1 });
+			setCurSlide(1);
 		}
 	}, [help]);
 
@@ -124,32 +128,40 @@ export default function Help() {
 	}
 
 	function handleClickNode(slide) {
-		setCurSlide(slide);
+		if (slide !== curSlide) {
+			setCurSlide(slide);
+		}
 	}
 
 	return (
 		<>
 			{help && (
-				<div className="help" ref={helpRef}>
-					<Quit />
-					<div className="slider" ref={sliderRef}>
-						<div className="slider__slides" ref={slidesRef}>
-							<Slide1 start={curSlide === 1} />
-							<Slide2 start={curSlide === 2} />
-						</div>
+				<ReactScrollWheelHandler
+					leftHandler={handleClickNode.bind(this, 2)}
+					rightHandler={handleClickNode.bind(this, 1)}
+				>
+					<div className="help" ref={helpRef}>
+						<Quit />
 
-						<div className="slider__map">
-							<div
-								className={`slider__map__node ${curSlide === 1 ? "is-active" : ""}`}
-								onClick={handleClickNode.bind(this, 1)}
-							/>
-							<div
-								className={`slider__map__node ${curSlide === 2 ? "is-active" : ""}`}
-								onClick={handleClickNode.bind(this, 2)}
-							/>
+						<div className="slider" ref={sliderRef}>
+							<div className="slider__slides" ref={slidesRef}>
+								<Slide1 start={curSlide === 1} />
+								<Slide2 start={curSlide === 2} />
+							</div>
+
+							<div className="slider__map">
+								<div
+									className={`slider__map__node ${curSlide === 1 ? "is-active" : ""}`}
+									onClick={handleClickNode.bind(this, 1)}
+								/>
+								<div
+									className={`slider__map__node ${curSlide === 2 ? "is-active" : ""}`}
+									onClick={handleClickNode.bind(this, 2)}
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
+				</ReactScrollWheelHandler>
 			)}
 		</>
 	);

@@ -1,8 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { TweenLite } from "gsap/TweenMax";
 import "../../styles/Layout.scss";
+import { useMappedState } from "redux-react-hook";
 
 export default function Layout() {
+	const mapState = React.useCallback(state => state, []);
+	const { device } = useMappedState(mapState);
 	const mouseRef = useRef(null);
 	const clickRef = useRef(null);
 	const containerRef = useRef(null);
@@ -99,7 +102,7 @@ export default function Layout() {
 		<div className="help__layout">
 			<div className="layout">
 				<div className="layout__mouse" ref={mouseRef}>
-					<div className="layout__mouse__icon" />
+					<div className={`layout__mouse__icon layout__mouse__icon__${device ? "mouse" : "tap"}`} />
 					<div className="layout__mouse__click" ref={clickRef} />
 				</div>
 				<div className="layout__frame" />

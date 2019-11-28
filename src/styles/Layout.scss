@@ -27,8 +27,13 @@ $layoutThinBorder: 1px;
 
   width: 100%;
   height: 100%;
-
+}
+.layout__mouse__icon__mouse {
   background: url("../assets/images/sprite-icons.png") 17px -13px;
+}
+.layout__mouse__icon__tap {
+  background: url("../assets/images/sprite-icons-tap.png");
+  background-size: cover;
 }
 
 .layout__mouse__click {
