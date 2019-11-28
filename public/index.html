@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Oran XD</title>
@@ -12,7 +12,7 @@
       ::-webkit-scrollbar-track-piece {background-color: rgba(0, 0, 0, 0.2);-webkit-border-radius: 6px;}
       ::-webkit-scrollbar-thumb:vertical {height: 5px;background-color: rgba(125, 125, 125, 0.7);-webkit-border-radius: 6px;}
       ::-webkit-scrollbar-thumb:horizontal {width: 5px;background-color: rgba(125, 125, 125, 0.7);-webkit-border-radius: 6px;}
-      .loader {z-index:11;margin: 0;display: none;flex-flow: column nowrap;justify-content: center;align-items: center;background: #000;min-height: 100vh;}
+      .loader {z-index:11;margin: 0;display: flex;flex-flow: column nowrap;justify-content: center;align-items: center;background: #000;min-height: 100vh;}
       .loader__loading{font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
       .loader__text{font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
       .loader__box {box-sizing: border-box;padding: 0;width: 60%;height: 42px;position: relative;overflow: hidden}
@@ -22,10 +22,11 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
+      // stats bookmark, use it when you want to see the FPS or ram occupation.
       // javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
     </script>
     <div class="loader" id="loader">
-      <h3 class="loader__loading"> LOADING </h3>
+      <div class="loader__loading"> LOADING </div>
       <div class="loader__text">0%</div>
       <div class="loader__box">
         <div class="loader__bar"></div>
@@ -49,28 +50,28 @@
         }
 
         console.log("%c Hi! I\'m Oran, XD", "color: red;font-size: 24px;font-weight: bold;text-decoration: underline;");
-        console.log("More information and source code can be found here: https://github.com/Orainsink/webgl-polyfile");
-        console.log("And I'm looking for a job as a FE developer")
+        console.log("More information and source code can be found here: https://github.com/Orainsink/resume");
+        console.log("And I'm looking for a job as a FE developer");
         if (!webGL()){
           alert("I'm sorry your browser does not support webGL")
         }
         // disable console
-        /*if (!window.console) {
+        if (!window.console) {
           window.console = {};
         }
         var methods = ['log', 'debug', 'warn', 'info'];
         for (var i = 0; i < methods.length; i++) {
           console[methods[i]] = function () {
           };
-        }*/
-        if (!window.console) {
+        }
+        /*if (!window.console) {
           window.console = {};
         }
         var methods = ['warn','info'];
         for (var i = 0; i < methods.length; i++) {
           console[methods[i]] = function () {
           };
-        }
+        }*/
       })();
     </script>
   </body>
