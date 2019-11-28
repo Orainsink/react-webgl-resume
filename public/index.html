@@ -7,14 +7,14 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Oran XD</title>
     <style>
-      *{margin:0}
+      *{margin:0;}
       ::-webkit-scrollbar {width: 5px;height: 5px;}
       ::-webkit-scrollbar-track-piece {background-color: rgba(0, 0, 0, 0.2);-webkit-border-radius: 6px;}
       ::-webkit-scrollbar-thumb:vertical {height: 5px;background-color: rgba(125, 125, 125, 0.7);-webkit-border-radius: 6px;}
       ::-webkit-scrollbar-thumb:horizontal {width: 5px;background-color: rgba(125, 125, 125, 0.7);-webkit-border-radius: 6px;}
-      .loader {z-index:11;margin: 0;display: flex;flex-flow: column nowrap;justify-content: center;align-items: center;background: #000;min-height: 100vh;}
-      .loader__loading{font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
-      .loader__text{font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
+      .loader {line-height: 1;font-family:Arial, "Helvetica Neue", Helvetica, sans-serif!important; z-index:11;margin: 0;display: flex;flex-flow: column nowrap;justify-content: center;align-items: center;background: #000;min-height: 100vh;}
+      .loader__loading{line-height: 1;font-family:inherit;font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
+      .loader__text{line-height: 1;font-family:inherit;font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
       .loader__box {box-sizing: border-box;padding: 0;width: 60%;height: 42px;position: relative;overflow: hidden}
       .loader__bar {background: #FFF;height: 100%;width: 0%;margin: 0;transition: all 1s linear;left: 0;top: 0;}
     </style>

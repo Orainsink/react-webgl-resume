@@ -728,14 +728,6 @@
     "@babel/helper-regex" "^7.4.4"
     regexpu-core "^4.6.0"
 
-"@babel/polyfill@^7.2.5":
-  version "7.6.0"
-  resolved "https://registry.npm.taobao.org/@babel/polyfill/download/@babel/polyfill-7.6.0.tgz#6d89203f8b6cd323e8d946e47774ea35dc0619cc"
-  integrity sha1-bYkgP4ts0yPo2Ubkd3TqNdwGGcw=
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.2"
-
 "@babel/preset-env@7.6.0":
   version "7.6.0"
   resolved "https://registry.npm.taobao.org/@babel/preset-env/download/@babel/preset-env-7.6.0.tgz#aae4141c506100bb2bfaa4ac2a5c12b395619e50"
@@ -942,14 +934,6 @@
   version "9.0.1"
   resolved "https://registry.npm.taobao.org/@csstools/normalize.css/download/@csstools/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha1-wns5HYRX0eiT8e3er15UEtEv+7U=
-
-"@fullpage/react-fullpage@^0.1.16":
-  version "0.1.16"
-  resolved "https://registry.npm.taobao.org/@fullpage/react-fullpage/download/@fullpage/react-fullpage-0.1.16.tgz#aa78031dd94880ca59aa14d42d973f5514a72ded"
-  integrity sha1-qngDHdlIgMpZqhTULZc/VRSnLe0=
-  dependencies:
-    "@babel/polyfill" "^7.2.5"
-    fullpage.js "^3.0.7"
 
 "@hapi/address@2.x.x":
   version "2.1.2"
@@ -2818,7 +2802,7 @@ core-js@^1.0.0:
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
-core-js@^2.4.0, core-js@^2.6.5:
+core-js@^2.4.0:
   version "2.6.10"
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-2.6.10.tgz#8a5b8391f8cc7013da703411ce5b585706300d7f"
   integrity sha1-iluDkfjMcBPacDQRzltYVwYwDX8=
@@ -4357,11 +4341,6 @@ fstream@^1.0.0, fstream@^1.0.12:
     inherits "~2.0.0"
     mkdirp ">=0.5 0"
     rimraf "2"
-
-fullpage.js@^3.0.7:
-  version "3.0.7"
-  resolved "https://registry.npm.taobao.org/fullpage.js/download/fullpage.js-3.0.7.tgz#27d4815f39ad26019bf96dbc7644ac7ec6226f39"
-  integrity sha1-J9SBXzmtJgGb+W28dkSsfsYibzk=
 
 function-bind@^1.1.1:
   version "1.1.1"
