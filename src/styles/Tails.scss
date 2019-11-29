@@ -1,6 +1,11 @@
 // general
 .tails {
   background-color: #fff;
+  a:link{text-decoration:underline; color:#000;}
+  a:visited{text-decoration:underline; color:#000;}
+  a:hover{text-decoration:underline; color:#000;}
+  a:active{text-decoration:underline; color:#000;}
+  a.web:visited{text-decoration:underline; color:#000;}
 }
 .tails {
   position: absolute;
