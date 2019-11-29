@@ -11,6 +11,7 @@ export default function reducer(state, action) {
 
 		case "setTrigger": {
 			let trigger = action.payload;
+			console.log("Trigger",trigger)
 			return { ...state, trigger };
 		}
 

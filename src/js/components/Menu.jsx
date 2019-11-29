@@ -20,6 +20,7 @@ export default function Menu() {
 	const setHelp = React.useCallback(() => {
 		dispatch({ type: "setHelp" });
 	}, []);
+	const setTrigger = React.useCallback(blur => dispatch({ type: "setTrigger", payload: blur }), []);
 
 	const menu = useRef(null);
 	const menuButton = useRef(null);
@@ -69,7 +70,11 @@ export default function Menu() {
 					<a className="menu__item menu__items--3D" ref={a => (menuItem[1] = a)} onClick={setHelp}>
 						{" HELP "}
 					</a>
-					<a className="menu__item menu__items--3D" ref={a => (menuItem[2] = a)}>
+					<a
+						className="menu__item menu__items--3D"
+						ref={a => (menuItem[2] = a)}
+						onClick={setTrigger.bind(this, "click")}
+					>
 						{" CONTACT "}
 					</a>
 					<a

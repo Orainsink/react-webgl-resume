@@ -6,6 +6,12 @@
   a:hover{text-decoration:underline; color:#000;}
   a:active{text-decoration:underline; color:#000;}
   a.web:visited{text-decoration:underline; color:#000;}
+  h1{
+    font-weight: bold;
+  }
+  h2{
+    font-weight: normal;
+  }
 }
 .tails {
   position: absolute;

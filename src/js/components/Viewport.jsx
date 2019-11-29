@@ -60,7 +60,8 @@ export default function Viewport() {
 		sectionChangeBegin,
 		sectionChangeComplete,
 		mapScrollTo,
-		device
+		device,
+		mute
 	} = useMappedState(mapState);
 	const dispatch = useDispatch();
 
@@ -567,9 +568,13 @@ export default function Viewport() {
 			}
 		}
 	}
+
+	/**
+	 * 触发用户动作过后取消静音
+	 */
 	function initializeSound() {
 		if (!gotGesture) {
-			setMute();
+			if (mute) setMute();
 			gotGesture = true;
 		}
 	}
