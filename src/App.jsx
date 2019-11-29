@@ -11,6 +11,9 @@ import Help from "./js/components/Help.jsx";
 
 import { useDispatch, useMappedState } from "redux-react-hook";
 
+function bodyScroll(e) {
+	e.preventDefault();
+}
 function App() {
 	const mapState = React.useCallback(state => state, []);
 	const { trigger, isOpen, isSliding, sounds, device } = useMappedState(mapState);
@@ -36,7 +39,9 @@ function App() {
 	const setIsOpen = React.useCallback(blur => dispatch({ type: "setIsOpen", payload: blur }), []);
 	const setTrigger = React.useCallback(blur => dispatch({ type: "setTrigger", payload: blur }), []);
 
-	// 检测设备类型 device [true: web, false: phone]
+	/**
+	 * 检测设备类型 device [true: web, false: phone]
+	 */
 	useEffect(() => {
 		const tmp =
 			navigator.userAgent.match(/Android/i) ||
@@ -48,9 +53,8 @@ function App() {
 			navigator.userAgent.match(/Windows Phone/i);
 		setDevice(!tmp);
 	}, [device]);
-
 	/**
-	 * navigation
+	 * 处理trigger事件, 包括点击, 鼠标进入, 鼠标移除
 	 */
 	useEffect(() => {
 		switch (trigger) {
@@ -67,7 +71,20 @@ function App() {
 				break;
 		}
 	}, [trigger]);
-	// 鼠标进入trigger
+	/**
+	 * Heads时禁掉页面滚动, 用于处理微信/qq/safari浏览器下拉时会出现空白,以及夸克等浏览器会下拉刷新的bug
+	 * tails时取消监听, 可以正常监听滚动事件.
+	 */
+	useEffect(() => {
+		if (!isOpen) {
+			document.body.addEventListener("touchmove", bodyScroll, { passive: false });
+		} else {
+			document.body.removeEventListener("touchmove", bodyScroll, { passive: false });
+		}
+	}, [isOpen]);
+	/**
+	 * 鼠标进入trigger时执行,
+	 */
 	function open() {
 		let y, to;
 		if (isOpen) {
@@ -82,7 +99,10 @@ function App() {
 		setHeadsParam({ y, ease: "power2" });
 		setTailsParam({ y, ease: "power2" });
 	}
-	// 鼠标离开trigger
+
+	/**
+	 * 鼠标离开trigger时执行
+	 */
 	function close() {
 		if (isSliding) return false;
 		let y, to;
@@ -108,8 +128,10 @@ function App() {
 		setHeadsParam({ y, ease: "power2" });
 		setTailsParam({ y, ease: "power2" });
 	}
-	// 切换tail <-> heads
-	function slide(callback) {
+	/**
+	 * 切换tail <-> heads动作
+	 */
+	function slide() {
 		setIsSliding(true);
 
 		let to, y, durations;
@@ -134,9 +156,6 @@ function App() {
 
 			if (to === "tails") {
 				setHeadsVisib(false);
-			}
-			if (callback) {
-				callback();
 			}
 		}
 		function slideBegin(to) {

@@ -17,6 +17,13 @@
       .loader__text{line-height: 1;font-family:inherit;font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
       .loader__box {box-sizing: border-box;padding: 0;width: 60%;height: 42px;position: relative;overflow: hidden}
       .loader__bar {background: #FFF;height: 100%;width: 0%;margin: 0;transition: all 1s linear;left: 0;top: 0;}
+      html, body, #root, .loader {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
     </style>
   </head>
   <body>
@@ -64,7 +71,7 @@
           console[methods[i]] = function () {
           };
         }
-        /*if (!window.console) {
+/*        if (!window.console) {
           window.console = {};
         }
         var methods = ['warn','info'];
