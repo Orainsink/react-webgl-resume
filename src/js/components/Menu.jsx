@@ -6,7 +6,7 @@ import { TimelineMax } from "gsap";
 
 export default function Menu() {
 	const mapState = React.useCallback(state => state, []);
-	const { isOpen, mute, quality } = useMappedState(mapState);
+	const { isOpen, mute, quality, device } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
 	const [active, setActive] = useState(false);
@@ -42,10 +42,21 @@ export default function Menu() {
 		TweenLite.to(menu.current, 0.4, { left: 30, ease: window.Linear.easeNone });
 		TweenLite.to(menuButton.current, 0.4, { opacity: 1 });
 	}
+	function tap() {
+		if (!device && !active) {
+			mouseover();
+		}
+	}
 
 	return (
 		!isOpen && (
-			<div className={`menu`} onMouseEnter={mouseover} onMouseLeave={mouseout} ref={menu}>
+			<div
+				className={`menu`}
+				onMouseEnter={mouseover}
+				onMouseLeave={mouseout}
+				ref={menu}
+				onClick={tap}
+			>
 				<div className="menu__button" ref={menuButton}>
 					<div className="menu__button__line menu__button__line--top" />
 					<div className="menu__button__line menu__button__line--middle" />
