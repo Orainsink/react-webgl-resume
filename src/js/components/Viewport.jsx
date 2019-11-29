@@ -48,6 +48,8 @@ let fogColor = "#0a0a0a";
 let sectionHeight = 50;
 // mouse
 let mouseX = 0;
+// 初次渲染,用户是否进行操作
+let gotGesture = false;
 
 export default function Viewport() {
 	const mapState = React.useCallback(state => state, []);
@@ -72,6 +74,9 @@ export default function Viewport() {
 		payload => dispatch({ type: "setSectionChangeComplete", payload }),
 		[]
 	);
+	const setMute = React.useCallback(() => {
+		dispatch({ type: "setMute" });
+	}, []);
 	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
 
 	const [resizeListener, sizes] = useResizeAware();
@@ -552,6 +557,7 @@ export default function Viewport() {
 	 * @param event
 	 */
 	function handleWheel(way) {
+		initializeSound();
 		console.log("scroll");
 		if (!isScrolling && isActive) {
 			if (way === "down") {
@@ -559,6 +565,12 @@ export default function Viewport() {
 			} else {
 				prev();
 			}
+		}
+	}
+	function initializeSound() {
+		if (!gotGesture) {
+			setMute();
+			gotGesture = true;
 		}
 	}
 

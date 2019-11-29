@@ -5,7 +5,7 @@ export function makeStore() {
 	return createStore(reducer, {
 		device: true, // 设备类型[true: web, false: phone]
 		trigger: null, // Trigger触发事件[null,"mouseEnter","mouseLeave","click"]
-		mute: false, // 静音
+		mute: true, // 静音
 		help: false, // 帮助页面
 		quality: 1, // 模型质量 [0.5,1]
 		headsVisib: true, // Heads可见 [true,false]

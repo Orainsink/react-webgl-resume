@@ -60,18 +60,11 @@
           window.console = {};
         }
         var methods = ['log', 'debug', 'warn', 'info'];
+        // var methods = ['warn','info'];
         for (var i = 0; i < methods.length; i++) {
           console[methods[i]] = function () {
           };
         }
-        /*if (!window.console) {
-          window.console = {};
-        }
-        var methods = ['warn','info'];
-        for (var i = 0; i < methods.length; i++) {
-          console[methods[i]] = function () {
-          };
-        }*/
       })();
     </script>
   </body>

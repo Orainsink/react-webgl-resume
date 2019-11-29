@@ -3,11 +3,6 @@ import ReactHowler from "react-howler";
 import { useMappedState } from "redux-react-hook";
 import PageVisibility from "react-page-visibility";
 
-import background from "../../assets/sounds/background.ogg";
-import wind from "../../assets/sounds/wind.ogg";
-import whitenoise from "../../assets/sounds/whitenoise.ogg";
-import neon from "../../assets/sounds/neon.ogg";
-
 export default function Sound() {
 	const mapState = React.useCallback(state => state, []);
 	const { mute, sounds } = useMappedState(mapState);
@@ -15,17 +10,41 @@ export default function Sound() {
 	const [visibility, setVisibility] = useState(true);
 
 	const soundsList = [
-		{ name: "background", src: background, volume: 0.5, loop: true },
-		{ name: "wind", src: wind },
+		{
+			name: "background",
+			src: [
+				require("../../assets/sounds/background.ogg"),
+				require("../../assets/sounds/background.mp3"),
+				require("../../assets/sounds/background.wav")
+			],
+			volume: 0.5,
+			loop: true
+		},
+		{
+			name: "wind",
+			src: [
+				require("../../assets/sounds/wind.ogg"),
+				require("../../assets/sounds/wind.mp3"),
+				require("../../assets/sounds/wind.wav")
+			]
+		},
 		{
 			name: "whitenoise",
-			src: whitenoise,
-			volume: 0.5
+			src: [
+				require("../../assets/sounds/whitenoise.ogg"),
+				require("../../assets/sounds/whitenoise.mp3"),
+				require("../../assets/sounds/whitenoise.wav")
+			],
+			volume: 0.05
 		},
 		{
 			name: "neon",
-			src: neon,
-			volume: 0.5
+			src: [
+				require("../../assets/sounds/neon.ogg"),
+				require("../../assets/sounds/neon.mp3"),
+				require("../../assets/sounds/neon.wav")
+			],
+			volume: 0.05
 		}
 	];
 
