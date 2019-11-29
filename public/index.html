@@ -56,22 +56,22 @@
           alert("I'm sorry your browser does not support webGL")
         }
         // disable console
-        if (!window.console) {
+        /*if (!window.console) {
           window.console = {};
         }
         var methods = ['log', 'debug', 'warn', 'info'];
         for (var i = 0; i < methods.length; i++) {
           console[methods[i]] = function () {
           };
-        }
-/*        if (!window.console) {
+        }*/
+        if (!window.console) {
           window.console = {};
         }
         var methods = ['warn','info'];
         for (var i = 0; i < methods.length; i++) {
           console[methods[i]] = function () {
           };
-        }*/
+        }
       })();
     </script>
   </body>

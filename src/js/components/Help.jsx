@@ -100,13 +100,11 @@ export default function Help() {
 	const { help } = useMappedState(mapState);
 	const [curSlide, setCurSlide] = useState(1);
 
-	const helpRef = useRef(null);
 	const sliderRef = useRef(null);
 	const slidesRef = useRef(null);
 
 	useEffect(() => {
 		if (help) {
-			TweenLite.to(helpRef.current, 0.5, { display: "block", opacity: 0.9, delay: 0.1 });
 			setCurSlide(1);
 		}
 	}, [help]);
@@ -114,7 +112,8 @@ export default function Help() {
 	useEffect(() => {
 		let timer = null;
 		if (help) {
-			TweenLite.to(slidesRef.current, 0.5, { x: 2 - curSlide ? "0%" : "-50%", ease: "easeIn" });
+			slidesRef.current &&
+				TweenLite.to(slidesRef.current, 0.5, { x: 2 - curSlide ? "0%" : "-50%", ease: "easeIn" });
 			timer = setInterval(() => {
 				changeSlide();
 			}, 12000);
@@ -139,7 +138,7 @@ export default function Help() {
 					leftHandler={handleClickNode.bind(this, 2)}
 					rightHandler={handleClickNode.bind(this, 1)}
 				>
-					<div className="help" ref={helpRef}>
+					<div className={`help ${help ? "help__active" : ""}`}>
 						<Quit />
 
 						<div className="slider" ref={sliderRef}>

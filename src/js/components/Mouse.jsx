@@ -4,6 +4,7 @@ import TimelineMax from "gsap/TimelineMax";
 import React from "react";
 import "../../styles/Mouse.scss";
 
+let tl = new TimelineMax();
 export default function Mouse() {
 	const mouseWheelRef = useRef(null);
 	const [y, setY] = useState(0);
@@ -17,7 +18,6 @@ export default function Mouse() {
 
 	function scroll() {
 		setY(-80 - y);
-		const tl = new TimelineMax();
 		TweenLite.to(mouseWheelRef.current, 0.4, { opacity: 1 });
 		tl.to(".mouse__wheel__line", 0.5, { top: y + "%" });
 		tl.to(".mouse__wheel", 0.3, { opacity: 0.2 });

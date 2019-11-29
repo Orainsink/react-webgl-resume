@@ -43,7 +43,7 @@ export default function Layout() {
 				onUpdate: function() {
 					if (this.time() > 0.25) {
 						flag = !flag;
-						open();
+						mouseRef.current && open();
 					}
 				}
 			});
@@ -53,7 +53,7 @@ export default function Layout() {
 			TweenLite.to(containerRef.current, 0.8, {
 				top: openY + "%",
 				onComplete: () => {
-					click();
+					containerRef.current && click();
 				}
 			});
 		}
@@ -81,7 +81,7 @@ export default function Layout() {
 					onUpdate: function() {
 						if (!flag && this.time() > 0.28) {
 							flag = !flag;
-							slide();
+							clickRef.current && slide();
 						}
 					}
 				}
