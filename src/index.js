@@ -26,8 +26,8 @@ const barBoxWidth = barBox.offsetWidth;
 
 imagesLoader.start();
 imagesLoader.onProgress(percent => {
-  text.innerText = `${Math.round(percent+ (100-percent)*barWidth/barBoxWidth)}%`;
-  bar.style.width = `${Math.round(percent+ (100-percent)*barWidth/barBoxWidth)}%`;
+  text.innerText = `${Math.ceil(percent+ (100-percent)*barWidth/barBoxWidth)}%`;
+  bar.style.width = `${Math.ceil(percent+ (100-percent)*barWidth/barBoxWidth)}%`;
 });
 imagesLoader.onComplete(() => {
   text.innerText = "100%";

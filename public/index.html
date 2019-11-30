@@ -144,8 +144,8 @@
       text.innerText = `${Math.round(tmp)}%`;
       bar.style.width = `${Math.round(tmp)}%`;
       time += 1;
-      tmp = tmp > 99?tmp:Math.tanh(time/10)*80 + Math.random()*5
-    }, Math.random()*2000)
+      tmp = tmp > 99?tmp:Math.tanh(time/10)*87
+    }, (Math.random()+0.3)*1000)
   })()
 </script>
 </body>
