@@ -15,10 +15,19 @@ let loader = document.getElementById("loader");
 const imagesLoader = new ImagesLoader(imgList);
 let text = document.getElementsByClassName("loader__text")[0];
 let bar = document.getElementsByClassName("loader__bar")[0];
+let barBox = document.getElementsByClassName("loader__box")[0];
+
+// 清除假进度条计时器
+window.clearInterval( window.loaderLoadingProgressTimer);
+window.loaderLoadingProgressTimer = null;
+
+const barWidth = bar.offsetWidth;
+const barBoxWidth = barBox.offsetWidth;
+
 imagesLoader.start();
 imagesLoader.onProgress(percent => {
-  text.innerText = `${Math.round(percent)}%`;
-  bar.style.width = `${Math.round(percent)}%`;
+  text.innerText = `${Math.round(percent+ (100-percent)*barWidth/barBoxWidth)}%`;
+  bar.style.width = `${Math.round(percent+ (100-percent)*barWidth/barBoxWidth)}%`;
 });
 imagesLoader.onComplete(() => {
   text.innerText = "100%";

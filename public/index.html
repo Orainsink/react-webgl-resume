@@ -1,71 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png" />
+<head>
+    <meta charset="utf-8"/>
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
     <title>Oran XD</title>
     <style>
-      *{margin:0;}
-      ::-webkit-scrollbar {width: 5px;height: 5px;}
-      ::-webkit-scrollbar-track-piece {background-color: rgba(0, 0, 0, 0.2);-webkit-border-radius: 6px;}
-      ::-webkit-scrollbar-thumb:vertical {height: 5px;background-color: rgba(125, 125, 125, 0.7);-webkit-border-radius: 6px;}
-      ::-webkit-scrollbar-thumb:horizontal {width: 5px;background-color: rgba(125, 125, 125, 0.7);-webkit-border-radius: 6px;}
-      .loader {user-select:none;line-height: 1;font-family:Arial, "Helvetica Neue", Helvetica, sans-serif!important; z-index:11;margin: 0;display: flex;flex-flow: column nowrap;justify-content: center;align-items: center;background: #000;min-height: 100vh;}
-      .loader__loading{line-height: 1;font-family:inherit;font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
-      .loader__text{line-height: 1;font-family:inherit;font-weight: bold;color: #FFF;font-size: 42px;text-shadow: 0 0 3px #FFF;}
-      .loader__box {box-sizing: border-box;padding: 0;width: 60%;height: 42px;position: relative;overflow: hidden}
-      .loader__bar {background: #FFF;height: 100%;width: 0%;margin: 0;transition: all 1s linear;left: 0;top: 0;}
+        * {
+            margin: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track-piece {
+            background-color: rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:vertical {
+            height: 5px;
+            background-color: rgba(125, 125, 125, 0.7);
+            -webkit-border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:horizontal {
+            width: 5px;
+            background-color: rgba(125, 125, 125, 0.7);
+            -webkit-border-radius: 6px;
+        }
+
+        .loader {
+            user-select: none;
+            line-height: 1;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+            z-index: 11;
+            margin: 0;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            min-height: 100vh;
+        }
+
+        .loader__loading {
+            line-height: 1;
+            font-family: inherit;
+            font-weight: bold;
+            color: #FFF;
+            font-size: 42px;
+            text-shadow: 0 0 3px #FFF;
+        }
+
+        .loader__text {
+            line-height: 1;
+            font-family: inherit;
+            font-weight: bold;
+            color: #FFF;
+            font-size: 42px;
+            text-shadow: 0 0 3px #FFF;
+        }
+
+        .loader__box {
+            box-sizing: border-box;
+            padding: 0;
+            width: 60%;
+            height: 42px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .loader__bar {
+            background: #FFF;
+            height: 100%;
+            width: 0%;
+            margin: 0;
+            transition: all 1s linear;
+            left: 0;
+            top: 0;
+        }
     </style>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script>
-      // stats bookmark, use it when you want to see the FPS or ram occupation.
-      // javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
-    </script>
-    <div class="loader" id="loader">
-      <div class="loader__loading"> LOADING </div>
-      <div class="loader__text">0%</div>
-      <div class="loader__box">
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<script>
+  // stats bookmark, use it when you want to see the FPS or ram occupation.
+  // javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
+</script>
+<div class="loader" id="loader">
+    <div class="loader__loading"> LOADING</div>
+    <div class="loader__text">0%</div>
+    <div class="loader__box">
         <div class="loader__bar"></div>
-      </div>
     </div>
-    <div id="root"></div>
-    <script>
-      document = window.document;
+</div>
+<div id="root"></div>
+<script>
+  document = window.document;
 
-      (function () {
-        function webGL() {
-          try {
-            var canvas = document.createElement('canvas');
-            return !!window.WebGLRenderingContext
-              && (canvas.getContext('webgl')
-                || canvas.getContext('experimental-webgl'));
+  (function () {
+    function webGL() {
+      try {
+        var canvas = document.createElement('canvas');
+        return !!window.WebGLRenderingContext
+          && (canvas.getContext('webgl')
+            || canvas.getContext('experimental-webgl'));
 
-          } catch (e) {
-            return false;
-          }
-        }
+      } catch (e) {
+        return false;
+      }
+    }
 
-        console.log("%c Hi! I\'m Oran, XD", "color: red;font-size: 24px;font-weight: bold;text-decoration: underline;");
-        console.log("More information and source code can be found here: https://github.com/Orainsink/react-webgl-resume");
-        console.log("And I'm looking for a job as a FE developer");
-        if (!webGL()){
-          alert("I'm sorry your browser does not support webGL")
-        }
-        // disable console
-        if (!window.console) {
-          window.console = {};
-        }
-        var methods = ['log', 'debug', 'warn', 'info'];
-        // var methods = ['warn','info'];
-        for (var i = 0; i < methods.length; i++) {
-          console[methods[i]] = function () {
-          };
-        }
-      })();
-    </script>
-  </body>
+    console.log("%c Hi! I\'m Oran, XD", "color: red;font-size: 24px;font-weight: bold;text-decoration: underline;");
+    console.log("More information and source code can be found here: https://github.com/Orainsink/react-webgl-resume");
+    console.log("And I'm looking for a job as a FE developer");
+    if (!webGL()) {
+      alert("I'm sorry your browser does not support webGL")
+    }
+    // disable console
+    if (!window.console) {
+      window.console = {};
+    }
+    // var methods = ['log', 'debug', 'warn', 'info'];
+    var methods = ['warn', 'info'];
+    for (var i = 0; i < methods.length; i++) {
+      console[methods[i]] = function () {
+      };
+    }
+  })();
+</script>
+<script>
+    // 进度条, 模拟加载过程, #(滑稽)
+  (function () {
+    var tmp = 0;
+    var time = 0;
+    let text = document.getElementsByClassName("loader__text")[0];
+    let bar = document.getElementsByClassName("loader__bar")[0];
+    window.loaderLoadingProgressTimer = setInterval(()=> {
+      text.innerText = `${Math.round(tmp)}%`;
+      bar.style.width = `${Math.round(tmp)}%`;
+      time += 1;
+      tmp = tmp > 99?tmp:Math.tanh(time/10)*80 + Math.random()*5
+    }, 1000)
+  })()
+</script>
+</body>
 </html>

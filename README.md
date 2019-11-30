@@ -23,17 +23,17 @@
 # 进度
 
 - [x] ~~run, read, think~~
-- [x] 移除 jQuery
-- [x] 用 React Hooks 重写
-- [x] 有postcss和babel, 改用ES6, css3语法重写, 移除为了兼容ie而写的妥协性css
-- [x] 升级依赖 
-- [x] Loading 预加载动画优化 
-- [x] 移除移动端专页, 添加移动端适配 
+- [x] 移除所有 jQuery 依赖
+- [x] 用 React Hooks 重构
+- [x] 用 ES6, css3 语法重写
+- [x] 升级/替换依赖
+- [x] Loading 预加载动画,优化加载效果
+- [x] 移除移动端专页, 添加移动端适配
 
 # Todos
 
 - [ ] 尝试用 GLTFExporter 重新导出模型数据, 废弃老版本的 JSONloader
-- [ ] 修复模型的一些已知问题
+- [ ] 修复一些已知问题
 - [ ] 添加自定义内容
 - [ ] 组件过渡动画优化
 - [ ] 性能优化, 移除不必要的 ref 引用
