@@ -77,6 +77,16 @@
             left: 0;
             top: 0;
         }
+        .loader__tip {
+            margin-top: 20px;
+            font-family: inherit;
+            font-weight: bold;
+            color: #FFF;
+            font-size: 16px;
+            text-shadow: 0 0 3px #FFF;
+            max-width: 80%;
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -91,6 +101,7 @@
     <div class="loader__box">
         <div class="loader__bar"></div>
     </div>
+    <div class="loader__tip">*加载超时, 你可能需要检查网络或者科学上网后重新刷新</div>
 </div>
 <div id="root"></div>
 <script>
@@ -132,15 +143,33 @@
   (function () {
     var tmp = 0;
     var time = 0;
-    var total = 80 + Math.random()*10
+    var oldTime = new Date();
+    var during = 0;
+    var total = 80 + Math.random()*10;
     var text = document.getElementsByClassName("loader__text")[0];
     var bar = document.getElementsByClassName("loader__bar")[0];
+    var tip = document.getElementsByClassName("loader__tip")[0];
+
     window.loaderLoadingProgressTimer = setInterval(()=> {
       text.innerText = `${Math.round(tmp)}%`;
       bar.style.width = `${Math.round(tmp)}%`;
       time += 1;
-      tmp = tmp > 99?tmp:Math.tanh(time/10)*total
-    }, (Math.random()+0.3)*1000)
+      tmp = tmp > 99?tmp:Math.tanh(time/10)*total;
+
+      if(during < 20000){
+        var curTime = new Date();
+        during = curTime.getTime() - oldTime.getTime();
+        if (during > 20000){
+          tip.style.opacity = 1;
+          stop()
+        }
+      }
+    }, (Math.random()+0.01)*3000)
+    function stop(){
+      // 清除假进度条计时器
+      window.clearInterval( window.loaderLoadingProgressTimer);
+      window.loaderLoadingProgressTimer = null;
+    }
   })()
 </script>
 </body>
