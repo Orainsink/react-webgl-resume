@@ -55,9 +55,11 @@ export default function preloadImages(cb){
     imagesLoader.onComplete(() => {
       text.innerText = "100%";
       bar.style.width = "100%";
-      setTimeout(() => {
+
+      setTimeout(()=>{
         loader.style.display = "none";
-        cb && cb()
-      }, 2000);
+      },1000);
+
+      cb && cb()
     });
 	}

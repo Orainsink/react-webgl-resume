@@ -131,113 +131,7 @@ export default function Viewport() {
 
 		setMap({ count: sectionsList.length, now: index });
 
-		// in begin
-		if (to === "hello") {
-			helloSection.in();
-			helloSection.start();
-			helloSection.smokeStart();
-
-			beamsSection.out("up");
-			beamsSection.start();
-		} else if (to === "beams") {
-			helloSection.smokeStart();
-
-			beamsSection.in();
-			beamsSection.start();
-		} else if (to === "drop") {
-			beamsSection.out("down");
-			beamsSection.start();
-
-			dropSection.in();
-			dropSection.start();
-		} else if (to === "ball") {
-			dropSection.out("down");
-			dropSection.start();
-
-			ballSection.in();
-			ballSection.start();
-
-			flowSection.fieldIn();
-			flowSection.start();
-		} else if (to === "flow") {
-			flowSection.in();
-			flowSection.fieldIn();
-			flowSection.start();
-
-			neonsSection.smokeStart();
-		} else if (to === "neons") {
-			flowSection.fieldIn();
-			flowSection.start();
-
-			neonsSection.start();
-			neonsSection.smokeStart();
-
-			heightSection.show();
-		} else if (to === "height") {
-			flowSection.fieldIn();
-			flowSection.start();
-
-			neonsSection.smokeStart();
-
-			heightSection.show();
-			heightSection.in();
-			heightSection.start();
-		} else if (to === "wave") {
-			heightSection.show();
-
-			waveSection.in(way);
-			waveSection.start();
-		} else if (to === "face") {
-			faceSection.in();
-			faceSection.start();
-			rocksSection.show();
-		} else if (to === "rocks") {
-			rocksSection.show();
-			rocksSection.in();
-			rocksSection.start();
-		} else if (to === "galaxy") {
-			rocksSection.show();
-
-			galaxySection.in(way);
-			galaxySection.start();
-
-			gravitySection.show();
-		} else if (to === "gravity") {
-			gravitySection.show();
-			gravitySection.in();
-			gravitySection.start();
-		} else if (to === "end") {
-			endSection.in();
-		}
-
-		// out begin
-		if (from === "hello" && to !== "hello") {
-			helloSection.out(way);
-		} else if (from === "beams") {
-			beamsSection.out(way);
-		} else if (from === "drop") {
-			dropSection.out(way);
-		} else if (from === "ball") {
-			ballSection.out(way);
-		} else if (from === "flow") {
-			flowSection.out(way);
-		} else if (from === "neons") {
-			neonsSection.out(way);
-		} else if (from === "height") {
-			heightSection.out(way);
-		} else if (from === "wave") {
-			waveSection.out(way);
-		} else if (from === "face") {
-			faceSection.out(way);
-		} else if (from === "rocks") {
-			rocksSection.out(way);
-		} else if (from === "galaxy") {
-			galaxySection.out(way);
-		} else if (from === "gravity") {
-			gravitySection.out(way);
-		} else if (from === "end") {
-			endSection.out(way);
-		}
+		sectionsInAndOut(way, to, from);
 	}, [sectionChangeBegin]);
 	// changeComplete
 	useEffect(() => {
@@ -246,113 +140,7 @@ export default function Viewport() {
 		const from = sectionChangeComplete.from.name;
 		console.log(to, from);
 		// out complete
-		if (from === "hello") {
-			helloSection.stop();
-
-			if (to !== "beams") {
-				helloSection.smokeStop();
-			}
-
-			if (to !== "beams" && to !== "drop") {
-				beamsSection.stop();
-			}
-		} else if (from === "beams") {
-			if (to !== "hello") {
-				helloSection.smokeStop();
-			}
-
-			if (to !== "hello" && to !== "drop") {
-				beamsSection.stop();
-			}
-		} else if (from === "drop") {
-			if (to !== "hello" && to !== "beams") {
-				beamsSection.stop();
-			}
-
-			if (to !== "ball") {
-				dropSection.stop();
-			}
-		} else if (from === "ball") {
-			ballSection.stop();
-
-			if (to !== "drop") {
-				dropSection.stop();
-			}
-
-			if (to !== "flow" && to !== "neons" && to !== "height") {
-				flowSection.stop();
-			}
-		} else if (from === "flow") {
-			if (to !== "neons" && to !== "height") {
-				neonsSection.smokeStop();
-			}
-
-			if (to !== "ball" && to !== "neons" && to !== "height") {
-				flowSection.stop();
-			}
-		} else if (from === "neons") {
-			neonsSection.stop();
-
-			if (to !== "flow" && to !== "height") {
-				neonsSection.smokeStop();
-			}
-
-			if (to !== "ball" && to !== "flow" && to !== "height") {
-				flowSection.stop();
-			}
-
-			if (to !== "height" && to !== "wave") {
-				heightSection.hide();
-			}
-		} else if (from === "height") {
-			heightSection.stop();
-
-			if (to !== "neons" && to !== "wave") {
-				heightSection.hide();
-			}
-
-			if (to !== "flow" && to !== "neons") {
-				neonsSection.smokeStop();
-			}
-
-			if (to !== "ball" && to !== "flow" && to !== "neons") {
-				flowSection.stop();
-			}
-		} else if (from === "wave") {
-			waveSection.stop();
-
-			if (to !== "neons" && to !== "height") {
-				heightSection.hide();
-			}
-		} else if (from === "face") {
-			faceSection.stop();
-
-			if (to !== "rocks" && to !== "galaxy") {
-				rocksSection.hide();
-			}
-		} else if (from === "rocks") {
-			rocksSection.stop();
-
-			if (to !== "face" && to !== "galaxy") {
-				rocksSection.hide();
-			}
-		} else if (from === "galaxy") {
-			galaxySection.stop();
-
-			if (to !== "face" && to !== "rocks") {
-				rocksSection.hide();
-			}
-
-			if (to !== "gravity") {
-				gravitySection.hide();
-			}
-		} else if (from === "gravity") {
-			gravitySection.stop();
-
-			if (to !== "galaxy") {
-				gravitySection.hide();
-			}
-		}
+		sectionOutComplete(to, from);
 	}, [sectionChangeComplete]);
 	// 切换head <->tails时触发
 	useEffect(() => {
@@ -531,6 +319,7 @@ export default function Viewport() {
 
 		frameId = window.requestAnimationFrame(draw);
 	}
+
 	/**
 	 * 设置背景
 	 */
@@ -658,6 +447,237 @@ export default function Viewport() {
 			sectionsMap[i] = section.name;
 			section.el.position.y = i * -sectionHeight;
 			scene.add(section.el);
+		}
+	}
+
+	/**
+	 * 根据way,to,from,进行section跳转
+	 * @param way
+	 * @param to
+	 * @param from
+	 */
+	function sectionsInAndOut(way, to, from) {
+		// in begin
+		if (to === "hello") {
+			helloSection.in();
+			helloSection.start();
+			helloSection.smokeStart();
+
+			beamsSection.out("up");
+			beamsSection.start();
+		} else if (to === "beams") {
+			helloSection.smokeStart();
+
+			beamsSection.in();
+			beamsSection.start();
+		} else if (to === "drop") {
+			beamsSection.out("down");
+			beamsSection.start();
+
+			dropSection.in();
+			dropSection.start();
+		} else if (to === "ball") {
+			dropSection.out("down");
+			dropSection.start();
+
+			ballSection.in();
+			ballSection.start();
+
+			flowSection.fieldIn();
+			flowSection.start();
+		} else if (to === "flow") {
+			flowSection.in();
+			flowSection.fieldIn();
+			flowSection.start();
+
+			neonsSection.smokeStart();
+		} else if (to === "neons") {
+			flowSection.fieldIn();
+			flowSection.start();
+
+			neonsSection.start();
+			neonsSection.smokeStart();
+
+			heightSection.show();
+		} else if (to === "height") {
+			flowSection.fieldIn();
+			flowSection.start();
+
+			neonsSection.smokeStart();
+
+			heightSection.show();
+			heightSection.in();
+			heightSection.start();
+		} else if (to === "wave") {
+			heightSection.show();
+
+			waveSection.in(way);
+			waveSection.start();
+		} else if (to === "face") {
+			faceSection.in();
+			faceSection.start();
+			rocksSection.show();
+		} else if (to === "rocks") {
+			rocksSection.show();
+			rocksSection.in();
+			rocksSection.start();
+		} else if (to === "galaxy") {
+			rocksSection.show();
+
+			galaxySection.in(way);
+			galaxySection.start();
+
+			gravitySection.show();
+		} else if (to === "gravity") {
+			gravitySection.show();
+			gravitySection.in();
+			gravitySection.start();
+		} else if (to === "end") {
+			endSection.in();
+		}
+
+		// out begin
+		if (from === "hello" && to !== "hello") {
+			helloSection.out(way);
+		} else if (from === "beams") {
+			beamsSection.out(way);
+		} else if (from === "drop") {
+			dropSection.out(way);
+		} else if (from === "ball") {
+			ballSection.out(way);
+		} else if (from === "flow") {
+			flowSection.out(way);
+		} else if (from === "neons") {
+			neonsSection.out(way);
+		} else if (from === "height") {
+			heightSection.out(way);
+		} else if (from === "wave") {
+			waveSection.out(way);
+		} else if (from === "face") {
+			faceSection.out(way);
+		} else if (from === "rocks") {
+			rocksSection.out(way);
+		} else if (from === "galaxy") {
+			galaxySection.out(way);
+		} else if (from === "gravity") {
+			gravitySection.out(way);
+		} else if (from === "end") {
+			endSection.out(way);
+		}
+	}
+
+	/**
+	 * 根据 to,from, 处理section跳转完成后的模型状态
+	 * @param to
+	 * @param from
+	 */
+	function sectionOutComplete(to, from) {
+		if (from === "hello") {
+			helloSection.stop();
+
+			if (to !== "beams") {
+				helloSection.smokeStop();
+			}
+
+			if (to !== "beams" && to !== "drop") {
+				beamsSection.stop();
+			}
+		} else if (from === "beams") {
+			if (to !== "hello") {
+				helloSection.smokeStop();
+			}
+
+			if (to !== "hello" && to !== "drop") {
+				beamsSection.stop();
+			}
+		} else if (from === "drop") {
+			if (to !== "hello" && to !== "beams") {
+				beamsSection.stop();
+			}
+
+			if (to !== "ball") {
+				dropSection.stop();
+			}
+		} else if (from === "ball") {
+			ballSection.stop();
+
+			if (to !== "drop") {
+				dropSection.stop();
+			}
+
+			if (to !== "flow" && to !== "neons" && to !== "height") {
+				flowSection.stop();
+			}
+		} else if (from === "flow") {
+			if (to !== "neons" && to !== "height") {
+				neonsSection.smokeStop();
+			}
+
+			if (to !== "ball" && to !== "neons" && to !== "height") {
+				flowSection.stop();
+			}
+		} else if (from === "neons") {
+			neonsSection.stop();
+
+			if (to !== "flow" && to !== "height") {
+				neonsSection.smokeStop();
+			}
+
+			if (to !== "ball" && to !== "flow" && to !== "height") {
+				flowSection.stop();
+			}
+
+			if (to !== "height" && to !== "wave") {
+				heightSection.hide();
+			}
+		} else if (from === "height") {
+			heightSection.stop();
+
+			if (to !== "neons" && to !== "wave") {
+				heightSection.hide();
+			}
+
+			if (to !== "flow" && to !== "neons") {
+				neonsSection.smokeStop();
+			}
+
+			if (to !== "ball" && to !== "flow" && to !== "neons") {
+				flowSection.stop();
+			}
+		} else if (from === "wave") {
+			waveSection.stop();
+
+			if (to !== "neons" && to !== "height") {
+				heightSection.hide();
+			}
+		} else if (from === "face") {
+			faceSection.stop();
+
+			if (to !== "rocks" && to !== "galaxy") {
+				rocksSection.hide();
+			}
+		} else if (from === "rocks") {
+			rocksSection.stop();
+
+			if (to !== "face" && to !== "galaxy") {
+				rocksSection.hide();
+			}
+		} else if (from === "galaxy") {
+			galaxySection.stop();
+
+			if (to !== "face" && to !== "rocks") {
+				rocksSection.hide();
+			}
+
+			if (to !== "gravity") {
+				gravitySection.hide();
+			}
+		} else if (from === "gravity") {
+			gravitySection.stop();
+
+			if (to !== "galaxy") {
+				gravitySection.hide();
+			}
 		}
 	}
 

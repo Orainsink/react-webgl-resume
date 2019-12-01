@@ -7,32 +7,28 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
     <title>Oran XD</title>
     <style>
+        body{background: #0a0a0a}
         * {
             margin: 0;
         }
-
         ::-webkit-scrollbar {
             width: 5px;
             height: 5px;
         }
-
         ::-webkit-scrollbar-track-piece {
             background-color: rgba(0, 0, 0, 0.2);
             -webkit-border-radius: 6px;
         }
-
         ::-webkit-scrollbar-thumb:vertical {
             height: 5px;
             background-color: rgba(125, 125, 125, 0.7);
             -webkit-border-radius: 6px;
         }
-
         ::-webkit-scrollbar-thumb:horizontal {
             width: 5px;
             background-color: rgba(125, 125, 125, 0.7);
             -webkit-border-radius: 6px;
         }
-
         .loader {
             user-select: none;
             line-height: 1;
@@ -45,8 +41,9 @@
             align-items: center;
             background: #000;
             min-height: 100vh;
+            min-width: 100vw;
+            position: fixed;
         }
-
         .loader__loading {
             line-height: 1;
             font-family: inherit;
@@ -55,7 +52,6 @@
             font-size: 42px;
             text-shadow: 0 0 3px #FFF;
         }
-
         .loader__text {
             line-height: 1;
             font-family: inherit;
@@ -64,7 +60,6 @@
             font-size: 42px;
             text-shadow: 0 0 3px #FFF;
         }
-
         .loader__box {
             box-sizing: border-box;
             padding: 0;
@@ -73,13 +68,12 @@
             position: relative;
             overflow: hidden
         }
-
         .loader__bar {
             background: #FFF;
             height: 100%;
             width: 0%;
             margin: 0;
-            transition: all 1s linear;
+            transition: all .3s linear;
             left: 0;
             top: 0;
         }
