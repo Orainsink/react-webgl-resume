@@ -102,6 +102,8 @@
         <div class="loader__bar"></div>
     </div>
     <div class="loader__tip">*加载超时, 你可能需要检查网络或者科学上网后重新刷新</div>
+    <!--<div class="loader__tip">*网站部署在gh-pages, 国内访问会很慢</div>
+    <div class="loader__tip">*静态资源会缓存, 第二次打开网站将不需要再次加载</div>-->
 </div>
 <div id="root"></div>
 <script>
@@ -148,7 +150,7 @@
     var total = 80 + Math.random()*10;
     var text = document.getElementsByClassName("loader__text")[0];
     var bar = document.getElementsByClassName("loader__bar")[0];
-    var tip = document.getElementsByClassName("loader__tip")[0];
+    var tip = document.getElementsByClassName("loader__tip");
 
     window.loaderLoadingProgressTimer = setInterval(()=> {
       text.innerText = `${Math.round(tmp)}%`;
@@ -160,7 +162,9 @@
         var curTime = new Date();
         during = curTime.getTime() - oldTime.getTime();
         if (during > 20000){
-          tip.style.opacity = 1;
+          for(var i=0;i<tip.length;i++){
+            tip[i].style.opacity = 1;
+          }
           stop()
         }
       }
