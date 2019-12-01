@@ -2,8 +2,9 @@ import Section from "../classes/SectionClass";
 import TextPanel from "../objects/TextPanelObject3D";
 import HeightMap from "../objects/HeightMapObject3D";
 import AImg from "../../assets/images/heightMap-A.jpg"
-import BImg from "../../assets/images/heightMap-B.jpg"
 import OImg from "../../assets/images/heightMap-O.jpg"
+import RImg from "../../assets/images/heightMap-R.jpg"
+import NImg from "../../assets/images/heightMap-N.jpg"
 import device from "../utils/deviceUtil"
 
 let heightSection = new Section("height");
@@ -14,9 +15,10 @@ let heightMap = new HeightMap({
   plane: false,
   points: false,
   maps: [
-    { name: "A", url:AImg },
-    { name: "B", url: BImg },
-    { name: "O", url: OImg }
+    { name: "O", url: OImg },
+    { name: "R", url: RImg },
+    { name: "A", url: AImg },
+    { name: "N", url: NImg }
   ]
 });
 heightMap.el.position.z = -10;

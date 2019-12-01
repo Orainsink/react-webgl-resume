@@ -125,8 +125,8 @@
     if (!window.console) {
       window.console = {};
     }
-    // var methods = ['log', 'debug', 'warn', 'info'];
-    var methods = ['warn', 'info'];
+    var methods = ['log', 'debug', 'warn', 'info'];
+    // var methods = ['warn', 'info'];
     for (var i = 0; i < methods.length; i++) {
       console[methods[i]] = function () {
       };
@@ -138,13 +138,14 @@
   (function () {
     var tmp = 0;
     var time = 0;
-    let text = document.getElementsByClassName("loader__text")[0];
-    let bar = document.getElementsByClassName("loader__bar")[0];
+    var total = 80 + Math.random()*10
+    var text = document.getElementsByClassName("loader__text")[0];
+    var bar = document.getElementsByClassName("loader__bar")[0];
     window.loaderLoadingProgressTimer = setInterval(()=> {
       text.innerText = `${Math.round(tmp)}%`;
       bar.style.width = `${Math.round(tmp)}%`;
       time += 1;
-      tmp = tmp > 99?tmp:Math.tanh(time/10)*87
+      tmp = tmp > 99?tmp:Math.tanh(time/10)*total
     }, (Math.random()+0.3)*1000)
   })()
 </script>

@@ -111,7 +111,7 @@ class HeightMap {
    * @return {THREE.Points}
    */
   getPoints() {
-    const material = new THREE.PointsMaterial({ size: 0.3 });
+    let material = new THREE.PointsMaterial({ size: 0.3 });
     let points = new THREE.Points(this.geometry, material);
 
     return points;

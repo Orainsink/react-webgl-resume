@@ -39,10 +39,13 @@
 }
 
 .trigger__info--heads {
-  top: 0;
+  bottom: 0;
   opacity: 0;
 
-  color: #0a0a0a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .trigger__info--tails {

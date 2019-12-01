@@ -16,7 +16,7 @@ import textureNeonGlowImg from "../../assets/images/texture-neonGlow.png";
  * @params {Number} [options.width=20] Neon width
  * @params {Boolean} [options.projection=true] Projection halo?
  * @params {Boolean} [options.planes=3] Glow planes
- * @requires jQuery, THREE, TweenLite, SOUNDS, random, yoyo
+ * @requires THREE, TweenLite, SOUNDS, random, yoyo
  */
 
 class Neon {
@@ -179,7 +179,7 @@ class Neon {
 	 * @return {THREE.Mesh}
 	 */
 	getTube() {
-		let geometry = new THREE.CylinderGeometry(0.2, 0.2, this.parameters.width, 6);
+		let geometry = new THREE.CylinderGeometry(this.parameters.radiusTop, this.parameters.radiusBottom, this.parameters.width, 6);
 		let material = new THREE.MeshLambertMaterial({
 			color: "#808080",
 			emissive: "#000000"
@@ -263,7 +263,9 @@ class Neon {
 Neon.defaultOptions = {
 	color: "#ffffff",
 	width: 20,
-	projection: true,
+  radiusTop: 0.2,
+  radiusBottom: 0.2,
+  projection: true,
 	planes: 3
 };
 

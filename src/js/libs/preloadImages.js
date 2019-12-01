@@ -1,7 +1,8 @@
 // 预加载图片, 加载完成过后结束loading, 因为考虑到bundle文件较大加载慢,影响用户体验, 所以直接控制真实DOM.
 export const imgList = [
 	require("../../assets/images/heightMap-A.jpg"),
-	require("../../assets/images/heightMap-B.jpg"),
+	require("../../assets/images/heightMap-R.jpg"),
+	require("../../assets/images/heightMap-N.jpg"),
 	require("../../assets/images/heightMap-O.jpg"),
 	require("../../assets/images/matCap.jpg"),
 	require("../../assets/images/matCap-shiny.jpg"),
