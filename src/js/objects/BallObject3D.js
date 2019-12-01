@@ -35,14 +35,15 @@ class Ball {
       emissive: "#0a0a0a",
       depthWrite: false,
       depthTest: true,
-      transparent: true
+      transparent: true,
+      emissiveMap: texture
     });
 
     let geometry = new THREE.SphereGeometry(10, 30, 30);
 
     let mesh = new THREE.Mesh(geometry, materialStripe);
 
-    let colorA = new THREE.Color("#000000");
+    let colorA = new THREE.Color("#0a0a0a");
     let colorB = new THREE.Color("#ffffff");
 
     // Make the ball blink once

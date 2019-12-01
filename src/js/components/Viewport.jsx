@@ -469,7 +469,7 @@ export default function Viewport() {
 			// renderer.setClearColor(0x000000, 0);
 			renderer = new THREE.WebGLRenderer({
 				alpha: false,
-				antialias: false
+				antialias: device
 			});
 			renderer.setClearColor("#0a0a0a", 1);
 			renderer.setSize(width * quality, height * quality);
