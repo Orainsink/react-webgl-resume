@@ -41,7 +41,7 @@ let backgroundLines;
 // sections
 let sectionsMap = {};
 let totalSections;
-let currentIndex = 6;
+let currentIndex = 0;
 let previousIndex = 0;
 // parameters
 let fogColor = "#0a0a0a";
