@@ -1,7 +1,10 @@
 {
   "name": "resume_of_oran",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
+  "author": "Orainsink",
+  "email" : "ywt1250066597@gmail.com",
+  "url": "http://foolishrobot.xyz",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@reach/router": "^1.2.1",

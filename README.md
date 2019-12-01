@@ -4,6 +4,8 @@
 
 源码 fork 自  https://github.com/vaalentin/2015
 
+在此基础上用自己熟悉的技术栈重构.
+
 # 技术栈
 
 **models**: maya
@@ -12,7 +14,7 @@
 
 **Cli**: creat-react-app
 
-**webGL**: three.js r101
+**webGL**: three.js r110
 
 **sound**: react-howler
 
@@ -29,15 +31,17 @@
 - [x] 升级/替换依赖
 - [x] Loading 预加载动画,优化加载效果
 - [x] 移除移动端专页, 添加移动端适配
+- [x] 添加自定义内容
+- [x] 组件过渡动画优化
+- [x] 修复一些已知问题
 
 # Todos
 
 - [ ] 尝试用 GLTFExporter 重新导出模型数据, 废弃老版本的 JSONloader
-- [ ] 修复一些已知问题
-- [ ] 添加自定义内容
-- [ ] 组件过渡动画优化
+- [ ] 修复未知问题
 - [ ] 性能优化, 移除不必要的 ref 引用
 - [ ] 拆分viewPort组件
+- [ ] 修改sound组件
 
 
 # Quick start
