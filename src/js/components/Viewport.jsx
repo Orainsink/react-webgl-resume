@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
 import "../../styles/Viewport.scss";
 import ViewportTrigger from "./ViewportTrigger.jsx";
@@ -22,7 +22,7 @@ import faceSection from "../sections/faceSection";
 import rocksSection from "../sections/rocksSection";
 import galaxySection from "../sections/galaxySection";
 import gravitySection from "../sections/gravitySection";
-import citySection from "../sections/citySection";
+// import citySection from "../sections/citySection";
 import endSection from "../sections/endSection";
 
 // THREE Scene
@@ -96,7 +96,7 @@ export default function Viewport() {
 		rocksSection,
 		galaxySection,
 		gravitySection,
-		citySection,
+		// citySection,
 		endSection
 	];
 
