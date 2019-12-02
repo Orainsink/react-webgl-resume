@@ -7,6 +7,8 @@ import device from "../utils/deviceUtil"
 let ballSection = new Section("ball");
 
 let ball = new Ball();
+ball.callback((blur)=>ballSection.cb(blur));
+
 ball.el.rotation.z = 2;
 ballSection.add(ball.el);
 

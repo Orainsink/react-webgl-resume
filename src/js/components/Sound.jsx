@@ -5,7 +5,7 @@ import PageVisibility from "react-page-visibility";
 
 export default function Sound() {
 	const mapState = React.useCallback(state => state, []);
-	const { mute, sounds } = useMappedState(mapState);
+	const { mute, sounds, isOpen } = useMappedState(mapState);
 
 	const [visibility, setVisibility] = useState(true);
 
@@ -44,7 +44,7 @@ export default function Sound() {
 				require("../../assets/sounds/neon.mp3"),
 				require("../../assets/sounds/neon.wav")
 			],
-			volume: 0.05
+			volume: 0.5
 		}
 	];
 
@@ -56,7 +56,7 @@ export default function Sound() {
 					key={i}
 					{...item}
 					playing={sounds[item.name] || false}
-					mute={!visibility || mute}
+					mute={!visibility || mute || isOpen}
 				/>
 			))}
 		</>

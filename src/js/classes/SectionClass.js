@@ -18,6 +18,7 @@ class Section {
     this._out = fn;
     this._start = fn;
     this._stop = fn;
+    this.cb = fn;
 
     this.el = new THREE.Object3D();
   }
@@ -120,6 +121,14 @@ class Section {
    */
   onStop(callback) {
     this._stop = callback;
+  }
+
+  /**
+   * pass the callback function
+   * @param {Function} [cb]
+   */
+  callback(cb){
+    this.cb = cb
   }
 }
 

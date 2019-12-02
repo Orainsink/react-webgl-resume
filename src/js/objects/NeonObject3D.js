@@ -28,6 +28,7 @@ class Neon {
 		// setup 3d els
 		this.tube = this.getTube();
 		this.glow = this.getGlow();
+		this.cb = function(){};
 
 		let glows = this.getGlows(this.glow);
 
@@ -138,7 +139,7 @@ class Neon {
 			this.projection.material.opacity = 0.05;
 		}
 
-		// SOUNDS.neon.play();
+    this.cb();
 
     TweenLite.delayedCall(random(0.05, 0.07), () => {
 			this.tube.material.emissive.set("#000000");
@@ -168,7 +169,7 @@ class Neon {
     TweenLite.delayedCall(random(0.05, 0.1), () => {
 			this.flickering = !this.flickering;
 
-			// SOUNDS.neon.play();
+			this.cb()
 		});
 	}
 
@@ -257,6 +258,10 @@ class Neon {
 		mesh.position.z = -1;
 
 		return mesh;
+	}
+
+	callback(cb){
+		this.cb = cb
 	}
 }
 

@@ -1,14 +1,11 @@
 import * as THREE from "three";
 import { TweenLite } from "gsap/TweenMax";
-
-// import SOUNDS from "../modules/soundsModule";
 import random from "../utils/randomUtil";
 import yoyo from "../utils/yoyoUtil";
 import glitchMaterial from "../materials/glitchMaterial";
 import textureBallImg from "../../assets/images/texture-ball.png"
 import textureBallAlpha from "../../assets/images/texture-ballAlpha.png"
 
-// TODO SOUND Module
 /**
  * Animated ball
  *
@@ -18,6 +15,8 @@ import textureBallAlpha from "../../assets/images/texture-ballAlpha.png"
  */
 class Ball {
   constructor() {
+    this.cb = function(){};
+    let _this = this;
     let texture = new THREE.TextureLoader().load(
       textureBallImg
     );
@@ -51,21 +50,22 @@ class Ball {
       materialStripe.emissive = colorB;
       materialStripe.color = colorA;
 
+      _this.cb(true);
       TweenLite.delayedCall(random(0.1, 1), function() {
         materialStripe.emissive = colorA;
         materialStripe.color = colorB;
+        _this.cb(false)
       });
     }
 
     // Make the ball glitch once
     function glitch() {
       mesh.material = glitchMaterial;
-
-      // SOUNDS.whitenoise.play();
+      _this.cb(true);
 
       TweenLite.delayedCall(random(0.2, 1), function() {
         mesh.material = materialStripe;
-        // SOUNDS.whitenoise.stop();
+        _this.cb(false)
       });
     }
 
@@ -162,6 +162,9 @@ class Ball {
       // idleTweens.glitch.pause();
       idleTweens.blink.pause();
     };
+  }
+  callback(cb){
+    this.cb = cb
   }
 }
 

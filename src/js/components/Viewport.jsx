@@ -329,7 +329,7 @@ export default function Viewport() {
 		console.log("setupBackground");
 		const rangeY = [sectionHeight, -sectionsList.length * sectionHeight - sectionHeight];
 
-		setSounds({ ...sounds, background: true });
+		setSounds({ background: true });
 
 		const backgroundParticles = new BackgroundParticles({
 			rangeY: rangeY,
@@ -411,7 +411,7 @@ export default function Viewport() {
 			onStart: function() {
 				console.log("sliding_start");
 				isScrolling = true;
-				setSounds({ ...sounds, wind: true });
+				setSounds({ background: true, wind: true });
 				setSectionChangeBegin(data);
 			},
 			onComplete: function() {
@@ -482,6 +482,10 @@ export default function Viewport() {
 
 			ballSection.in();
 			ballSection.start();
+			ballSection.callback(blur => {
+				console.log("blurblur", blur);
+				setSounds({ background: true, whitenoise: blur });
+			});
 
 			flowSection.fieldIn();
 			flowSection.start();
@@ -497,6 +501,11 @@ export default function Viewport() {
 
 			neonsSection.start();
 			neonsSection.smokeStart();
+			// 传入修改音效的callback
+			// 其他参数需要设为false, 否则会一直触发滑动音效
+			neonsSection.callback(() => {
+				setSounds({ background: true, neon: true });
+			});
 
 			heightSection.show();
 		} else if (to === "height") {

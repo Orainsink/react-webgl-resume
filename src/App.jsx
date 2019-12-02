@@ -163,12 +163,12 @@ function App() {
 				setWaypoint(false);
 
 				try {
-					setSounds({ ...sounds, background: true });
+					setSounds({ background: true });
 				} catch (e) {
 					console.warn(e);
 				}
 			} else {
-				setSounds({ ...sounds, background: false });
+				setSounds({ background: false });
 			}
 		}
 		function slideComplete(to) {
