@@ -483,7 +483,6 @@ export default function Viewport() {
 			ballSection.in();
 			ballSection.start();
 			ballSection.callback(blur => {
-				console.log("blurblur", blur);
 				setSounds({ background: true, whitenoise: blur });
 			});
 
