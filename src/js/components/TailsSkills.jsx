@@ -46,7 +46,7 @@ export default function Skills() {
 				<h2 className="tails__section__el"> HTML / CSS </h2>
 				<div className="tails__section__el">
 					<p>
-						<span className={"bold"}>HTML5 / CSS3</span> <br />
+						<span className={"bold"}>HTML5 / CSS3 / SVG</span> <br />
 					</p>
 					<p>
 						<span className={"bold"}>移动端兼容: </span>flexible-rem方案，vh/vw方案，媒体查询

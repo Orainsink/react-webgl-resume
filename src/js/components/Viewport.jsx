@@ -56,7 +56,6 @@ export default function Viewport() {
 	const {
 		quality,
 		headsVisib,
-		sounds,
 		sectionChangeBegin,
 		sectionChangeComplete,
 		mapScrollTo,
@@ -112,14 +111,20 @@ export default function Viewport() {
 		sceneIn();
 		start();
 	}, []);
-	// 点击 map 切换
+
+	/**
+	 * map 切换
+	 */
 	useEffect(() => {
 		if (mapScrollTo || mapScrollTo === 0) {
 			currentIndex = mapScrollTo;
 			animateCamera(currentIndex);
 		}
 	}, [mapScrollTo]);
-	// changeBegin
+
+	/**
+	 * changeBegin
+	 */
 	useEffect(() => {
 		if (!sectionChangeBegin || !sectionChangeBegin.to) return;
 
@@ -133,7 +138,10 @@ export default function Viewport() {
 
 		sectionsInAndOut(way, to, from);
 	}, [sectionChangeBegin]);
-	// changeComplete
+
+	/**
+	 * changeComplete
+	 */
 	useEffect(() => {
 		if (!sectionChangeComplete || !sectionChangeComplete.to) return;
 		const to = sectionChangeComplete.to.name;
@@ -142,7 +150,10 @@ export default function Viewport() {
 		// out complete
 		sectionOutComplete(to, from);
 	}, [sectionChangeComplete]);
-	// 切换head <->tails时触发
+
+	/**
+	 * 切换head <->tails时触发
+	 */
 	useEffect(() => {
 		console.log("headsVisibChange", headsVisib);
 		if (headsVisib) {
@@ -151,15 +162,19 @@ export default function Viewport() {
 			stop();
 		}
 	}, [headsVisib]);
-	// 修改模型质量时触发
+
+	/**
+	 * 修改模型质量时触发
+	 */
 	useEffect(() => {
 		console.log("quality");
 		if (!renderer) return;
 		renderer.setSize(width * quality, height * quality);
 	}, [quality]);
+
 	/**
 	 * resize事件
-	 * 组件刚建立的时候,初始化width和height, 其后每次resize, 更新渲染器和相机
+	 * 初始化width和height, 其后每次resize, 更新渲染器和相机
 	 */
 	useEffect(() => {
 		width = sizes.width || viewport.current.offsetWidth || 0;
@@ -457,120 +472,155 @@ export default function Viewport() {
 	 * @param from
 	 */
 	function sectionsInAndOut(way, to, from) {
-		// in begin
-		if (to === "hello") {
-			helloSection.in();
-			helloSection.start();
-			helloSection.smokeStart();
+		//in begin
+		switch (to) {
+			case "hello": {
+				helloSection.in();
+				helloSection.start();
+				helloSection.smokeStart();
 
-			beamsSection.out("up");
-			beamsSection.start();
-		} else if (to === "beams") {
-			helloSection.smokeStart();
+				beamsSection.out("up");
+				beamsSection.start();
+				break;
+			}
+			case "beams": {
+				helloSection.smokeStart();
 
-			beamsSection.in();
-			beamsSection.start();
-		} else if (to === "drop") {
-			beamsSection.out("down");
-			beamsSection.start();
+				beamsSection.in();
+				beamsSection.start();
+				break;
+			}
+			case "drop": {
+				beamsSection.out("down");
+				beamsSection.start();
 
-			dropSection.in();
-			dropSection.start();
-		} else if (to === "ball") {
-			dropSection.out("down");
-			dropSection.start();
+				dropSection.in();
+				dropSection.start();
+				break;
+			}
+			case "ball": {
+				dropSection.out("down");
+				dropSection.start();
 
-			ballSection.in();
-			ballSection.start();
-			ballSection.callback(blur => {
-				setSounds({ background: true, whitenoise: blur });
-			});
+				ballSection.in();
+				ballSection.start();
+				ballSection.callback(blur => {
+					setSounds({ background: true, whitenoise: blur });
+				});
 
-			flowSection.fieldIn();
-			flowSection.start();
-		} else if (to === "flow") {
-			flowSection.in();
-			flowSection.fieldIn();
-			flowSection.start();
+				flowSection.fieldIn();
+				flowSection.start();
+				break;
+			}
+			case "flow": {
+				flowSection.in();
+				flowSection.fieldIn();
+				flowSection.start();
 
-			neonsSection.smokeStart();
-		} else if (to === "neons") {
-			flowSection.fieldIn();
-			flowSection.start();
+				neonsSection.smokeStart();
+				break;
+			}
+			case "neons": {
+				flowSection.fieldIn();
+				flowSection.start();
 
-			neonsSection.start();
-			neonsSection.smokeStart();
-			// 传入修改音效的callback
-			// 其他参数需要设为false, 否则会一直触发滑动音效
-			neonsSection.callback(() => {
-				setSounds({ background: true, neon: true });
-			});
+				neonsSection.start();
+				neonsSection.smokeStart();
+				// 传入修改音效的callback
+				// 其他参数需要设为false, 否则会一直触发滑动音效
+				neonsSection.callback(() => {
+					setSounds({ background: true, neon: true });
+				});
 
-			heightSection.show();
-		} else if (to === "height") {
-			flowSection.fieldIn();
-			flowSection.start();
+				heightSection.show();
+				break;
+			}
+			case "height": {
+				flowSection.fieldIn();
+				flowSection.start();
 
-			neonsSection.smokeStart();
+				neonsSection.smokeStart();
 
-			heightSection.show();
-			heightSection.in();
-			heightSection.start();
-		} else if (to === "wave") {
-			heightSection.show();
+				heightSection.show();
+				heightSection.in();
+				heightSection.start();
+				break;
+			}
+			case "wave": {
+				heightSection.show();
 
-			waveSection.in(way);
-			waveSection.start();
-		} else if (to === "face") {
-			faceSection.in();
-			faceSection.start();
-			rocksSection.show();
-		} else if (to === "rocks") {
-			rocksSection.show();
-			rocksSection.in();
-			rocksSection.start();
-		} else if (to === "galaxy") {
-			rocksSection.show();
+				waveSection.in(way);
+				waveSection.start();
+				break;
+			}
+			case "face": {
+				faceSection.in();
+				faceSection.start();
+				rocksSection.show();
+				break;
+			}
+			case "rocks": {
+				rocksSection.show();
+				rocksSection.in();
+				rocksSection.start();
+				break;
+			}
+			case "galaxy": {
+				rocksSection.show();
 
-			galaxySection.in(way);
-			galaxySection.start();
+				galaxySection.in(way);
+				galaxySection.start();
 
-			gravitySection.show();
-		} else if (to === "gravity") {
-			gravitySection.show();
-			gravitySection.in();
-			gravitySection.start();
-		} else if (to === "end") {
-			endSection.in();
+				gravitySection.show();
+				break;
+			}
+			case "gravity": {
+				gravitySection.show();
+				gravitySection.in();
+				gravitySection.start();
+				break;
+			}
+			case "end": {
+				endSection.in();
+				break;
+			}
+			default: {
+				console.log("to error");
+			}
 		}
 
-		// out begin
-		if (from === "hello" && to !== "hello") {
-			helloSection.out(way);
-		} else if (from === "beams") {
-			beamsSection.out(way);
-		} else if (from === "drop") {
-			dropSection.out(way);
-		} else if (from === "ball") {
-			ballSection.out(way);
-		} else if (from === "flow") {
-			flowSection.out(way);
-		} else if (from === "neons") {
-			neonsSection.out(way);
-		} else if (from === "height") {
-			heightSection.out(way);
-		} else if (from === "wave") {
-			waveSection.out(way);
-		} else if (from === "face") {
-			faceSection.out(way);
-		} else if (from === "rocks") {
-			rocksSection.out(way);
-		} else if (from === "galaxy") {
-			galaxySection.out(way);
-		} else if (from === "gravity") {
-			gravitySection.out(way);
-		} else if (from === "end") {
-			endSection.out(way);
+		//out begin
+		switch (from) {
+			case "hello": {
+				if (to !== "hello") helloSection.out(way);
+				return;
+			}
+			case "beams":
+				return beamsSection.out(way);
+			case "drop":
+				return dropSection.out(way);
+			case "ball":
+				return ballSection.out(way);
+			case "flow":
+				return flowSection.out(way);
+			case "neons":
+				return neonsSection.out(way);
+			case "height":
+				return heightSection.out(way);
+			case "wave":
+				return waveSection.out(way);
+			case "face":
+				return faceSection.out(way);
+			case "rocks":
+				return rocksSection.out(way);
+			case "galaxy":
+				return galaxySection.out(way);
+			case "gravity":
+				return gravitySection.out(way);
+			case "end":
+				return endSection.out(way);
+			default:
+				return console.log("from wrong");
 		}
 	}
 
@@ -580,111 +630,149 @@ export default function Viewport() {
 	 * @param from
 	 */
 	function sectionOutComplete(to, from) {
-		if (from === "hello") {
-			helloSection.stop();
-
-			if (to !== "beams") {
-				helloSection.smokeStop();
+		switch (from) {
+			case "hello": {
+				helloSection.stop();
+				if (to !== "beams") {
+					helloSection.smokeStop();
+				}
+				if (to !== "beams" && to !== "drop") {
+					beamsSection.stop();
+				}
+				break;
 			}
 
-			if (to !== "beams" && to !== "drop") {
-				beamsSection.stop();
-			}
-		} else if (from === "beams") {
-			if (to !== "hello") {
-				helloSection.smokeStop();
+			case "beams": {
+				if (to !== "hello") {
+					helloSection.smokeStop();
+				}
+
+				if (to !== "hello" && to !== "drop") {
+					beamsSection.stop();
+				}
+				break;
 			}
 
-			if (to !== "hello" && to !== "drop") {
-				beamsSection.stop();
-			}
-		} else if (from === "drop") {
-			if (to !== "hello" && to !== "beams") {
-				beamsSection.stop();
+			case "drop": {
+				if (to !== "hello" && to !== "beams") {
+					beamsSection.stop();
+				}
+
+				if (to !== "ball") {
+					dropSection.stop();
+				}
+				break;
 			}
 
-			if (to !== "ball") {
-				dropSection.stop();
-			}
-		} else if (from === "ball") {
-			ballSection.stop();
+			case "ball": {
+				ballSection.stop();
 
-			if (to !== "drop") {
-				dropSection.stop();
-			}
+				if (to !== "drop") {
+					dropSection.stop();
+				}
 
-			if (to !== "flow" && to !== "neons" && to !== "height") {
-				flowSection.stop();
-			}
-		} else if (from === "flow") {
-			if (to !== "neons" && to !== "height") {
-				neonsSection.smokeStop();
+				if (to !== "flow" && to !== "neons" && to !== "height") {
+					flowSection.stop();
+				}
+				break;
 			}
 
-			if (to !== "ball" && to !== "neons" && to !== "height") {
-				flowSection.stop();
-			}
-		} else if (from === "neons") {
-			neonsSection.stop();
+			case "flow": {
+				if (to !== "neons" && to !== "height") {
+					neonsSection.smokeStop();
+				}
 
-			if (to !== "flow" && to !== "height") {
-				neonsSection.smokeStop();
-			}
-
-			if (to !== "ball" && to !== "flow" && to !== "height") {
-				flowSection.stop();
+				if (to !== "ball" && to !== "neons" && to !== "height") {
+					flowSection.stop();
+				}
+				break;
 			}
 
-			if (to !== "height" && to !== "wave") {
-				heightSection.hide();
-			}
-		} else if (from === "height") {
-			heightSection.stop();
+			case "neons": {
+				neonsSection.stop();
 
-			if (to !== "neons" && to !== "wave") {
-				heightSection.hide();
-			}
+				if (to !== "flow" && to !== "height") {
+					neonsSection.smokeStop();
+				}
 
-			if (to !== "flow" && to !== "neons") {
-				neonsSection.smokeStop();
-			}
+				if (to !== "ball" && to !== "flow" && to !== "height") {
+					flowSection.stop();
+				}
 
-			if (to !== "ball" && to !== "flow" && to !== "neons") {
-				flowSection.stop();
-			}
-		} else if (from === "wave") {
-			waveSection.stop();
-
-			if (to !== "neons" && to !== "height") {
-				heightSection.hide();
-			}
-		} else if (from === "face") {
-			faceSection.stop();
-
-			if (to !== "rocks" && to !== "galaxy") {
-				rocksSection.hide();
-			}
-		} else if (from === "rocks") {
-			rocksSection.stop();
-
-			if (to !== "face" && to !== "galaxy") {
-				rocksSection.hide();
-			}
-		} else if (from === "galaxy") {
-			galaxySection.stop();
-
-			if (to !== "face" && to !== "rocks") {
-				rocksSection.hide();
+				if (to !== "height" && to !== "wave") {
+					heightSection.hide();
+				}
+				break;
 			}
 
-			if (to !== "gravity") {
-				gravitySection.hide();
-			}
-		} else if (from === "gravity") {
-			gravitySection.stop();
+			case "height": {
+				heightSection.stop();
 
-			if (to !== "galaxy") {
-				gravitySection.hide();
+				if (to !== "neons" && to !== "wave") {
+					heightSection.hide();
+				}
+
+				if (to !== "flow" && to !== "neons") {
+					neonsSection.smokeStop();
+				}
+
+				if (to !== "ball" && to !== "flow" && to !== "neons") {
+					flowSection.stop();
+				}
+				break;
+			}
+
+			case "wave": {
+				waveSection.stop();
+
+				if (to !== "neons" && to !== "height") {
+					heightSection.hide();
+				}
+				break;
+			}
+
+			case "face": {
+				waveSection.stop();
+
+				if (to !== "neons" && to !== "height") {
+					heightSection.hide();
+				}
+				break;
+			}
+
+			case "rocks": {
+				rocksSection.stop();
+
+				if (to !== "face" && to !== "galaxy") {
+					rocksSection.hide();
+				}
+				break;
+			}
+
+			case "galaxy": {
+				galaxySection.stop();
+
+				if (to !== "face" && to !== "rocks") {
+					rocksSection.hide();
+				}
+
+				if (to !== "gravity") {
+					gravitySection.hide();
+				}
+				break;
+			}
+
+			case "gravity": {
+				gravitySection.stop();
+
+				if (to !== "galaxy") {
+					gravitySection.hide();
+				}
+				break;
+			}
+
+			default: {
+				console.log("complete error");
 			}
 		}
 	}

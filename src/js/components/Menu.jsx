@@ -37,12 +37,14 @@ export default function Menu() {
 			tl.fromTo(item, 0.2, { opacity: 0 }, { opacity: 1 });
 		});
 	}
+
 	function mouseout() {
 		setActive(false);
 
 		TweenLite.to(menu.current, 0.4, { left: 30, ease: window.Linear.easeNone });
 		TweenLite.to(menuButton.current, 0.4, { opacity: 1 });
 	}
+
 	function tap() {
 		if (!device && !active) {
 			mouseover();

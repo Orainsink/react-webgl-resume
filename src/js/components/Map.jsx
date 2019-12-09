@@ -29,8 +29,6 @@ export default function Map() {
 
 	const mapRef = useRef(null);
 
-	useEffect(() => {}, []);
-
 	return (
 		<div className="map" ref={mapRef}>
 			{mapList.map((item, index) => (
