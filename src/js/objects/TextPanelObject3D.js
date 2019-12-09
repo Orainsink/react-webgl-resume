@@ -17,137 +17,133 @@ import { TweenLite } from "gsap/TweenMax";
  * @requires jQuery, THREE, TweenLite
  */
 class TextPanel {
-  constructor(text, options) {
-    let parameters = Object.assign(TextPanel.defaultOptions, options);
+	constructor(text, options) {
+		let parameters = Object.assign(TextPanel.defaultOptions, options);
 
-    text = text || "";
+		text = text || "";
 
-    // split and clean the words
-    let words = text.split("\n");
-    let wordsCount = words.length;
-    for (let i = 0; i < wordsCount; i++) {
-      words[i] = words[i].replace(/^\s+|\s+$/g, "");
-    }
+		// split and clean the words
+		let words = text.split("\n");
+		let wordsCount = words.length;
+		for (let i = 0; i < wordsCount; i++) {
+			words[i] = words[i].replace(/^\s+|\s+$/g, "");
+		}
 
-    let canvas = document.createElement("canvas");
-    let context = canvas.getContext("2d");
+		let canvas = document.createElement("canvas");
+		let context = canvas.getContext("2d");
 
-    let font =
-      parameters.style + " " + parameters.size + "px" + " " + parameters.font;
+		let font = parameters.style + " " + parameters.size + "px" + " " + parameters.font;
 
-    context.font = font;
+		context.font = font;
 
-    // max width
-    let width;
+		// max width
+		let width;
 
-    let maxWidth = 0;
-    for (let j = 0; j < wordsCount; j++) {
-      let tempWidth = context.measureText(words[j]).width;
-      if (tempWidth > maxWidth) {
-        maxWidth = tempWidth;
-      }
-    }
+		let maxWidth = 0;
+		for (let j = 0; j < wordsCount; j++) {
+			let tempWidth = context.measureText(words[j]).width;
+			if (tempWidth > maxWidth) {
+				maxWidth = tempWidth;
+			}
+		}
 
-    width = maxWidth;
+		width = maxWidth;
 
-    // get the line height and the total height
-    let lineHeight = parameters.size + parameters.lineSpacing;
-    let height = lineHeight * wordsCount;
+		// get the line height and the total height
+		let lineHeight = parameters.size + parameters.lineSpacing;
+		let height = lineHeight * wordsCount;
 
-    // security margin
-    canvas.width = width + 20;
-    canvas.height = height + 20;
+		// security margin
+		canvas.width = width + 20;
+		canvas.height = height + 20;
 
-    // set the font once more to update the context
-    context.font = font;
-    context.fillStyle = parameters.color;
-    context.textAlign = parameters.align;
-    context.textBaseline = "top";
+		// set the font once more to update the context
+		context.font = font;
+		context.fillStyle = parameters.color;
+		context.textAlign = parameters.align;
+		context.textBaseline = "top";
 
-    // draw text
-    for (let k = 0; k < wordsCount; k++) {
-      let word = words[k];
+		// draw text
+		for (let k = 0; k < wordsCount; k++) {
+			let word = words[k];
 
-      let left;
+			let left;
 
-      if (parameters.align === "left") {
-        left = 0;
-      } else if (parameters.align === "center") {
-        left = canvas.width / 2;
-      } else {
-        left = canvas.width;
-      }
+			if (parameters.align === "left") {
+				left = 0;
+			} else if (parameters.align === "center") {
+				left = canvas.width / 2;
+			} else {
+				left = canvas.width;
+			}
 
-      context.fillText(word, left, lineHeight * k);
-    }
+			context.fillText(word, left, lineHeight * k);
+		}
 
-    let texture = new THREE.Texture(canvas);
-    texture.needsUpdate = true;
+		let texture = new THREE.Texture(canvas);
+		texture.needsUpdate = true;
 
-    let material = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      depthWrite: false,
-      depthTest: true,
-      side: THREE.DoubleSide,
-      opacity: 0
-    });
+		let material = new THREE.MeshBasicMaterial({
+			map: texture,
+			transparent: true,
+			depthWrite: false,
+			depthTest: true,
+			side: THREE.DoubleSide,
+			opacity: 0
+		});
 
-    let geometry = new THREE.PlaneGeometry(
-      canvas.width / 20,
-      canvas.height / 20
-    );
+		let geometry = new THREE.PlaneGeometry(canvas.width / 20, canvas.height / 20);
 
-    // Group is exposed, mesh is animated
-    let group = new THREE.Object3D();
+		// Group is exposed, mesh is animated
+		let group = new THREE.Object3D();
 
-    let mesh = new THREE.Mesh(geometry, material);
-    mesh.position.y = -20;
-    group.add(mesh);
+		let mesh = new THREE.Mesh(geometry, material);
+		mesh.position.y = -20;
+		group.add(mesh);
 
-    group.visible = false;
+		group.visible = false;
 
-    this.el = group;
+		this.el = group;
 
-    let cache = { y: mesh.position.y, opacity: mesh.material.opacity };
+		let cache = { y: mesh.position.y, opacity: mesh.material.opacity };
 
-    function update() {
-      mesh.position.y = cache.y;
-      mesh.material.opacity = cache.opacity;
-    }
+		function update() {
+			mesh.position.y = cache.y;
+			mesh.material.opacity = cache.opacity;
+		}
 
-    this.in = function() {
-      TweenLite.to(cache,1.5, {
-        y: 0,
-        opacity: 1,
-        onStart: function() {
-          group.visible = true;
-        },
-        onUpdate: update
-      });
-    };
+		this.in = function() {
+			TweenLite.to(cache, 1.5, {
+				y: 0,
+				opacity: 1,
+				onStart: function() {
+					group.visible = true;
+				},
+				onUpdate: update
+			});
+		};
 
-    this.out = function(way) {
-      let y = way === "up" ? -20 : 20;
-      TweenLite.to(cache,1,{
-        y: y,
-        opacity: 0,
-        onUpdate: update,
-        onComplete: function() {
-          group.visible = false;
-        }
-      });
-    };
-  }
+		this.out = function(way) {
+			let y = way === "up" ? -20 : 20;
+			TweenLite.to(cache, 1, {
+				y: y,
+				opacity: 0,
+				onUpdate: update,
+				onComplete: function() {
+					group.visible = false;
+				}
+			});
+		};
+	}
 }
 
 TextPanel.defaultOptions = {
-  size: 100,
-  font: "Futura, Trebuchet MS, Arial, sans-serif",
-  style: "Bold",
-  align: "center",
-  lineSpacing: 20,
-  color: "rgba(200, 200, 200, 1)"
+	size: 100,
+	font: "Futura, Trebuchet MS, Arial, sans-serif",
+	style: "Bold",
+	align: "center",
+	lineSpacing: 20,
+	color: "rgba(200, 200, 200, 1)"
 };
 
 export default TextPanel;

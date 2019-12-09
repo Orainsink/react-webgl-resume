@@ -5,7 +5,7 @@
  * @method loop
  */
 function loop() {
-  this.restart();
+	this.restart();
 }
 
 export default loop;

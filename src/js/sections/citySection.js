@@ -3,21 +3,21 @@ import Section from "../classes/SectionClass";
 import City from "../objects/CityObject3D";
 
 let citySection = new Section("city");
-const publicPath = process.env.PUBLIC_URL
+const publicPath = process.env.PUBLIC_URL;
 let city = new City();
 city.addGroup({
-  name: "shanghai",
-  objs: {
-    grounds: publicPath + "/3D/shanghai-grounds.json",
-    buildings:publicPath + "/3D/shanghai-buildings.json",
-    towers: publicPath + "/3D/shanghai-towers.json",
-  },
-  outline: {
-    ground: {
-      offset: 0.2,
-      solid: true
-    }
-  }
+	name: "shanghai",
+	objs: {
+		grounds: publicPath + "/3D/shanghai-grounds.json",
+		buildings: publicPath + "/3D/shanghai-buildings.json",
+		towers: publicPath + "/3D/shanghai-towers.json"
+	},
+	outline: {
+		ground: {
+			offset: 0.2,
+			solid: true
+		}
+	}
 });
 
 // city.el.rotation.y = Math.PI / 6;
@@ -27,12 +27,12 @@ city.el.position.set(5, -10, 0);
 citySection.add(city.el);
 city.showGroup("shanghai");
 
-TweenLite.to(city.el.rotation, 30,{
-  y: 2 * Math.PI,
-  ease: window.Linear.easeNone,
-  onComplete: function() {
-    this.restart();
-  }
+TweenLite.to(city.el.rotation, 30, {
+	y: 2 * Math.PI,
+	ease: window.Linear.easeNone,
+	onComplete: function() {
+		this.restart();
+	}
 });
 
 citySection.onIn(function(way) {});

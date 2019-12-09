@@ -10,11 +10,10 @@
  * @return {Number} Mapped value
  */
 function map(value, oldRange, newRange) {
-  let newValue =
-    ((value - oldRange[0]) * (newRange[1] - newRange[0])) /
-      (oldRange[1] - oldRange[0]) +
-    newRange[0];
-  return Math.min(Math.max(newValue, newRange[0]), newRange[1]);
+	let newValue =
+		((value - oldRange[0]) * (newRange[1] - newRange[0])) / (oldRange[1] - oldRange[0]) +
+		newRange[0];
+	return Math.min(Math.max(newValue, newRange[0]), newRange[1]);
 }
 
 export default map;

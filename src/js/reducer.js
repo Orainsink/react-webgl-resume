@@ -6,7 +6,7 @@ export default function reducer(state, action) {
 	switch (action.type) {
 		case "setDevice": {
 			let device = action.payload;
-			return {...state, device};
+			return { ...state, device };
 		}
 
 		case "setTrigger": {

@@ -14,72 +14,69 @@ import random from "../utils/randomUtil";
  */
 
 class LookAtField {
-  constructor(options) {
-    let parameters = Object.assign(
-      {
-        count: 100
-      },
-      options
-    );
+	constructor(options) {
+		let parameters = Object.assign(
+			{
+				count: 100
+			},
+			options
+		);
 
-    let center = new THREE.Vector3(0, 50, 0);
+		let center = new THREE.Vector3(0, 50, 0);
 
-    let triangleGeometry = new THREE.TetrahedronGeometry(3);
+		let triangleGeometry = new THREE.TetrahedronGeometry(3);
 
-    let triangleMaterial = new THREE.MeshLambertMaterial({
-      flatShading: THREE.FlatShading
-    });
-    let triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
+		let triangleMaterial = new THREE.MeshLambertMaterial({
+			flatShading: THREE.FlatShading
+		});
+		let triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
 
-    let group = new THREE.Object3D();
+		let group = new THREE.Object3D();
 
-    for (let i = 0; i < parameters.count; i++) {
-      let triangleCopy = triangleMesh.clone();
-      triangleCopy.position.x = random(-50, 50);
-      triangleCopy.position.y = random(-50, 50);
-      triangleCopy.position.z = random(-50, 30);
+		for (let i = 0; i < parameters.count; i++) {
+			let triangleCopy = triangleMesh.clone();
+			triangleCopy.position.x = random(-50, 50);
+			triangleCopy.position.y = random(-50, 50);
+			triangleCopy.position.z = random(-50, 30);
 
-      triangleCopy.rotation.x = random(0, 2 * Math.PI);
-      triangleCopy.rotation.y = random(0, 2 * Math.PI);
-      triangleCopy.rotation.z = random(0, 2 * Math.PI);
+			triangleCopy.rotation.x = random(0, 2 * Math.PI);
+			triangleCopy.rotation.y = random(0, 2 * Math.PI);
+			triangleCopy.rotation.z = random(0, 2 * Math.PI);
 
-      triangleCopy.scale.x = triangleCopy.scale.y = triangleCopy.scale.z = random(
-        0.6,
-        1
-      );
+			triangleCopy.scale.x = triangleCopy.scale.y = triangleCopy.scale.z = random(0.6, 1);
 
-      triangleCopy.lookAt(center);
+			triangleCopy.lookAt(center);
 
-      group.add(triangleCopy);
-    }
+			group.add(triangleCopy);
+		}
 
-    group.position.y = -50;
+		group.position.y = -50;
 
-    function update() {
-      for (let i = 0; i < parameters.count; i++) {
-        group.children[i].lookAt(center);
-      }
-    }
+		function update() {
+			for (let i = 0; i < parameters.count; i++) {
+				group.children[i].lookAt(center);
+			}
+		}
 
-    this.el = group;
+		this.el = group;
 
-    this.in = function() {
-      group.visible = true;
-      TweenLite.to(center, 2,{ y: 0, onUpdate: update });
-      TweenLite.to(group.position, 1,{ y: 0 });
-    };
+		this.in = function() {
+			group.visible = true;
+			TweenLite.to(center, 2, { y: 0, onUpdate: update });
+			TweenLite.to(group.position, 1, { y: 0 });
+		};
 
-    this.out = function() {
-      TweenLite.to(center, 1,{
-        y: 50,
-        onUpdate: update,
-        onComplete: function() {
-          group.visible = false;
-        }
-      });
-      TweenLite.to(group.position, 1,{ y: -50 });
-    };
-  }
+		this.out = function() {
+			TweenLite.to(center, 1, {
+				y: 50,
+				onUpdate: update,
+				onComplete: function() {
+					group.visible = false;
+				}
+			});
+			TweenLite.to(group.position, 1, { y: -50 });
+		};
+	}
 }
 
 export default LookAtField;

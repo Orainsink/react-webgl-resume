@@ -3,9 +3,9 @@ import { TweenLite } from "gsap/TweenMax";
 
 import random from "../utils/randomUtil";
 import yoyo from "../utils/yoyoUtil";
-import textureLaserBodyImg from "../../assets/images/texture-laserBody.png"
-import textureLaserCapImg from "../../assets/images/texture-laserCap.png"
-import textureLaserFlareImg from "../../assets/images/texture-laserFlare.png"
+import textureLaserBodyImg from "../../assets/images/texture-laserBody.png";
+import textureLaserCapImg from "../../assets/images/texture-laserCap.png";
+import textureLaserFlareImg from "../../assets/images/texture-laserFlare.png";
 
 /**
  * Light beam
@@ -21,202 +21,192 @@ import textureLaserFlareImg from "../../assets/images/texture-laserFlare.png"
  * @requires jQuery, THREE, TweenLite, random, yoyo
  */
 class Beam {
-  constructor(options) {
-    let parameters = Object.assign(Beam.defaultOptions, options);
+	constructor(options) {
+		let parameters = Object.assign(Beam.defaultOptions, options);
 
-    let width = parameters.width;
-    let height = parameters.height;
+		let width = parameters.width;
+		let height = parameters.height;
 
-    let group = new THREE.Object3D();
+		let group = new THREE.Object3D();
 
-    let baseMaterial = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      depthWrite: false,
-      depthTest: true,
-      transparent: true,
-      opacity: 1,
-      blending: THREE.AdditiveBlending,
-      color: parameters.color
-    });
+		let baseMaterial = new THREE.MeshBasicMaterial({
+			side: THREE.DoubleSide,
+			depthWrite: false,
+			depthTest: true,
+			transparent: true,
+			opacity: 1,
+			blending: THREE.AdditiveBlending,
+			color: parameters.color
+		});
 
-    let bodyTexture = new THREE.TextureLoader().load(
-      textureLaserBodyImg
-    );
-    let capTexture = new THREE.TextureLoader().load(
-      textureLaserCapImg
-    );
-    let flareTexture = new THREE.TextureLoader().load(
-      textureLaserFlareImg
-    );
+		let bodyTexture = new THREE.TextureLoader().load(textureLaserBodyImg);
+		let capTexture = new THREE.TextureLoader().load(textureLaserCapImg);
+		let flareTexture = new THREE.TextureLoader().load(textureLaserFlareImg);
 
-    let lineMaterial = new THREE.LineBasicMaterial({ color: parameters.color });
-    let bodyMaterial = baseMaterial.clone();
-    let capMaterial = baseMaterial.clone();
-    let flareMaterial = baseMaterial.clone();
-    let cubeMaterial = baseMaterial.clone();
+		let lineMaterial = new THREE.LineBasicMaterial({ color: parameters.color });
+		let bodyMaterial = baseMaterial.clone();
+		let capMaterial = baseMaterial.clone();
+		let flareMaterial = baseMaterial.clone();
+		let cubeMaterial = baseMaterial.clone();
 
-    bodyMaterial.map = bodyTexture;
-    capMaterial.map = capTexture;
-    flareMaterial.map = flareTexture;
+		bodyMaterial.map = bodyTexture;
+		capMaterial.map = capTexture;
+		flareMaterial.map = flareTexture;
 
-    let bodyGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
-    let capGeometry = new THREE.PlaneGeometry(width, width, 1, 1);
-    let flareGeometry = new THREE.PlaneGeometry(10, 10, 1, 1);
-    let movingFlareGeometry = new THREE.PlaneGeometry(10, 40);
-    let cubeGeometry = new THREE.BoxGeometry(
-      parameters.cubeSize,
-      parameters.cubeSize,
-      parameters.cubeSize
-    );
+		let bodyGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
+		let capGeometry = new THREE.PlaneGeometry(width, width, 1, 1);
+		let flareGeometry = new THREE.PlaneGeometry(10, 10, 1, 1);
+		let movingFlareGeometry = new THREE.PlaneGeometry(10, 40);
+		let cubeGeometry = new THREE.BoxGeometry(
+			parameters.cubeSize,
+			parameters.cubeSize,
+			parameters.cubeSize
+		);
 
-    // set height 0
-    bodyGeometry.vertices[2].y = bodyGeometry.vertices[3].y =
-      height / 2 + width / 2;
-    bodyGeometry.verticesNeedUpdate = true;
-    bodyGeometry.computeBoundingSphere();
+		// set height 0
+		bodyGeometry.vertices[2].y = bodyGeometry.vertices[3].y = height / 2 + width / 2;
+		bodyGeometry.verticesNeedUpdate = true;
+		bodyGeometry.computeBoundingSphere();
 
-    let bodyMesh = new THREE.Mesh(bodyGeometry, bodyMaterial);
-    let capMeshTop = new THREE.Mesh(capGeometry, capMaterial);
-    let capMeshBottom = capMeshTop.clone();
-    let flareMesh = new THREE.Mesh(flareGeometry, flareMaterial);
-    let cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+		let bodyMesh = new THREE.Mesh(bodyGeometry, bodyMaterial);
+		let capMeshTop = new THREE.Mesh(capGeometry, capMaterial);
+		let capMeshBottom = capMeshTop.clone();
+		let flareMesh = new THREE.Mesh(flareGeometry, flareMaterial);
+		let cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
-    bodyMesh.position.y = 0;
-    capMeshTop.position.y = height / 2 + width / 2;
-    capMeshBottom.position.y = -(height / 2) - width / 2;
-    capMeshBottom.rotation.z = Math.PI;
-    flareMesh.position.y = -(height / 2) - width / 2;
+		bodyMesh.position.y = 0;
+		capMeshTop.position.y = height / 2 + width / 2;
+		capMeshBottom.position.y = -(height / 2) - width / 2;
+		capMeshBottom.rotation.z = Math.PI;
+		flareMesh.position.y = -(height / 2) - width / 2;
 
-    // line
-    let lineGeometry = new THREE.Geometry();
-    lineGeometry.vertices.push(new THREE.Vector3(0, height / 2 + width / 2, 0));
-    lineGeometry.vertices.push(new THREE.Vector3(0, height / 2 + width / 2, 0));
+		// line
+		let lineGeometry = new THREE.Geometry();
+		lineGeometry.vertices.push(new THREE.Vector3(0, height / 2 + width / 2, 0));
+		lineGeometry.vertices.push(new THREE.Vector3(0, height / 2 + width / 2, 0));
 
-    let lineMesh = new THREE.Line(lineGeometry, lineMaterial);
+		let lineMesh = new THREE.Line(lineGeometry, lineMaterial);
 
-    group.add(lineMesh);
+		group.add(lineMesh);
 
-    // body
-    let body = new THREE.Object3D();
+		// body
+		let body = new THREE.Object3D();
 
-    let bodyPlane = new THREE.Object3D();
+		let bodyPlane = new THREE.Object3D();
 
-    bodyPlane.add(bodyMesh);
-    bodyPlane.add(capMeshTop);
-    bodyPlane.add(capMeshBottom);
+		bodyPlane.add(bodyMesh);
+		bodyPlane.add(capMeshTop);
+		bodyPlane.add(capMeshBottom);
 
-    body.add(bodyPlane);
+		body.add(bodyPlane);
 
-    group.add(body);
+		group.add(body);
 
-    // flare
-    group.add(flareMesh);
+		// flare
+		group.add(flareMesh);
 
-    // moving flare
-    let movingFlareMaterial = flareMaterial.clone();
-    let movingFlareMesh = new THREE.Mesh(
-      movingFlareGeometry,
-      movingFlareMaterial
-    );
-    movingFlareMesh.scale.x = 3;
-    group.add(movingFlareMesh);
+		// moving flare
+		let movingFlareMaterial = flareMaterial.clone();
+		let movingFlareMesh = new THREE.Mesh(movingFlareGeometry, movingFlareMaterial);
+		movingFlareMesh.scale.x = 3;
+		group.add(movingFlareMesh);
 
-    // cube group
-    let cubeGroup = new THREE.Object3D();
-    cubeGroup.add(cubeMesh);
-    cubeGroup.add(movingFlareMesh);
-    group.add(cubeGroup);
+		// cube group
+		let cubeGroup = new THREE.Object3D();
+		cubeGroup.add(cubeMesh);
+		cubeGroup.add(movingFlareMesh);
+		group.add(cubeGroup);
 
-    // animations
-    let cache = { y: height / 2 + width / 2 };
+		// animations
+		let cache = { y: height / 2 + width / 2 };
 
-    function positionUpdate() {
-      let extremity = this.target.y - width / 2;
+		function positionUpdate() {
+			let extremity = this.target.y - width / 2;
 
-      lineGeometry.vertices[1].y = extremity;
-      lineGeometry.verticesNeedUpdate = true;
-      lineGeometry.computeBoundingSphere();
+			lineGeometry.vertices[1].y = extremity;
+			lineGeometry.verticesNeedUpdate = true;
+			lineGeometry.computeBoundingSphere();
 
-      bodyGeometry.vertices[2].y = bodyGeometry.vertices[3].y = this.target.y;
-      bodyGeometry.verticesNeedUpdate = true;
-      bodyGeometry.computeBoundingSphere();
+			bodyGeometry.vertices[2].y = bodyGeometry.vertices[3].y = this.target.y;
+			bodyGeometry.verticesNeedUpdate = true;
+			bodyGeometry.computeBoundingSphere();
 
-      capMeshBottom.position.y = extremity;
+			capMeshBottom.position.y = extremity;
 
-      flareMesh.position.y = extremity;
-      cubeGroup.position.y = extremity;
-    }
+			flareMesh.position.y = extremity;
+			cubeGroup.position.y = extremity;
+		}
 
-    let idleTweens = {
-      flare: TweenLite.to({ scale: 1, opacity: 1 },random(1, 2), {
-        scale: 2,
-        opacity: 0.6,
-        paused: true,
-        onUpdate: function() {
-          flareMesh.scale.set(this.target.scale, this.target.scale, 1);
-          flareMaterial.opacity = this.target.opacity;
-        },
-        onComplete: yoyo,
-        onReverseComplete: yoyo
-      }),
+		let idleTweens = {
+			flare: TweenLite.to({ scale: 1, opacity: 1 }, random(1, 2), {
+				scale: 2,
+				opacity: 0.6,
+				paused: true,
+				onUpdate: function() {
+					flareMesh.scale.set(this.target.scale, this.target.scale, 1);
+					flareMaterial.opacity = this.target.opacity;
+				},
+				onComplete: yoyo,
+				onReverseComplete: yoyo
+			}),
 
-      movingflare: TweenLite.to({ y: 0, scale: 3, opacity: 1 }, random(2, 6),{
-        y: 30,
-        scale: 1,
-        opacity: 0,
-        paused: true,
-        onUpdate: function() {
-          movingFlareMesh.position.y = this.target.y;
-          movingFlareMesh.scale.x = this.target.scale;
-          movingFlareMaterial.opacity = this.target.opacity;
-        },
-        onComplete: yoyo,
-        onReverseComplete: yoyo
-      }),
+			movingflare: TweenLite.to({ y: 0, scale: 3, opacity: 1 }, random(2, 6), {
+				y: 30,
+				scale: 1,
+				opacity: 0,
+				paused: true,
+				onUpdate: function() {
+					movingFlareMesh.position.y = this.target.y;
+					movingFlareMesh.scale.x = this.target.scale;
+					movingFlareMaterial.opacity = this.target.opacity;
+				},
+				onComplete: yoyo,
+				onReverseComplete: yoyo
+			}),
 
-      body: TweenLite.to({ opacity: 1 }, random(1, 2),{
-        opacity: 0.5,
-        onUpdate: function(){
-          bodyMaterial.opacity = capMaterial.opacity = this.target.opacity;
-        },
-        onComplete: yoyo,
-        onReverseComplete: yoyo
-      })
-    };
+			body: TweenLite.to({ opacity: 1 }, random(1, 2), {
+				opacity: 0.5,
+				onUpdate: function() {
+					bodyMaterial.opacity = capMaterial.opacity = this.target.opacity;
+				},
+				onComplete: yoyo,
+				onReverseComplete: yoyo
+			})
+		};
 
-    this.el = group;
+		this.el = group;
 
-    let delay = parameters.delay;
+		let delay = parameters.delay;
 
-    this.in = function() {
-      TweenLite.to(cache, 1, {y: -5, delay: delay, onUpdate: positionUpdate });
-    };
+		this.in = function() {
+			TweenLite.to(cache, 1, { y: -5, delay: delay, onUpdate: positionUpdate });
+		};
 
-    this.out = function(way) {
-      let y = way === "up" ? height / 2 + width / 2 - 1 : -70;
-      TweenLite.to(cache, 1,{ y: y, delay: delay, onUpdate: positionUpdate });
-    };
+		this.out = function(way) {
+			let y = way === "up" ? height / 2 + width / 2 - 1 : -70;
+			TweenLite.to(cache, 1, { y: y, delay: delay, onUpdate: positionUpdate });
+		};
 
-    this.start = function() {
-      idleTweens.flare.resume();
-      idleTweens.movingflare.resume();
-      idleTweens.body.resume();
-    };
+		this.start = function() {
+			idleTweens.flare.resume();
+			idleTweens.movingflare.resume();
+			idleTweens.body.resume();
+		};
 
-    this.stop = function() {
-      idleTweens.flare.pause();
-      idleTweens.movingflare.pause();
-      idleTweens.body.pause();
-    };
-  }
+		this.stop = function() {
+			idleTweens.flare.pause();
+			idleTweens.movingflare.pause();
+			idleTweens.body.pause();
+		};
+	}
 }
 
 Beam.defaultOptions = {
-  color: "#ffffff",
-  height: 15,
-  width: 2,
-  cubeSize: 0.5,
-  delay: 0
+	color: "#ffffff",
+	height: 15,
+	width: 2,
+	cubeSize: 0.5,
+	delay: 0
 };
 
 export default Beam;

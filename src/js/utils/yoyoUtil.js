@@ -5,11 +5,11 @@
  * @method yoyo
  */
 function yoyo() {
-  if (this.reversed()) {
-    this.restart();
-  } else {
-    this.reverse();
-  }
+	if (this.reversed()) {
+		this.restart();
+	} else {
+		this.reverse();
+	}
 }
 
 export default yoyo;

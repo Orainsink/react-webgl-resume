@@ -8,15 +8,15 @@
  * @return {Number} Random value
  */
 function random(low, high, round) {
-  round = round || false;
+	round = round || false;
 
-  let randomValue = Math.random() * (high - low) + low;
+	let randomValue = Math.random() * (high - low) + low;
 
-  if (round) {
-    return Math.floor(randomValue);
-  }
+	if (round) {
+		return Math.floor(randomValue);
+	}
 
-  return randomValue;
+	return randomValue;
 }
 
 export default random;

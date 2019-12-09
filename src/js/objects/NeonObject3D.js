@@ -28,7 +28,7 @@ class Neon {
 		// setup 3d els
 		this.tube = this.getTube();
 		this.glow = this.getGlow();
-		this.cb = function(){};
+		this.cb = function() {};
 
 		let glows = this.getGlows(this.glow);
 
@@ -48,61 +48,49 @@ class Neon {
 		// animations
 		let _this = this;
 
-		this.idleIntensityTween = TweenLite.to(
-			{ projection: 0.08, glow: 0.4 },
-      random(0.8, 5),
-			{
-				projection: 0.15,
-				glow: 0.7,
-				paused: true,
-				onStart: function() {
-					_this.tube.material.emissive.set(_this.parameters.color);
-				},
-				onUpdate: function() {
-					if (_this.flickering) {
-						return false;
-					}
+		this.idleIntensityTween = TweenLite.to({ projection: 0.08, glow: 0.4 }, random(0.8, 5), {
+			projection: 0.15,
+			glow: 0.7,
+			paused: true,
+			onStart: function() {
+				_this.tube.material.emissive.set(_this.parameters.color);
+			},
+			onUpdate: function() {
+				if (_this.flickering) {
+					return false;
+				}
 
-					_this.glow.material.opacity = this.target.glow;
-					if (_this.parameters.projection) {
-						_this.projection.opacity = this.target.opacity;
-					}
-				},
-				onComplete: yoyo,
-				onReverseComplete: yoyo
+				_this.glow.material.opacity = this.target.glow;
+				if (_this.parameters.projection) {
+					_this.projection.opacity = this.target.opacity;
+				}
+			},
+			onComplete: yoyo,
+			onReverseComplete: yoyo
+		});
+
+		this.idleFlickTween = TweenLite.to({}, random(0.1, 10), {
+			paused: true,
+			onComplete: function() {
+				_this.flickOff();
+				this.duration(random(0.1, 10));
+				this.restart();
 			}
-		);
+		});
 
-		this.idleFlickTween = TweenLite.to(
-			{},
-      random(0.1, 10),
-			{
-				paused: true,
-				onComplete: function() {
-					_this.flickOff();
-					this.duration(random(0.1, 10));
+		this.inTween = TweenLite.to({}, random(0.2, 2), {
+			paused: true,
+			onComplete: function() {
+				if (_this.currentFlicker++ < _this.totalFlicker) {
+					_this.flickOn();
+					this.duration(random(0.1, 0.5));
 					this.restart();
+				} else {
+					_this.animations = [_this.idleIntensityTween, _this.idleFlickTween];
+					_this.start();
 				}
 			}
-		);
-
-		this.inTween = TweenLite.to(
-			{},
-      random(0.2, 2),
-			{
-				paused: true,
-				onComplete: function() {
-					if (_this.currentFlicker++ < _this.totalFlicker) {
-						_this.flickOn();
-						this.duration(random(0.1, 0.5));
-						this.restart();
-					} else {
-						_this.animations = [_this.idleIntensityTween, _this.idleFlickTween];
-						_this.start();
-					}
-				}
-			}
-		);
+		});
 
 		this.animations = [this.inTween];
 	}
@@ -139,9 +127,9 @@ class Neon {
 			this.projection.material.opacity = 0.05;
 		}
 
-    this.cb();
+		this.cb();
 
-    TweenLite.delayedCall(random(0.05, 0.07), () => {
+		TweenLite.delayedCall(random(0.05, 0.07), () => {
 			this.tube.material.emissive.set("#000000");
 			this.tube.material.needsUpdate = true;
 
@@ -166,10 +154,10 @@ class Neon {
 			this.projection.material.opacity = 0.05;
 		}
 
-    TweenLite.delayedCall(random(0.05, 0.1), () => {
+		TweenLite.delayedCall(random(0.05, 0.1), () => {
 			this.flickering = !this.flickering;
 
-			this.cb()
+			this.cb();
 		});
 	}
 
@@ -180,7 +168,12 @@ class Neon {
 	 * @return {THREE.Mesh}
 	 */
 	getTube() {
-		let geometry = new THREE.CylinderGeometry(this.parameters.radiusTop, this.parameters.radiusBottom, this.parameters.width, 6);
+		let geometry = new THREE.CylinderGeometry(
+			this.parameters.radiusTop,
+			this.parameters.radiusBottom,
+			this.parameters.width,
+			6
+		);
 		let material = new THREE.MeshLambertMaterial({
 			color: "#808080",
 			emissive: "#000000"
@@ -260,17 +253,17 @@ class Neon {
 		return mesh;
 	}
 
-	callback(cb){
-		this.cb = cb
+	callback(cb) {
+		this.cb = cb;
 	}
 }
 
 Neon.defaultOptions = {
 	color: "#ffffff",
 	width: 20,
-  radiusTop: 0.2,
-  radiusBottom: 0.2,
-  projection: true,
+	radiusTop: 0.2,
+	radiusBottom: 0.2,
+	projection: true,
 	planes: 3
 };
 

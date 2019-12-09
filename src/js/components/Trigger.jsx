@@ -7,16 +7,17 @@ export default function Trigger() {
 	const { isOpen } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
-	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger",payload }), []);
+	const setTrigger = React.useCallback(
+		payload => dispatch({ type: "setTrigger", payload }),
+		[]
+	);
 
 	return (
 		<div
-			className={`trigger trigger_${
-        isOpen? "top" : "bottom"
-			}`}
+			className={`trigger trigger_${isOpen ? "top" : "bottom"}`}
 			onMouseEnter={setTrigger.bind(this, "mouseEnter")}
 			onMouseLeave={setTrigger.bind(this, "mouseLeave")}
-			onClick={setTrigger.bind(this,"click")}
+			onClick={setTrigger.bind(this, "click")}
 		/>
 	);
 }

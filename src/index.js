@@ -10,17 +10,19 @@ import * as serviceWorker from "./serviceWorker";
 
 import preloadImages from "./js/libs/preloadImages";
 // 预加载图片
-preloadImages(()=>{startApp()});
+preloadImages(() => {
+	startApp();
+});
 
-function startApp(){
-  const store = makeStore();
+function startApp() {
+	const store = makeStore();
 
-  ReactDOM.render(
-    <StoreContext.Provider value={store}>
-      <App />
-    </StoreContext.Provider>,
-    document.getElementById("root")
-  );
+	ReactDOM.render(
+		<StoreContext.Provider value={store}>
+			<App />
+		</StoreContext.Provider>,
+		document.getElementById("root")
+	);
 }
 
 serviceWorker.unregister();
