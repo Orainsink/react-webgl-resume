@@ -25,6 +25,7 @@ const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const postcssNormalize = require("postcss-normalize");
 
@@ -271,7 +272,7 @@ module.exports = function(webpackEnv) {
 				// To fix this, we prevent you from importing files out of src/ -- if you'd like to,
 				// please link the files into your node_modules/ and let module-resolution kick in.
 				// Make sure your source files are compiled, as they will not be processed in any way.
-				new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
+				new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
 			]
 		},
 		resolveLoader: {
@@ -540,7 +541,8 @@ module.exports = function(webpackEnv) {
 					};
 				}
 			}),
-			// Moment.js is an extremely popular library that bundles large locale files
+            new BundleAnalyzerPlugin(),
+            // Moment.js is an extremely popular library that bundles large locale files
 			// by default due to how Webpack interprets its code. This is a practical
 			// solution that requires the user to opt into importing specific locales.
 			// https://github.com/jmblog/how-to-optimize-momentjs-with-webpack

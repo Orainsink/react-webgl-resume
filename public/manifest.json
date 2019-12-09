@@ -10,5 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "description": "Oran ,a front end developer, is looking for a job."
+  "description": "Oran ,a front end developer, is looking for a job.",
+  "keywords": ["Oran","webGL","resume","react"]
 }

@@ -16,12 +16,15 @@ function bodyScroll(e) {
 }
 function App() {
 	const mapState = React.useCallback(state => state, []);
-	const { trigger, isOpen, isSliding, sounds, device } = useMappedState(mapState);
+	const { trigger, isOpen, isSliding, device } = useMappedState(mapState);
 	const dispatch = useDispatch();
 
 	const [headsParam, setHeadsParam] = useState({});
 	const [tailsParam, setTailsParam] = useState({});
-	const setSounds = React.useCallback(payload => dispatch({ type: "setSounds", payload }), []);
+	const setSounds = React.useCallback(
+		payload => dispatch({ type: "setSounds", payload }),
+		[]
+	);
 
 	const setHeadsVisib = React.useCallback(
 		blur => dispatch({ type: "setHeadsVisib", payload: blur }),
@@ -35,9 +38,18 @@ function App() {
 		blur => dispatch({ type: "setWaypoint", payload: blur }),
 		[]
 	);
-	const setDevice = React.useCallback(payload => dispatch({ type: "setDevice", payload }), []);
-	const setIsOpen = React.useCallback(blur => dispatch({ type: "setIsOpen", payload: blur }), []);
-	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
+	const setDevice = React.useCallback(
+		payload => dispatch({ type: "setDevice", payload }),
+		[]
+	);
+	const setIsOpen = React.useCallback(
+		blur => dispatch({ type: "setIsOpen", payload: blur }),
+		[]
+	);
+	const setTrigger = React.useCallback(
+		payload => dispatch({ type: "setTrigger", payload }),
+		[]
+	);
 
 	/**
 	 * 检测设备类型 device [true: web, false: phone]
@@ -77,9 +89,13 @@ function App() {
 	 */
 	useEffect(() => {
 		if (!isOpen) {
-			document.body.addEventListener("touchmove", bodyScroll, { passive: false });
+			document.body.addEventListener("touchmove", bodyScroll, {
+				passive: false
+			});
 		} else {
-			document.body.removeEventListener("touchmove", bodyScroll, { passive: false });
+			document.body.removeEventListener("touchmove", bodyScroll, {
+				passive: false
+			});
 		}
 	}, [isOpen]);
 	/**
