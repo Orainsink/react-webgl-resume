@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="/react-webgl-resume/favicon.png"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><link rel="manifest" href="/react-webgl-resume/manifest.json"/><title>Oran XD</title><style>body{background:#0a0a0a}*{margin:0}::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track-piece{background-color:rgba(0,0,0,.2);-webkit-border-radius:6px}::-webkit-scrollbar-thumb:vertical{height:5px;background-color:rgba(125,125,125,.7);-webkit-border-radius:6px}::-webkit-scrollbar-thumb:horizontal{width:5px;background-color:rgba(125,125,125,.7);-webkit-border-radius:6px}.loader{user-select:none;line-height:1;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;z-index:11;margin:0;display:flex;flex-flow:column nowrap;justify-content:center;align-items:center;background:#000;min-height:100vh;min-width:100vw;position:fixed}.loader__loading{line-height:1;font-family:inherit;font-weight:700;color:#fff;font-size:42px;text-shadow:0 0 3px #fff}.loader__text{line-height:1;font-family:inherit;font-weight:700;color:#fff;font-size:42px;text-shadow:0 0 3px #fff}.loader__box{box-sizing:border-box;padding:0;width:60%;height:42px;position:relative;overflow:hidden}.loader__bar{background:#fff;height:100%;width:0%;margin:0;transition:all .3s linear;left:0;top:0}.loader__tip{margin-top:20px;font-family:inherit;color:#fff;font-size:16px;text-shadow:0 0 3px #fff;max-width:80%;opacity:0}</style><link href="/react-webgl-resume/static/css/main.b37adaff.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><script></script><div class="loader" id="loader"><div class="loader__loading">LOADING</div><div class="loader__text">0%</div><div class="loader__box"><div class="loader__bar"></div></div><div class="loader__tip">*加载超时,你可以选择继续等待,或者检查网络/科学上网后重新加载</div></div><div id="root"></div><script>document=window.document,function(){console.log("%c Hi! I'm Oran, XD","color: red;font-size: 24px;font-weight: bold;text-decoration: underline;"),console.log("More information and source code can be found here: https://github.com/Orainsink/react-webgl-resume"),console.log("And I'm looking for a job as a FE developer"),function(){try{var o=document.createElement("canvas");return!!window.WebGLRenderingContext&&(o.getContext("webgl")||o.getContext("experimental-webgl"))}catch(o){return!1}}()||alert("I'm sorry your browser does not support webGL"),window.console||(window.console={});for(var o=["log","debug","warn","info"],e=0;e<o.length;e++)console[o[e]]=function(){}}()</script><script>// 进度条, 模拟加载过程, #(滑稽)
+  (function () {
+    var tmp = 0;
+    var time = 0;
+    var oldTime = new Date();
+    var during = 0;
+    var total = 80 + Math.random()*10;
+    var text = document.getElementsByClassName("loader__text")[0];
+    var bar = document.getElementsByClassName("loader__bar")[0];
+    var tip = document.getElementsByClassName("loader__tip");
+
+    window.loaderLoadingProgressTimer = setInterval(()=> {
+      text.innerText = `${Math.round(tmp)}%`;
+      bar.style.width = `${Math.round(tmp)}%`;
+      time += 1;
+      tmp = tmp > 99?tmp:Math.tanh(time/10)*total;
+
+      if(during < 20000){
+        var curTime = new Date();
+        during = curTime.getTime() - oldTime.getTime();
+        if (during > 20000){
+          for(var i=0;i<tip.length;i++){
+            tip[i].style.opacity = 1;
+          }
+          stop()
+        }
+      }
+    }, (Math.random()+0.01)*3000)
+    function stop(){
+      // 清除假进度条计时器
+      window.clearInterval( window.loaderLoadingProgressTimer);
+      window.loaderLoadingProgressTimer = null;
+    }
+  })()</script><script>!function(i){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],l=0,f=[];l<n.length;l++)t=n[l],c[t]&&f.push(c[t][0]),c[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(i[r]=o[r]);for(s&&s(e);f.length;)f.shift()();return p.push.apply(p,u||[]),a()}function a(){for(var e,r=0;r<p.length;r++){for(var t=p[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==c[u]&&(n=!1)}n&&(p.splice(r--,1),e=l(l.s=t[0]))}return e}var t={},c={1:0},p=[];function l(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return i[e].call(r.exports,r,r.exports,l),r.l=!0,r.exports}l.m=i,l.c=t,l.d=function(e,r,t){l.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},l.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},l.t=function(r,e){if(1&e&&(r=l(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(l.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)l.d(t,n,function(e){return r[e]}.bind(null,n));return t},l.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return l.d(r,"a",r),r},l.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},l.p="/react-webgl-resume/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;a()}([])</script><script src="/react-webgl-resume/static/js/2.ab30e2ad.chunk.js"></script><script src="/react-webgl-resume/static/js/main.8e64e27f.chunk.js"></script></body></html>

@@ -158,6 +158,7 @@
   },
   "homepage": "http://Orainsink.github.io/react-webgl-resume",
   "devDependencies": {
+    "gh-pages": "2.0",
     "webpack-bundle-analyzer": "^3.6.0"
   }
 }
