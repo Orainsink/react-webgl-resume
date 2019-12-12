@@ -7,6 +7,8 @@ export default function About() {
 	const mapState = React.useCallback(state => state, []);
 	const { waypoint } = useMappedState(mapState);
 
+	const publicPath = process.env.PUBLIC_URL;
+
 	useEffect(() => {
 		if (waypoint) {
 			if (hasStarted) return;
@@ -60,6 +62,16 @@ export default function About() {
 				</p>
 				<p>
 					2019年5月从长虹离职，同月入职美亚联环保科技，独立负责"早点星球"小程序，H5，web，后台及其他恰饭项目前端开发。
+				</p>
+				<br />
+				<p className={"bold"}>
+					PDF简历：{"  "}
+					<a
+						href={publicPath + "/resume.pdf"}
+						download="Oran_resume.pdf"
+					>
+						点我下载
+					</a>
 				</p>
 				<div className="text--center">
 					<a className="tails__link placeholder--email">
