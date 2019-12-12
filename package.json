@@ -4,7 +4,6 @@
   "private": true,
   "author": "Orainsink",
   "email": "ywt1250066597@gmail.com",
-  "url": "http://foolishrobot.xyz",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@reach/router": "^1.2.1",
@@ -157,9 +156,9 @@
       "react-app"
     ]
   },
-  "homepage": "http://Orainsink.github.io/react-webgl-resume",
+  "homepage": "https://Orainsink.github.io/react-webgl-resume",
   "devDependencies": {
-    "gh-pages": "^2.1.1",
+    "gh-pages": "^2.0.1",
     "webpack-bundle-analyzer": "^3.6.0"
   }
 }
