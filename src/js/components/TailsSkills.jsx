@@ -39,12 +39,12 @@ export default function Skills() {
 						<span className={"bold"}> WebGL: </span> Three.js <br />
 						{/*<span className={"bold"}> Canvas: </span> D3.js <br />*/}
 						<span className={"bold"}> 动画库: </span> GSAP <br />
-						<span className={"bold"}> 预处理: </span> 会使用
+						<span className={"bold"}> 预处理: </span>
 						babel，Sass，postcss <br />
-						<span className={"bold"}> 打包工具: </span> 会手动配置
+						<span className={"bold"}> 打包工具: </span>
 						Webpack <br />
-						<span className={"bold"}> 测试工具: </span> 了解
-						jest，Karma，Mocha，Travis CI <br />
+						<span className={"bold"}> 测试工具: </span>
+						Karma，Mocha，Travis CI <br />
 					</p>
 				</div>
 
