@@ -16,10 +16,18 @@ export default function Keys() {
 			<div className="key key--left">
 				<div className="key__triangle key__triangle--left" />
 			</div>
-			<div className={`key key--bottom ${current === "bottom" ? "key__active" : ""}`}>
+			<div
+				className={`key key--bottom ${
+					current === "bottom" ? "key__active" : ""
+				}`}
+			>
 				<div className="key__triangle key__triangle--bottom" />
 			</div>
-			<div className={`key key--top ${current === "top" ? "key__active" : ""}`}>
+			<div
+				className={`key key--top ${
+					current === "top" ? "key__active" : ""
+				}`}
+			>
 				<div className="key__triangle key__triangle--top" />
 			</div>
 			<div className="key key--right">

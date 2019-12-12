@@ -33,7 +33,9 @@ export default function Map() {
 		<div className="map" ref={mapRef}>
 			{mapList.map((item, index) => (
 				<div
-					className={`map__node ${index === map.now ? "is-active" : ""}`}
+					className={`map__node ${
+						index === map.now ? "is-active" : ""
+					}`}
 					onClick={scrollTo.bind(this, index)}
 					key={index}
 				/>

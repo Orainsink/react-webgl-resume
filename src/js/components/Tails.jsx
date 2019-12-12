@@ -22,7 +22,11 @@ export default function Tails(props) {
 			TweenLite.to(arrow.current, 0.8, { opacity: 0 });
 		}
 		if (trigger === "click" && !isOpen) {
-			TweenLite.to(arrow.current, 0.5, { transform: "rotate(180deg)", opacity: 0.5, top: 0 });
+			TweenLite.to(arrow.current, 0.5, {
+				transform: "rotate(180deg)",
+				opacity: 0.5,
+				top: 0
+			});
 		}
 	}, [trigger]);
 

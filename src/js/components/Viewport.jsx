@@ -64,8 +64,14 @@ export default function Viewport() {
 	} = useMappedState(mapState);
 	const dispatch = useDispatch();
 
-	const setSounds = React.useCallback(payload => dispatch({ type: "setSounds", payload }), []);
-	const setMap = React.useCallback(payload => dispatch({ type: "setMap", payload }), []);
+	const setSounds = React.useCallback(
+		payload => dispatch({ type: "setSounds", payload }),
+		[]
+	);
+	const setMap = React.useCallback(
+		payload => dispatch({ type: "setMap", payload }),
+		[]
+	);
 	const setSectionChangeBegin = React.useCallback(
 		payload => dispatch({ type: "setSectionChangeBegin", payload }),
 		[]
@@ -77,7 +83,10 @@ export default function Viewport() {
 	const setMute = React.useCallback(() => {
 		dispatch({ type: "setMute" });
 	}, []);
-	const setTrigger = React.useCallback(payload => dispatch({ type: "setTrigger", payload }), []);
+	const setTrigger = React.useCallback(
+		payload => dispatch({ type: "setTrigger", payload }),
+		[]
+	);
 
 	const [resizeListener, sizes] = useResizeAware();
 
@@ -342,7 +351,10 @@ export default function Viewport() {
 		// add background particles and lines
 		// rangeY based on the size and the number of sections
 		console.log("setupBackground");
-		const rangeY = [sectionHeight, -sectionsList.length * sectionHeight - sectionHeight];
+		const rangeY = [
+			sectionHeight,
+			-sectionsList.length * sectionHeight - sectionHeight
+		];
 
 		setSounds({ background: true });
 
@@ -782,7 +794,11 @@ export default function Viewport() {
 			upHandler={handleWheel.bind(this, "up")}
 			downHandler={handleWheel.bind(this, "down")}
 		>
-			<div className="heads__viewport" ref={viewport} onMouseMove={onMouseMove}>
+			<div
+				className="heads__viewport"
+				ref={viewport}
+				onMouseMove={onMouseMove}
+			>
 				{resizeListener}
 				<ViewportTrigger />
 			</div>

@@ -102,7 +102,11 @@ export default function Layout() {
 		<div className="help__layout">
 			<div className="layout">
 				<div className="layout__mouse" ref={mouseRef}>
-					<div className={`layout__mouse__icon layout__mouse__icon__${device ? "mouse" : "tap"}`} />
+					<div
+						className={`layout__mouse__icon layout__mouse__icon__${
+							device ? "mouse" : "tap"
+						}`}
+					/>
 					<div className="layout__mouse__click" ref={clickRef} />
 				</div>
 				<div className="layout__frame" />

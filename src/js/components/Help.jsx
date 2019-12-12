@@ -50,7 +50,12 @@ function Slide1(props) {
 
 	useEffect(() => {
 		if (start) {
-			TweenLite.fromTo(slideRef.current, 0.5, { opacity: 0 }, { opacity: 1 });
+			TweenLite.fromTo(
+				slideRef.current,
+				0.5,
+				{ opacity: 0 },
+				{ opacity: 1 }
+			);
 		} else {
 			TweenLite.to(slideRef.current, 0.2, { opacity: 0 });
 		}
@@ -62,7 +67,9 @@ function Slide1(props) {
 				<Layout />
 				<p className="text--center text--white">
 					{`There are 2 parts on the website. Presentation and About me, you can switch between
-					them anytime by ${device ? "clicking" : "tapping"} on the bottom and top part of the screen.`}
+					them anytime by ${
+						device ? "clicking" : "tapping"
+					} on the bottom and top part of the screen.`}
 				</p>
 			</div>
 		</div>
@@ -75,7 +82,12 @@ function Slide2(props) {
 
 	useEffect(() => {
 		if (start) {
-			TweenLite.fromTo(slideRef.current, 0.5, { opacity: 0 }, { opacity: 1 });
+			TweenLite.fromTo(
+				slideRef.current,
+				0.5,
+				{ opacity: 0 },
+				{ opacity: 1 }
+			);
 		} else {
 			TweenLite.to(slideRef.current, 0.2, { opacity: 0 });
 		}
@@ -88,7 +100,8 @@ function Slide2(props) {
 					<Keys />
 				</div>
 				<p className="text--center text--white">
-					You can naviguate with either your mouse wheel / trackpad or up / down keys.
+					You can naviguate with either your mouse wheel / trackpad or
+					up / down keys.
 				</p>
 			</div>
 		</div>
@@ -113,7 +126,10 @@ export default function Help() {
 		let timer = null;
 		if (help) {
 			slidesRef.current &&
-				TweenLite.to(slidesRef.current, 0.5, { x: 2 - curSlide ? "0%" : "-50%", ease: "easeIn" });
+				TweenLite.to(slidesRef.current, 0.5, {
+					x: 2 - curSlide ? "0%" : "-50%",
+					ease: "easeIn"
+				});
 			timer = setInterval(() => {
 				changeSlide();
 			}, 12000);
@@ -149,11 +165,15 @@ export default function Help() {
 
 							<div className="slider__map">
 								<div
-									className={`slider__map__node ${curSlide === 1 ? "is-active" : ""}`}
+									className={`slider__map__node ${
+										curSlide === 1 ? "is-active" : ""
+									}`}
 									onClick={handleClickNode.bind(this, 1)}
 								/>
 								<div
-									className={`slider__map__node ${curSlide === 2 ? "is-active" : ""}`}
+									className={`slider__map__node ${
+										curSlide === 2 ? "is-active" : ""
+									}`}
 									onClick={handleClickNode.bind(this, 2)}
 								/>
 							</div>

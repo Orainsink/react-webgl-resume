@@ -20,7 +20,10 @@ export default function Menu() {
 	const setHelp = React.useCallback(() => {
 		dispatch({ type: "setHelp" });
 	}, []);
-	const setTrigger = React.useCallback(blur => dispatch({ type: "setTrigger", payload: blur }), []);
+	const setTrigger = React.useCallback(
+		blur => dispatch({ type: "setTrigger", payload: blur }),
+		[]
+	);
 
 	const menu = useRef(null);
 	const menuButton = useRef(null);
@@ -30,7 +33,10 @@ export default function Menu() {
 	function mouseover() {
 		setActive(true);
 
-		TweenLite.to(menu.current, 0.4, { left: 0, ease: window.Linear.easeNone });
+		TweenLite.to(menu.current, 0.4, {
+			left: 0,
+			ease: window.Linear.easeNone
+		});
 		TweenLite.to(menuButton.current, 0.4, { opacity: 0 });
 		const tl = new TimelineMax();
 		menuItem.forEach(item => {
@@ -41,7 +47,10 @@ export default function Menu() {
 	function mouseout() {
 		setActive(false);
 
-		TweenLite.to(menu.current, 0.4, { left: 30, ease: window.Linear.easeNone });
+		TweenLite.to(menu.current, 0.4, {
+			left: 30,
+			ease: window.Linear.easeNone
+		});
 		TweenLite.to(menuButton.current, 0.4, { opacity: 1 });
 	}
 
@@ -65,11 +74,22 @@ export default function Menu() {
 					<div className="menu__button__line menu__button__line--middle" />
 					<div className="menu__button__line menu__button__line--bottom" />
 				</div>
-				<div className={`menu__items ${active ? "active" : ""}`} ref={menuItems}>
-					<a className="menu__item menu__items--3D" ref={a => (menuItem[0] = a)} onClick={setMute}>
+				<div
+					className={`menu__items ${active ? "active" : ""}`}
+					ref={menuItems}
+				>
+					<a
+						className="menu__item menu__items--3D"
+						ref={a => (menuItem[0] = a)}
+						onClick={setMute}
+					>
 						{mute ? " UNMUTE " : " MUTE "}
 					</a>
-					<a className="menu__item menu__items--3D" ref={a => (menuItem[1] = a)} onClick={setHelp}>
+					<a
+						className="menu__item menu__items--3D"
+						ref={a => (menuItem[1] = a)}
+						onClick={setHelp}
+					>
 						{" HELP "}
 					</a>
 					<a

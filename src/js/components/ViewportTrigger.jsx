@@ -51,7 +51,10 @@ export default function ViewportTrigger() {
 			</div>
 
 			<div className="trigger__info trigger__info--heads" ref={heads}>
-				<p className="trigger__info__text"> BACK TO THE PRESENTATION </p>
+				<p className="trigger__info__text">
+					{" "}
+					BACK TO THE PRESENTATION{" "}
+				</p>
 				<div className="trigger__info__bg trigger__info__bg--heads" />
 			</div>
 
