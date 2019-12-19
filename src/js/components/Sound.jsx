@@ -17,7 +17,7 @@ export default function Sound() {
 				require("../../assets/sounds/background.mp3"),
 				require("../../assets/sounds/background.wav")
 			],
-			volume: 0.5,
+			volume: 0.05,
 			loop: true
 		},
 		{
