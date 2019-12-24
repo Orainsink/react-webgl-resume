@@ -3,7 +3,7 @@ import "../../styles/Tails.scss";
 import About from "./TailsAbout.jsx";
 import Site from "./TailsSite.jsx";
 import Skills from "./TailsSkills.jsx";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import { useMappedState } from "redux-react-hook";
 
 export default function Tails(props) {

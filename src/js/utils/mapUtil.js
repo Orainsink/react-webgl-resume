@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Map a value from one range to another
  *

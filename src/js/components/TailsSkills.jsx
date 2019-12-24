@@ -1,12 +1,14 @@
 import React from "react";
 import { Waypoint } from "react-waypoint";
-import { TweenMax } from "gsap/TweenMax";
+// import { TweenMax } from "gsap/TweenMax";
+import { TimelineLite } from "gsap/TimelineLite";
 
 let hasStarted = false;
 export default function Skills() {
 	function start() {
 		if (hasStarted) return;
-		TweenMax.staggerFromTo(
+		const tl = new TimelineLite()
+		tl.staggerFromTo(
 			".tails__section--skills .tails__section__el",
 			0.5,
 			{ opacity: 0, y: 100 },

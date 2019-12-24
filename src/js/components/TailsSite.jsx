@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/TailsSite.scss";
 import { Waypoint } from "react-waypoint";
-import { TweenMax } from "gsap/TweenMax";
-import { TimelineMax } from "gsap";
+import { TimelineLite } from "gsap/TimelineLite";
 
 let interval = null;
 let hasStarted = false;
@@ -19,23 +18,16 @@ export default function Site() {
 
 	function animate() {
 		// wireframe timeline
-		const tl1 = new TimelineMax();
-		const tl2 = new TimelineMax();
+		const tl1 = new TimelineLite();
+		const tl2 = new TimelineLite();
+		const tl3 = new TimelineLite();
+		const tl4 = new TimelineLite();
+		const tl5 = new TimelineLite();
+		const tl6 = new TimelineLite();
+		
 		tl1.staggerTo(".wireframe__frame--top", 0.2, { width: "100%" }, 0.1);
 		tl1.staggerTo(".wireframe__frame--bottom", 0.2, { width: "100%" }, 0.1);
-		TweenMax.staggerTo(
-			".wireframe__frame--left",
-			0.2,
-			{ height: "100%" },
-			0.2
-		);
-		TweenMax.staggerTo(
-			".wireframe__frame--right",
-			0.6,
-			{ height: "100%" },
-			0.2
-		);
-		TweenMax.staggerTo(".wireframe__controls__node", 0.8, { top: 0 }, 0.2);
+
 		textLines.forEach(item => {
 			const width = item.className.includes(
 				"wireframe__text__line--incomplete"
@@ -45,7 +37,13 @@ export default function Site() {
 			tl2.to(item, 0.1, { width: width });
 		});
 
-		TweenMax.staggerFromTo(
+		tl3.staggerTo(".wireframe__frame--left", 0.2, { height: "100%" }, 0.2);
+
+		tl4.staggerTo(".wireframe__frame--right", 0.2, { height: "100%" }, 0.2);
+
+		tl5.staggerTo(".wireframe__controls__node", 0.8, { top: 0 }, 0.2);
+
+		tl6.staggerFromTo(
 			".tails__section--site .tails__section__el",
 			0.5,
 			{ opacity: 0, y: 100 },

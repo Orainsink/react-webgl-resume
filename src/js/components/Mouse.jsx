@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import TweenLite from "gsap/TweenLite";
-import TimelineMax from "gsap/TimelineMax";
+import { TweenLite } from "gsap/TweenLite";
+import { TimelineLite } from "gsap/TimelineLite";
 import React from "react";
 import "../../styles/Mouse.scss";
 
-let tl = new TimelineMax();
+let tl = new TimelineLite();
 export default function Mouse() {
 	const mouseWheelRef = useRef(null);
 	const [y, setY] = useState(0);
