@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/Heads.scss";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 
 export default function Heads(props) {
 	const heads = useRef(null);

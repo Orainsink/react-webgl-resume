@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 
 /**
  * Display a 2D text in 3D space

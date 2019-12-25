@@ -156,7 +156,6 @@
       "react-app"
     ]
   },
-  "homepage": "http://Orainsink.github.io/react-webgl-resume",
   "devDependencies": {
     "webpack-bundle-analyzer": "^3.6.0"
   }

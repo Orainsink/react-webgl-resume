@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 
 import map from "../utils/mapUtil";
 import random from "../utils/randomUtil";

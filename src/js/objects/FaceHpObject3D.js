@@ -1,4 +1,4 @@
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import yoyo from "../utils/yoyoUtil";
 import matCap from "../materials/matCapMaterial";
 import matCapShinyImg from "../../assets/images/matCap-shiny.jpg";

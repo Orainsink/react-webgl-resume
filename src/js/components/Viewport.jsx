@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
 import "../../styles/Viewport.scss";
 import ViewportTrigger from "./ViewportTrigger.jsx";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import * as THREE from "three";
 import BackgroundLines from "../objects/BackgroundLinesObject3D";
 import BackgroundParticles from "../objects/BackgroundParticlesObject3D";

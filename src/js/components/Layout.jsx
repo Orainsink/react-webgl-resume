@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import "../../styles/Layout.scss";
 import { useMappedState } from "redux-react-hook";
 

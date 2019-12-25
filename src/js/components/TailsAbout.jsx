@@ -14,14 +14,6 @@ export default function About() {
 			if (hasStarted) return;
 
 			const tl = new TimelineLite();
-			// tl.staggerFromTo(
-			// 	".tails__section__el",
-			// 	0.5,
-			// 	{ opacity: 0, y: 100 },
-			// 	{ opacity: 1, y: 0 },
-			// 	0.1
-			// );
-
 			tl.staggerFromTo(
 				".tails_ani",
 				0.5,

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useMappedState } from "redux-react-hook";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import "../../styles/Help.scss";
 import "../../styles/Slider.scss";
 import Keys from "./Keys.jsx";

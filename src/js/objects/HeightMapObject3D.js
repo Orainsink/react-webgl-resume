@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import Events from "../classes/EventsClass";
 
 import random from "../utils/randomUtil";

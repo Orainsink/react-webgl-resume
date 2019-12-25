@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 
 import SPRITE3D from "../libs/sprite3DLib";
 import spriteImg from "../../assets/images/sprite-none.png";

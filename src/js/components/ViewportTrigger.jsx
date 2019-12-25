@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import { useMappedState } from "redux-react-hook";
 
 export default function ViewportTrigger() {

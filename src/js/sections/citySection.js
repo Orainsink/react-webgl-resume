@@ -1,4 +1,4 @@
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import Section from "../classes/SectionClass";
 import City from "../objects/CityObject3D";
 

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { TweenLite } from "gsap/TweenMax";
+import { TweenLite } from "gsap/TweenLite";
 import loop from "../utils/loopUtil";
 import textureWaveImg from "../../assets/images/texture-wave.png";
 
