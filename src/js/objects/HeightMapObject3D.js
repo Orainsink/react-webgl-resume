@@ -284,7 +284,7 @@ class HeightMap {
 
 		TweenLite.to({ factor: 1 }, 0.8, {
 			factor: 0,
-			ease: window.Elastic.easeOut,
+			ease: "Power4.easeOut",
 			onUpdate: function() {
 				for (let i = 0, j = _this.geometry.vertices.length; i < j; i++) {
 					let vertex = _this.geometry.vertices[i];

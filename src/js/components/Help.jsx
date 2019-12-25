@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useMappedState } from "redux-react-hook";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import "../../styles/Help.scss";
 import "../../styles/Slider.scss";
 import Keys from "./Keys.jsx";
@@ -50,14 +50,14 @@ function Slide1(props) {
 
 	useEffect(() => {
 		if (start) {
-			TweenLite.fromTo(
+			TweenMax.fromTo(
 				slideRef.current,
 				0.5,
 				{ opacity: 0 },
 				{ opacity: 1 }
 			);
 		} else {
-			TweenLite.to(slideRef.current, 0.2, { opacity: 0 });
+			TweenMax.to(slideRef.current, 0.2, { opacity: 0 });
 		}
 	}, [start]);
 
@@ -82,14 +82,14 @@ function Slide2(props) {
 
 	useEffect(() => {
 		if (start) {
-			TweenLite.fromTo(
+			TweenMax.fromTo(
 				slideRef.current,
 				0.5,
 				{ opacity: 0 },
 				{ opacity: 1 }
 			);
 		} else {
-			TweenLite.to(slideRef.current, 0.2, { opacity: 0 });
+			TweenMax.to(slideRef.current, 0.2, { opacity: 0 });
 		}
 	}, [start]);
 	return (
@@ -126,7 +126,7 @@ export default function Help() {
 		let timer = null;
 		if (help) {
 			slidesRef.current &&
-				TweenLite.to(slidesRef.current, 0.5, {
+				TweenMax.to(slidesRef.current, 0.5, {
 					x: 2 - curSlide ? "0%" : "-50%",
 					ease: "easeIn"
 				});

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/Heads.scss";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 
 export default function Heads(props) {
 	const heads = useRef(null);
 
 	useEffect(() => {
-		TweenLite.to(heads.current, 0.4, { ...props.params });
+		TweenMax.to(heads.current, 0.4, { ...props.params });
 	}, [props.params]);
 
 	return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import { useMappedState } from "redux-react-hook";
 
 export default function ViewportTrigger() {
@@ -12,27 +12,27 @@ export default function ViewportTrigger() {
 
 	useEffect(() => {
 		if (trigger === "mouseEnter" && !isOpen) {
-			TweenLite.to(arrow.current, 0.5, { opacity: 0, bottom: 20 });
-			TweenLite.to(tails.current, 0.8, { opacity: 1 });
+			TweenMax.to(arrow.current, 0.5, { opacity: 0, bottom: 20 });
+			TweenMax.to(tails.current, 0.8, { opacity: 1 });
 		}
 		if (trigger === "mouseLeave" && !isOpen) {
-			TweenLite.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
-			TweenLite.to(tails.current, 0.8, { opacity: 0 });
+			TweenMax.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
+			TweenMax.to(tails.current, 0.8, { opacity: 0 });
 		}
 		if (trigger === "mouseEnter" && isOpen) {
-			TweenLite.to(arrow.current, 0.5, { opacity: 0, bottom: 20 });
-			TweenLite.to(heads.current, 0.8, { opacity: 1 });
+			TweenMax.to(arrow.current, 0.5, { opacity: 0, bottom: 20 });
+			TweenMax.to(heads.current, 0.8, { opacity: 1 });
 		}
 		if (trigger === "mouseLeave" && isOpen) {
-			TweenLite.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
-			TweenLite.to(heads.current, 0.8, { opacity: 0 });
+			TweenMax.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
+			TweenMax.to(heads.current, 0.8, { opacity: 0 });
 		}
 		if (trigger === "click" && isOpen) {
-			TweenLite.to(heads.current, 0.8, { opacity: 0 });
-			TweenLite.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
+			TweenMax.to(heads.current, 0.8, { opacity: 0 });
+			TweenMax.to(arrow.current, 0.5, { opacity: 0.5, bottom: 0 });
 		}
 		if (trigger === "click" && !isOpen) {
-			TweenLite.to(tails.current, 0.8, { opacity: 0 });
+			TweenMax.to(tails.current, 0.8, { opacity: 0 });
 		}
 	}, [isOpen, trigger]);
 	return (

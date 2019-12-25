@@ -112,8 +112,8 @@ function App() {
 			to = "tails";
 		}
 
-		setHeadsParam({ y, ease: "power2" });
-		setTailsParam({ y, ease: "power2" });
+		setHeadsParam({ y, ease: "Power2" });
+		setTailsParam({ y, ease: "Power2" });
 	}
 
 	/**
@@ -141,8 +141,8 @@ function App() {
 			onComplete();
 		}, 400);
 
-		setHeadsParam({ y, ease: "power2" });
-		setTailsParam({ y, ease: "power2" });
+		setHeadsParam({ y, ease: "Power2" });
+		setTailsParam({ y, ease: "Power2" });
 	}
 	/**
 	 * 切换tail <-> heads动作
@@ -197,8 +197,8 @@ function App() {
 			onComplete();
 		}, 400);
 
-		setHeadsParam({ y, duration: durations[0], ease: "power2" });
-		setTailsParam({ y, duration: durations[1], ease: "power2" });
+		setHeadsParam({ y, duration: durations[0], ease: "Power2" });
+		setTailsParam({ y, duration: durations[1], ease: "Power2" });
 
 		setIsOpen(!isOpen);
 		setTrigger(null);

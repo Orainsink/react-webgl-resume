@@ -1,4 +1,4 @@
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import Section from "../classes/SectionClass";
 import City from "../objects/CityObject3D";
 
@@ -27,9 +27,9 @@ city.el.position.set(5, -10, 0);
 citySection.add(city.el);
 city.showGroup("shanghai");
 
-TweenLite.to(city.el.rotation, 30, {
+TweenMax.to(city.el.rotation, 30, {
 	y: 2 * Math.PI,
-	ease: window.Linear.easeNone,
+	ease: "Power0.easeNone",
 	onComplete: function() {
 		this.restart();
 	}

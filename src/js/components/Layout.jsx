@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import "../../styles/Layout.scss";
 import { useMappedState } from "redux-react-hook";
 
@@ -38,7 +38,7 @@ export default function Layout() {
 		function moveMouse() {
 			let flag = false;
 
-			TweenLite.to(mouseRef.current, 0.5, {
+			TweenMax.to(mouseRef.current, 0.5, {
 				top: mouseY + "%",
 				onUpdate: function() {
 					if (this.time() > 0.25) {
@@ -50,7 +50,7 @@ export default function Layout() {
 		}
 
 		function open() {
-			TweenLite.to(containerRef.current, 0.8, {
+			TweenMax.to(containerRef.current, 0.8, {
 				top: openY + "%",
 				onComplete: () => {
 					containerRef.current && click();
@@ -60,7 +60,7 @@ export default function Layout() {
 
 		function click() {
 			let flag = false;
-			TweenLite.fromTo(
+			TweenMax.fromTo(
 				clickRef.current,
 				0.4,
 				{
@@ -89,12 +89,12 @@ export default function Layout() {
 		}
 
 		function slide() {
-			TweenLite.to(containerRef.current, 0.5, { top: y + "%" });
+			TweenMax.to(containerRef.current, 0.5, { top: y + "%" });
 			centerMouse();
 		}
 
 		function centerMouse() {
-			TweenLite.to(mouseRef.current, 0.5, { delay: 0.3, top: "45%" });
+			TweenMax.to(mouseRef.current, 0.5, { delay: 0.3, top: "45%" });
 		}
 	}
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import { TimelineLite } from "gsap/TimelineLite";
 import React from "react";
 import "../../styles/Mouse.scss";
@@ -18,7 +18,7 @@ export default function Mouse() {
 
 	function scroll() {
 		setY(-80 - y);
-		TweenLite.to(mouseWheelRef.current, 0.4, { opacity: 1 });
+		TweenMax.to(mouseWheelRef.current, 0.4, { opacity: 1 });
 		tl.to(".mouse__wheel__line", 0.5, { top: y + "%" });
 		tl.to(".mouse__wheel", 0.3, { opacity: 0.2 });
 	}

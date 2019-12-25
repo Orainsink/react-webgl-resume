@@ -45,7 +45,7 @@ class Wave {
 
 		let idleTween = TweenLite.to({}, 5, {
 			paused: true,
-			ease: window.Linear.easeNone,
+			ease: "Power0.easeNone",
 			onUpdate: updateWave,
 			onComplete: loop
 		});

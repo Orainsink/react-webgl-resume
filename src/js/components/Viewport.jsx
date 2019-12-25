@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
 import "../../styles/Viewport.scss";
 import ViewportTrigger from "./ViewportTrigger.jsx";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import * as THREE from "three";
 import BackgroundLines from "../objects/BackgroundLinesObject3D";
 import BackgroundParticles from "../objects/BackgroundParticlesObject3D";
@@ -242,7 +242,7 @@ export default function Viewport() {
 	 */
 	function sceneIn() {
 		console.log("sceneIn");
-		TweenLite.to({ fov: 200, speed: 0 }, 2, {
+		TweenMax.to({ fov: 200, speed: 0 }, 2, {
 			bezier: { type: "soft", values: [{ speed: 20 }, { speed: 0 }] },
 			fov: 60,
 			ease: "easeOutCubic",
@@ -432,7 +432,7 @@ export default function Viewport() {
 			},
 			way: way === -1 ? "up" : "down"
 		};
-		TweenLite.to(camera.position, 1.5, {
+		TweenMax.to(camera.position, 1.5, {
 			y: nextPosition,
 			ease: window.Quad.easeInOut,
 			onStart: function() {
@@ -452,7 +452,7 @@ export default function Viewport() {
 			}
 		});
 
-		TweenLite.to(cameraCache, 1.5, {
+		TweenMax.to(cameraCache, 1.5, {
 			bezier: { type: "soft", values: [{ speed: 10 }, { speed: 0 }] },
 			onUpdate: function() {
 				backgroundLines.updateY(this.target.speed);

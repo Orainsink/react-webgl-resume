@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/Menu.scss";
 import { useDispatch, useMappedState } from "redux-react-hook";
-import { TweenLite } from "gsap/TweenLite";
+import { TweenMax } from "gsap/TweenMax";
 import { TimelineLite } from "gsap/TimelineLite";
 
 export default function Menu() {
@@ -33,11 +33,10 @@ export default function Menu() {
 	function mouseover() {
 		setActive(true);
 
-		TweenLite.to(menu.current, 0.4, {
-			left: 0,
-			ease: window.Linear.easeNone
+		TweenMax.to(menu.current, 0.4, {
+			left: 0
 		});
-		TweenLite.to(menuButton.current, 0.4, { opacity: 0 });
+		TweenMax.to(menuButton.current, 0.4, { opacity: 0 });
 		const tl = new TimelineLite();
 		menuItem.forEach(item => {
 			tl.fromTo(item, 0.2, { opacity: 0 }, { opacity: 1 });
@@ -47,11 +46,10 @@ export default function Menu() {
 	function mouseout() {
 		setActive(false);
 
-		TweenLite.to(menu.current, 0.4, {
-			left: 30,
-			ease: window.Linear.easeNone
+		TweenMax.to(menu.current, 0.4, {
+			left: 30
 		});
-		TweenLite.to(menuButton.current, 0.4, { opacity: 1 });
+		TweenMax.to(menuButton.current, 0.4, { opacity: 1 });
 	}
 
 	function tap() {

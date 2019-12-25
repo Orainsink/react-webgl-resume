@@ -214,7 +214,7 @@ class FlowField {
 			return TweenLite.to({ i: 0 }, random(4, 8), {
 				i: 1,
 				paused: true,
-				ease: window.Linear.easeNone,
+				ease: "Power0.easeNone",
 				onUpdate: function() {
 					let position = sub.getPoint(this.target.i);
 					let rotation = sub.getTangent(this.target.i);
